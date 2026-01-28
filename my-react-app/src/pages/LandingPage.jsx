@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 
 import landingImage from "../images/landing/landing-image.png";
-import landingKevin from "../images/landing/kevin.jpeg";
-import landingAkinda from "../images/landing/akinda.jpg";
-import landingNithika from "../images/landing/nithika.jpg";
-import landingSamudi from "../images/landing/samudi.jpeg";
-import landingNihara from "../images/landing/nihara.jpeg";
-import landingThaaru from "../images/landing/thaaru.jpeg";
+// Note: Team images removed here as they are now in AboutUs page
 
+// --- ANIMATED COUNTER COMPONENT ---
+const AnimatedCounter = ({ target, suffix = "" }) => {
+  const [count, setCount] = useState(0);
 
+  useEffect(() => {
+    let startTimestamp = null;
+    const duration = 4000; // UPDATED: Duration increased to 4000ms (4 seconds) for slower counting
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      setCount(Math.floor(progress * target));
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        setCount(target);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }, [target]);
+
+  return <>{count}{suffix}</>;
+};
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -29,45 +45,6 @@ export default function LandingPage() {
     setForm({ name: '', email: '', message: '' });
   };
 
-  const teamMembers = [
-    {
-      name: 'Kevin Anjana',
-      role: 'Team Leader',
-      image: landingKevin,
-      bio: 'Undergraduate Software Engineer'
-    },
-    {
-      name: 'Akinda Perera',
-      role: 'Team Member',
-      image: landingAkinda,
-      bio: 'Undergraduate Software Engineer'
-    },
-    {
-      name: 'Nithika Nimlaka',
-      role: 'Team Member',
-      image: landingNithika,
-      bio: 'Undergraduate Software Engineer'
-    },
-    {
-      name: 'Nihara Fernando',
-      role: 'Team Member',
-      image: landingNihara,
-      bio: 'Undergraduate Software Engineer'
-    },
-    {
-      name: 'Thaaru Perera',
-      role: 'Team Member',
-      image: landingThaaru,
-      bio: 'Undergraduate Software Engineer'
-    },
-    {
-      name: 'Samudi Supeshala',
-      role: 'Team Member',
-      image: landingSamudi,
-      bio: 'Undergraduate Software Engineer'
-    }
-  ];
-
   return (
     <div className="app">
       {/* NAVBAR */}
@@ -79,7 +56,18 @@ export default function LandingPage() {
           </div>
           <ul className="nav-links">
             <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
+            {/* Updated: Click triggers navigation to About page */}
+            <li>
+              <a 
+                href="#about" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate('/about');
+                }}
+              >
+                About Us
+              </a>
+            </li>
             <li><a href="#contact">Contact Us</a></li>
           </ul>
           <button className="dashboard-btn" onClick={() => navigate('/dashboard')}>Dashboard →</button>
@@ -108,7 +96,6 @@ export default function LandingPage() {
                 alt="Lab Scientist"
                 className="hero-image"
               />
-              
             </div>
           </div>
 
@@ -131,46 +118,24 @@ export default function LandingPage() {
 
         <div className="stats-container">
           <div className="stat-card">
-            <div className="stat-value green">42</div>
+            {/* UPDATED: Animated Counter */}
+            <div className="stat-value green"><AnimatedCounter target={42} /></div>
             <div className="stat-name">Practicals</div>
           </div>
           <div className="stat-card">
-            <div className="stat-value green">100+</div>
+            {/* UPDATED: Animated Counter */}
+            <div className="stat-value green"><AnimatedCounter target={100} suffix="+" /></div>
             <div className="stat-name">Equipments</div>
           </div>
           <div className="stat-card">
-            <div className="stat-value green">40+</div>
+            {/* UPDATED: Animated Counter */}
+            <div className="stat-value green"><AnimatedCounter target={40} suffix="+" /></div>
             <div className="stat-name">Safety Methods</div>
           </div>
         </div>
       </section>
 
-      {/* ABOUT US SECTION */}
-      <section id="about" className="about">
-        <h2 className="section-title dark">Meet Our Team</h2>
-        <p className="section-subtitle dark">
-          Our dedicated team of experts brings together chemistry education, technology innovation, and student success.
-        </p>
-
-        <div className="team-grid">
-          {teamMembers.map((member, index) => (
-            <div key={index} className="team-card">
-              <div className="team-image-container">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="team-image"
-                />
-              </div>
-              <div className="team-info">
-                <h3 className="team-name">{member.name}</h3>
-                <p className="team-role">{member.role}</p>
-                <p className="team-bio">{member.bio}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* ABOUT US SECTION REMOVED - MOVED TO AboutUs.jsx */}
 
       {/* CONTACT US SECTION */}
       <section id="contact" className="contact">
@@ -305,6 +270,4 @@ export default function LandingPage() {
       </footer>
     </div>
   );
-
-
 }
