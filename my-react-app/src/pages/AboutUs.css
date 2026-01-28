@@ -1,0 +1,173 @@
+/* ABOUT PAGE SPECIFIC STYLES */
+
+/* Page-level background for About Us (overrides global white for this page) */
+.app {
+  background: linear-gradient(180deg, #eef2ff 0%, #e6fff2 100%);
+  min-height: 100vh;
+}
+
+
+/* Header Section */
+.about-header {
+  padding: 140px 2rem 80px;
+  text-align: center;
+  background: transparent;
+}
+
+.page-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 1rem;
+}
+
+.page-subtitle {
+  font-size: 1.25rem;
+  color: #10b981;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.page-description {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.125rem;
+  color: #4b5563;
+  line-height: 1.8;
+}
+
+/* Problem & Solution Section */
+.problem-solution-section {
+  padding: 60px 2rem;
+  background: transparent;
+}
+
+.ps-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.ps-card {
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.ps-card:hover {
+  transform: translateY(-5px);
+}
+
+.problem {
+  background-color: #fef2f2;
+  border-left: 5px solid #ef4444;
+}
+
+.solution {
+  background-color: #f0fdf4;
+  border-left: 5px solid #10b981;
+}
+
+.ps-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.ps-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #111;
+}
+
+.ps-text {
+  font-size: 1.05rem;
+  color: #4b5563;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.ps-note {
+  font-size: 0.95rem;
+  color: #6b7280;
+  font-style: italic;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 1rem;
+}
+
+/* Features Grid */
+.features-section {
+  padding: 80px 2rem;
+  background: transparent;
+  text-align: center;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 3rem auto 0;
+}
+
+.feature-card {
+  background: rgba(255,255,255,0.95);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.feature-card.highlight {
+  background: #10b981;
+  color: white;
+  grid-column: span 1; /* Adjust if you want it wider */
+}
+
+.feature-card.highlight .feature-text {
+  color: white;
+}
+
+.feature-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #10b981;
+  margin-bottom: 0.5rem;
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ps-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+}

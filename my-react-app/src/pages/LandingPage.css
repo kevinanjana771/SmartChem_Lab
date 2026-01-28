@@ -1,13 +1,13 @@
 .app {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   overflow-x: hidden;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
 
 /* LANDING PAGE STYLES */
+
 /* NAVBAR */
 .navbar {
   position: fixed;
@@ -85,10 +85,12 @@
 
 /* HERO SECTION */
 .hero {
-  padding: 120px 2rem 80px;
+  padding: 140px 2rem 80px; /* Increased top padding to clear fixed nav */
   max-width: 1280px;
   margin: 0 auto;
+  width: 100%;
   background: #f9fafb;
+  box-sizing: border-box;
 }
 
 .hero-title {
@@ -172,31 +174,7 @@
   z-index: 1;
 }
 
-.get-started-btn {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #10b981;
-  color: white;
-  padding: 1rem 2.5rem;
-  border: none;
-  border-radius: 50px;
-  font-size: 1.125rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-  z-index: 100;
-}
-
-.get-started-btn:hover {
-  background: #059669;
-  transform: translateX(-50%) translateY(-2px);
-  box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
-}
-
-/* ACHIEVEMENTS SECTION */
+/* ACHIEVEMENTS SECTION - Styles for the Animated Counters */
 .achievements {
   background: #1e293b;
   padding: 80px 2rem;
@@ -241,9 +219,10 @@
 }
 
 .stat-value {
-  font-size: 3.5rem;
+  font-size: 3.5rem; /* Large font for the numbers */
   font-weight: 800;
   margin-bottom: 0.5rem;
+  font-variant-numeric: tabular-nums; /* Ensures numbers don't jitter while counting */
 }
 
 .stat-value.green {
@@ -255,7 +234,7 @@
   color: #cbd5e1;
 }
 
-/* ABOUT SECTION */
+/* ABOUT SECTION (Kept for consistency if reused) */
 .about {
   padding: 80px 2rem;
   background: #f9fafb;
@@ -427,6 +406,8 @@
   font-size: 1rem;
   font-family: inherit;
   transition: border-color 0.3s;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-input:focus,
@@ -464,6 +445,7 @@
   background: #111827;
   color: white;
   padding: 4rem 2rem 2rem;
+  margin-top: auto;
 }
 
 .footer-content {
@@ -514,6 +496,7 @@
   color: #9ca3af;
   text-decoration: none;
   transition: color 0.3s;
+  cursor: pointer;
 }
 
 .footer-column ul li a:hover {
