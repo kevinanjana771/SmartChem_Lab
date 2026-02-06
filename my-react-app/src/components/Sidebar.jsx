@@ -12,7 +12,6 @@ const Sidebar = () => {
     { name: 'Safety Methods', path: '/safety', icon: '🛡️' }, // Placeholder path
     { name: 'Report', path: '/report', icon: '📊' }, // Placeholder path
     { name: 'Settings', path: '/settings', icon: '⚙️', badge: 2 },
-    { name: 'Support', path: '/support', icon: '❓' }, // Placeholder path
   ];
 
   return (
