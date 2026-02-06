@@ -10,10 +10,10 @@ const TopBar = () => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      console.log("User is logged in:", parsedUser); // Check console for this
+      console.log("User is logged in:", parsedUser);
       setUser(parsedUser);
     } else {
-      console.log("No user found in localStorage"); // Check console for this
+      console.log("No user found in localStorage");
       setUser(null);
     }
   }, []);
@@ -28,13 +28,12 @@ const TopBar = () => {
     <div className="topbar">
       <div className="topbar-left">
         <h2 className="page-title">
-          {/* Show 'Guest' if user is null, otherwise show name */}
           Welcome Back, {user ? user.name : 'Guest'} 🖐
         </h2>
       </div>
       <div className="topbar-right">
         {user ? (
-          // LOGGED IN STATE (Show Profile)
+          // LOGGED IN STATE
           <>
             <button className="logout-btn" onClick={handleLogout}>
               Logout
@@ -45,13 +44,21 @@ const TopBar = () => {
             </div>
           </>
         ) : (
-          // NOT LOGGED IN STATE (Show Login Button)
-          <button 
-            className="login-btn-top" 
-            onClick={() => navigate('/login')}
-          >
-            Login
-          </button>
+          // NOT LOGGED IN STATE
+          <>
+            <button 
+              className="login-btn-top" 
+              onClick={() => navigate('/login')}
+            >
+              Login
+            </button>
+            <button 
+              className="signup-btn-top" 
+              onClick={() => navigate('/signup')}
+            >
+              Sign Up
+            </button>
+          </>
         )}
       </div>
     </div>
