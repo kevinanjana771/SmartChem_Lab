@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 
 import landingImage from "../images/landing/landing-image.png";
-// Note: Team images removed here as they are now in AboutUs page
 
-// --- ANIMATED COUNTER COMPONENT ---
 const AnimatedCounter = ({ target, suffix = "" }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     let startTimestamp = null;
-    const duration = 4000; // UPDATED: Duration increased to 4000ms (4 seconds) for slower counting
+    const duration = 4000; 
     const step = (timestamp) => {
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = Math.min((timestamp - startTimestamp) / duration, 1);

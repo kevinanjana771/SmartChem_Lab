@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './EquipmentPreview.css';
+import './Equipments.jsx';
 
 const EquipmentPreview = () => {
   const navigate = useNavigate();
