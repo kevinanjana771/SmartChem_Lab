@@ -1,7 +1,7 @@
 /* =========================================
    PAGE WRAPPER (Centers the card)
    ========================================= */
-.login-page-wrapper {
+.signup-page-wrapper {
   width: 100%;
   min-height: 100vh;
   background: #f9fafb;
@@ -13,15 +13,13 @@
 }
 
 /* =========================================
-   YOUR PROVIDED CSS (Adapted for Login Card)
+   CARD LAYOUT
    ========================================= */
 
 .practical-preview {
-  /* Changed from 'max-width: 1200px' to a fixed card size for login */
   width: 100%;
   max-width: 1000px;
   background: white;
-  /* Added Flex to create split screen inside the card */
   display: flex;
   border-radius: 24px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -31,7 +29,7 @@
 /* Left Side - Image */
 .visual-side {
   width: 45%;
-  display: none; /* Hidden on mobile */
+  display: none;
 }
 
 @media (min-width: 768px) {
@@ -45,7 +43,7 @@
   height: 100%;
   min-height: 600px;
   object-fit: cover;
-  filter: grayscale(20%); /* Slightly desaturated to match 'black and white photo' vibe */
+  filter: grayscale(20%);
 }
 
 /* Right Side - Content */
@@ -55,6 +53,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 @media (min-width: 768px) {
@@ -90,7 +90,7 @@
 }
 
 .tab {
-  padding: 0.75rem 0; /* Expanded width */
+  padding: 0.75rem 0;
   flex: 1;
   background: transparent;
   border: none;
@@ -118,7 +118,7 @@
 }
 
 /* Form Elements */
-.login-form {
+.signup-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -151,13 +151,24 @@
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
+.form-input.input-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+}
+
 /* Action Area */
 .action-area {
   margin-top: 1rem;
 }
 
 .start-action-btn {
-  width: 100%; /* Full width for login form */
+  width: 100%;
   background: #10b981;
   color: white;
   padding: 1rem;
@@ -176,20 +187,25 @@
   box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
+.start-action-btn:active {
+  transform: translateY(0);
+}
+
 /* Footer inside card */
-.login-footer {
+.signup-footer {
   margin-top: 2rem;
   text-align: center;
   font-size: 0.9rem;
   color: #6b7280;
 }
 
-.login-footer a {
+.signup-footer a {
   color: #10b981;
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
 }
 
-.login-footer a:hover {
+.signup-footer a:hover {
   text-decoration: underline;
 }

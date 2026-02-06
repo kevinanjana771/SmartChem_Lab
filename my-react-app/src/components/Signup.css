@@ -1,10 +1,10 @@
 /* =========================================
    PAGE WRAPPER & CONTAINER
    ========================================= */
-.login-page-wrapper {
+.signup-page-wrapper {
   width: 100%;
   min-height: 100vh;
-  background: #f0fdf4; /* Very light emerald bg */
+  background: #f0fdf4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,9 +18,9 @@
   background: white;
   display: flex;
   border-radius: 24px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); /* Softer, deeper shadow */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  min-height: 700px;
+  min-height: 780px; /* Taller for signup */
   border: 1px solid rgba(16, 185, 129, 0.1);
 }
 
@@ -33,7 +33,7 @@
   display: none;
   position: relative;
   overflow: hidden;
-  background-color: #022c22; /* Very Dark Emerald */
+  background-color: #022c22;
 }
 
 @media (min-width: 768px) {
@@ -44,18 +44,16 @@
   }
 }
 
-/* Deep, Rich Gradient */
 .gradient-bg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at top left, #059669, #022c22);
+  background: radial-gradient(circle at bottom right, #10b981, #022c22);
   z-index: 1;
 }
 
-/* Floating Particles/Bubbles */
 .particles {
   position: absolute;
   top: 0;
@@ -68,7 +66,7 @@
 
 .bubble {
   position: absolute;
-  background: rgba(167, 243, 208, 0.2); /* Light Emerald */
+  background: rgba(167, 243, 208, 0.2);
   border-radius: 50%;
   filter: blur(4px);
   animation: floatUp linear infinite;
@@ -81,7 +79,6 @@
   100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
 }
 
-/* Center Icon Container */
 .center-icon {
   position: relative;
   z-index: 3;
@@ -90,37 +87,33 @@
   align-items: center;
   color: white;
   text-align: center;
-  transition: transform 0.1s ease-out; /* Smooth parallax */
+  transition: transform 0.1s ease-out;
 }
 
-/* Flask Animations */
-.flask-icon {
-  width: 140px;
-  height: 140px;
-  filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.6));
+/* Atom Animations */
+.atom-icon {
+  width: 160px;
+  height: 160px;
+  filter: drop-shadow(0 0 25px rgba(16, 185, 129, 0.6));
   margin-bottom: 1.5rem;
 }
 
-.flask-liquid {
-  animation: liquidBubble 2s infinite ease-in-out;
-  transform-origin: bottom;
+.orbit-ring-1 { animation: spin 4s linear infinite; }
+.orbit-ring-2 { animation: spin 6s linear infinite reverse; }
+.orbit-ring-3 { animation: spin 5s linear infinite; }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-.bubble-anim-1, .bubble-anim-2 {
-  animation: riseBubble 2.5s infinite linear;
-  opacity: 0;
-}
-.bubble-anim-2 { animation-delay: 1.2s; }
-
-@keyframes liquidBubble {
-  0%, 100% { transform: scaleY(1); }
-  50% { transform: scaleY(1.05); }
+.nucleus {
+  animation: pulseNucleus 2s infinite ease-in-out;
 }
 
-@keyframes riseBubble {
-  0% { transform: translateY(0); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateY(-20px); opacity: 0; }
+@keyframes pulseNucleus {
+  0%, 100% { r: 3; opacity: 0.8; }
+  50% { r: 3.5; opacity: 1; filter: drop-shadow(0 0 5px white); }
 }
 
 .lab-title-text {
@@ -162,13 +155,13 @@
 }
 
 .preview-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
 .preview-header h1 {
   font-size: 2.25rem;
-  color: #064e3b; /* Dark Emerald Text */
+  color: #064e3b;
   margin-bottom: 0.75rem;
   font-weight: 800;
 }
@@ -192,12 +185,11 @@
 }
 
 .form-group label {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: #374151;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  font-size: 0.75rem;
 }
 
 .form-input {
@@ -239,6 +231,18 @@
 .start-action-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.5);
+}
+
+/* Error Box */
+.error-box {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  border: 1px solid #fca5a5;
 }
 
 .login-footer {
