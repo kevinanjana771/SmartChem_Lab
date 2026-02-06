@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AboutUs.css'; // Make sure to create this CSS file
+import './AboutUs.css'; 
 
 
 import landingKevin from "../images/landing/kevin.jpeg";
