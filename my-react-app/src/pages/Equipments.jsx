@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Equipments.css';
 
 const equipmentList = [
-  { id: 1, name: 'Four Beam Balance', image: 'https://via.placeholder.com/150?text=Balance' },
+  { id: 1, name: 'Balance', image: 'https://via.placeholder.com/150?text=Balance' },
   { id: 2, name: 'Volumetric Flask', image: 'https://via.placeholder.com/150?text=Flask' },
   { id: 3, name: 'Wash Bottle', image: 'https://via.placeholder.com/150?text=Bottle' },
   { id: 4, name: 'Watch Glass', image: 'https://via.placeholder.com/150?text=Glass' },
