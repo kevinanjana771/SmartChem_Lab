@@ -1,23 +1,26 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import './Login.css';
+import './Signup.css';
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
   const visualSideRef = useRef(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   });
+
+  const [error, setError] = useState('');
 
   const handleMouseMove = (e) => {
     if (!visualSideRef.current) return;
     const rect = visualSideRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width; // 0 to 1
-    const y = (e.clientY - rect.top) / rect.height; // 0 to 1
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
     setMousePosition({ x, y });
   };
 
@@ -27,19 +30,32 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.email || !formData.password) {
-      alert('Please fill in all fields');
+    setError('');
+
+    if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
+      setError('Please fill in all fields');
       return;
     }
 
-    localStorage.setItem('user', JSON.stringify({
-      name: formData.name || 'Scientist',
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
+
+    const newUser = {
+      name: formData.name,
       email: formData.email,
       role: 'student',
-      avatar: `https://ui-avatars.com/api/?name=${formData.name || 'User'}&background=10b981&color=fff`
-    }));
+      avatar: `https://ui-avatars.com/api/?name=${formData.name}&background=10b981&color=fff`
+    };
 
-    navigate('/dashboard');
+    localStorage.setItem('user', JSON.stringify(newUser));
+    navigate('/login');
   };
 
   // Generate Bubbles
@@ -61,10 +77,10 @@ const Login = () => {
   ));
 
   return (
-    <div className="login-page-wrapper">
+    <div className="signup-page-wrapper">
       <div className="practical-preview">
         
-        {/* Left Side: Interactive Lab Design */}
+        {/* Left Side: Interactive Atom Design */}
         <div 
           className="visual-side" 
           ref={visualSideRef}
@@ -73,37 +89,43 @@ const Login = () => {
           <div className="gradient-bg"></div>
           <div className="particles">{bubbles}</div>
 
-          {/* Central Icon: Bubbling Flask */}
+          {/* Central Icon: Spinning Atom */}
           <div 
             className="center-icon"
             style={{ transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)` }}
           >
-            <svg viewBox="0 0 24 24" fill="none" className="flask-icon">
-              <path d="M10 2v7.31" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M14 2v7.31" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M8.5 2h7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              {/* The Flask Body */}
-              <path d="M6 19a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4l-3.5-8.5h-5L6 19z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="rgba(255,255,255,0.1)"/>
+            <svg viewBox="0 0 24 24" fill="none" className="atom-icon">
+              {/* Nucleus */}
+              <circle cx="12" cy="12" r="3" fill="#a7f3d0" className="nucleus" />
               
-              {/* Animated Liquid inside Flask */}
-              <path className="flask-liquid" d="M7.5 17a1.5 1.5 0 0 1 1.5-1.5h6a1.5 1.5 0 0 1 1.5 1.5v.5a2 2 0 0 1-2 2H9.5a2 2 0 0 1-2-2v-.5z" fill="#a7f3d0"/>
-              
-              {/* Bubbles inside liquid */}
-              <circle className="bubble-anim-1" cx="10" cy="17" r="0.5" fill="white" />
-              <circle className="bubble-anim-2" cx="14" cy="17.5" r="0.7" fill="white" />
+              {/* Orbit Rings */}
+              <g className="orbit-ring-1" style={{ transformOrigin: "center" }}>
+                <ellipse cx="12" cy="12" rx="10" ry="3" stroke="white" strokeWidth="1.5" />
+                <circle cx="22" cy="12" r="1.5" fill="white" className="electron" />
+              </g>
+              <g className="orbit-ring-2" style={{ transformOrigin: "center" }}>
+                <ellipse cx="12" cy="12" rx="10" ry="3" stroke="white" strokeWidth="1.5" transform="rotate(60 12 12)" />
+                <circle cx="17" cy="20.6" r="1.5" fill="white" className="electron" transform="rotate(60 12 12)" />
+              </g>
+              <g className="orbit-ring-3" style={{ transformOrigin: "center" }}>
+                <ellipse cx="12" cy="12" rx="10" ry="3" stroke="white" strokeWidth="1.5" transform="rotate(-60 12 12)" />
+                <circle cx="7" cy="3.4" r="1.5" fill="white" className="electron" transform="rotate(-60 12 12)" />
+              </g>
             </svg>
-            
-            <h2 className="lab-title-text">Welcome Back, Scientist</h2>
-            <p className="lab-sub-text">Ready to conduct your experiments?</p>
+
+            <h2 className="lab-title-text">Begin Your Research</h2>
+            <p className="lab-sub-text">Join the SmartChem community today.</p>
           </div>
         </div>
 
         {/* Right Side: Form */}
         <div className="preview-content">
           <div className="preview-header">
-            <h1>Student Portal</h1>
-            <p className="preview-text">Access the virtual laboratory and start your practicals.</p>
+            <h1>Student Registration</h1>
+            <p className="preview-text">Create your profile to access experiments.</p>
           </div>
+
+          {error && <div className="error-box">{error}</div>}
 
           <form onSubmit={handleSubmit} className="login-form">
             <div className="form-group">
@@ -112,10 +134,11 @@ const Login = () => {
                 type="text"
                 id="name"
                 name="name"
-                placeholder="Enter your name"
+                placeholder="e.g. Alex Curie"
                 value={formData.name}
                 onChange={handleChange}
                 className="form-input"
+                required
               />
             </div>
 
@@ -125,7 +148,7 @@ const Login = () => {
                 type="email"
                 id="email"
                 name="email"
-                placeholder="name@school.com"
+                placeholder="student@lab.edu"
                 value={formData.email}
                 onChange={handleChange}
                 className="form-input"
@@ -147,15 +170,27 @@ const Login = () => {
               />
             </div>
 
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="••••••••"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="form-input"
+                required
+              />
+            </div>
+
             <div className="action-area">
-              <button type="submit" className="start-action-btn">Sign In</button>
+              <button type="submit" className="start-action-btn">Join Lab</button>
             </div>
           </form>
 
           <div className="login-footer">
-            <p>
-              Don't have an account? <Link to="/signup">Create one</Link>
-            </p>
+            <p>Already have an account? <Link to="/login">Log In</Link></p>
           </div>
         </div>
       </div>
@@ -163,4 +198,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

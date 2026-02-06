@@ -6,15 +6,12 @@
   align-items: center;
   padding: 0 2rem;
   
-  /* FIX: Position it exactly next to sidebar */
+  /* Position it exactly next to sidebar */
   position: fixed;
   top: 0;
   left: 260px;
-  width: calc(100% - 260px); /* Calculate exact width remaining */
-  
-  /* FIX: Make sure it stays above content but below sidebar */
+  width: calc(100% - 260px);
   z-index: 9998;
-  
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
@@ -28,9 +25,10 @@
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem; /* Reduced gap slightly to fit buttons better */
 }
 
+/* --- LOGGED IN STYLES --- */
 .logout-btn {
   padding: 0.5rem 1.25rem;
   border: 1px solid #e5e7eb;
@@ -65,4 +63,41 @@
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #e5e7eb;
+}
+
+/* --- PUBLIC BUTTON STYLES --- */
+
+/* Login Button: Whitish look with border */
+.login-btn-top {
+  padding: 0.5rem 1.5rem;
+  background-color: #ffffff; /* White background */
+  border: 1px solid #d1d5db; /* Gray border for visibility against white topbar */
+  color: #374151; /* Dark gray text */
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.login-btn-top:hover {
+  background-color: #f9fafb; /* Slightly darker gray on hover */
+  border-color: #9ca3af;
+}
+
+/* Sign Up Button: Primary Action (Solid Color) */
+.signup-btn-top {
+  padding: 0.5rem 1.5rem;
+  background-color:#10b981; /* Brand Indigo */
+  border: 1px solid #9ca3af;
+  color: #000000;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.signup-btn-top:hover {
+  background-color: #10b981;; /* Darker Indigo */
+  border-color: black;
+  transform: translateY(-1px); /* Slight lift effect */
 }
