@@ -1,42 +1,95 @@
+/* SIDEBAR CONTAINER & COLOR BEND BG */
 .sidebar {
   width: 260px;
   height: 100vh;
-  background-color: #1e293b;/* Deep Purple */
-  color: white;
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
-  z-index: 100;
+  color: white;
+  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden; 
 }
 
+/* 
+   1. The Color Bend Background 
+   2. Dark Overlay (::before) to make text readable
+*/
+.sidebar {
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #022c22, /* Dark Emerald */
+    #10b981, /* Main Green */
+    #0e7490, /* Teal */
+    #1e3a8a, /* Dark Blue */
+    #022c22  /* Back to Emerald */
+  );
+  /* Slight rotation to make the bend visible */
+  background-size: 200% 200%;
+  animation: bgRotate 20s linear infinite;
+}
+
+@keyframes bgRotate {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6); 
+  z-index: 0; 
+  backdrop-filter: blur(5px);
+}
+
+/*HEADER & LOGO*/
 .sidebar-header {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 3rem;
+  position: relative;
+  z-index: 2; 
 }
 
 .logo-icon {
   font-size: 2rem;
-  background: #10b981;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
+  background: linear-gradient(135deg, #34d399, #059669);
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(5deg); }
 }
 
 .sidebar-brand {
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 800;
+  background: linear-gradient(to right, #fff, #6ee7b7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
 }
 
+/*NAVIGATION & SPOTLIGHT*/
 .sidebar-nav {
   flex: 1;
+  position: relative;
+  z-index: 2; /* Above overlay */
 }
 
 .nav-list {
@@ -46,7 +99,7 @@
 }
 
 .nav-item {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .nav-link {
@@ -56,31 +109,96 @@
   color: #cbd5e1;
   text-decoration: none;
   border-radius: 12px;
-  transition: all 0.3s;
   position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* The Spotlight Effect */
+.spotlight {
+  position: absolute;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background: radial-gradient(
+    400px circle at var(--x) var(--y),
+    rgba(16, 185, 129, 0.25),
+    transparent 40%
+  );
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.nav-link:hover .spotlight {
+  opacity: 1;
+}
+
+/* Hover State */
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
   color: white;
+  transform: translateX(5px);
+  border-color: rgba(16, 185, 129, 0.5);
+  background: rgba(255, 255, 255, 0.05);
 }
 
+/* Active State */
 .nav-link.active {
-  background-color: #10b981;
-  color: white;
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+}
+
+.nav-link.active .nav-icon {
+  filter: drop-shadow(0 0 5px rgba(52, 211, 153, 0.8));
+  transform: scale(1.1);
 }
 
 .nav-icon {
   margin-right: 1rem;
   font-size: 1.25rem;
+  z-index: 2;
+  transition: transform 0.3s;
+}
+
+.nav-text {
+  z-index: 2;
+  font-weight: 500;
 }
 
 .nav-badge {
   margin-left: auto;
-  background-color: #ef4444;
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
   color: white;
   font-size: 0.75rem;
-  padding: 0.15rem 0.5rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 99px;
   font-weight: 700;
+  box-shadow: 0 2px 5px rgba(239, 68, 68, 0.4);
+  z-index: 2;
+  animation: pulseBadge 2s infinite;
+}
+
+@keyframes pulseBadge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/*CLICK SPARK ANIMATION */
+.sidebar-spark {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: white;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: sparkRipple 0.6s linear forwards;
+  z-index: 0;
+}
+
+@keyframes sparkRipple {
+  0% { width: 0; height: 0; opacity: 0.8; }
+  100% { width: 150px; height: 150px; opacity: 0; }
 }

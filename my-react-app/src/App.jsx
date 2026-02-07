@@ -15,13 +15,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public Routes (No Sidebar) */}
+        {/* Public Routes  */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} /> {/* <--- ADD SIGNUP ROUTE HERE */}
+        <Route path="/signup" element={<Signup />} /> 
         
-        {/* App Routes (Wrapped in MainLayout with Sidebar) */}
+        {/* App Routes  */}
         <Route element={<MainLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/practicals" element={<Practicals />} />
