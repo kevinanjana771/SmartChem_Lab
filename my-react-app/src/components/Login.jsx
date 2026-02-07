@@ -61,7 +61,9 @@ const Login = () => {
   ));
 
   return (
+    
     <div className="login-page-wrapper">
+      <div className="color-bend-bg"></div>
       <div className="practical-preview">
         
         {/* Left Side: Interactive Lab Design */}
@@ -112,7 +114,7 @@ const Login = () => {
                 type="text"
                 id="name"
                 name="name"
-                placeholder="Enter your name"
+                placeholder="e.g. Alex Curie"
                 value={formData.name}
                 onChange={handleChange}
                 className="form-input"
@@ -125,7 +127,7 @@ const Login = () => {
                 type="email"
                 id="email"
                 name="email"
-                placeholder="name@school.com"
+                placeholder="student@lab.edu"
                 value={formData.email}
                 onChange={handleChange}
                 className="form-input"
@@ -148,14 +150,12 @@ const Login = () => {
             </div>
 
             <div className="action-area">
-              <button type="submit" className="start-action-btn">Sign In</button>
+              <button type="submit" className="start-action-btn">Enter Lab</button>
             </div>
           </form>
 
           <div className="login-footer">
-            <p>
-              Don't have an account? <Link to="/signup">Create one</Link>
-            </p>
+            <p>New to SmartChem? <Link to="/signup">Create an Account</Link></p>
           </div>
         </div>
       </div>
