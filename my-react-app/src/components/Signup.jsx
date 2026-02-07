@@ -78,6 +78,7 @@ const Signup = () => {
 
   return (
     <div className="signup-page-wrapper">
+      <div className="color-bend-bg"></div>  
       <div className="practical-preview">
         
         {/* Left Side: Interactive Atom Design */}
@@ -89,7 +90,7 @@ const Signup = () => {
           <div className="gradient-bg"></div>
           <div className="particles">{bubbles}</div>
 
-          {/* Central Icon: Spinning Atom */}
+          {/* Central Icon - Spinning Atom */}
           <div 
             className="center-icon"
             style={{ transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)` }}
