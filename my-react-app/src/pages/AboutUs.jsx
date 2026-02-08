@@ -9,6 +9,7 @@ import landingNithika from "../images/landing/nithika.jpg";
 import landingSamudi from "../images/landing/samudi.jpeg";
 import landingNihara from "../images/landing/nihara.jpeg";
 import landingThaaru from "../images/landing/thaaru.jpeg";
+import Footer from '../components/Footer';
 
 
 export default function AboutUs() {
@@ -137,41 +138,7 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-brand">
-            <div className="logo">
-              <div className="logo-icon">⚗</div>
-              <span className="logo-text">SmartChem Lab</span>
-            </div>
-            <p className="footer-description">
-              Empowering students with cutting-edge digital chemistry labs for practical mastery.
-            </p>
-          </div>
-          <div className="footer-links">
-            <div className="footer-column">
-              <h4>Quick Links</h4>
-              <ul>
-                <li><a onClick={() => navigate('/')}>Home</a></li>
-                <li><a onClick={() => navigate('/about')}>About Us</a></li>
-                <li><a onClick={() => navigate('/')}>Contact</a></li>
-              </ul>
-            </div>
-            <div className="footer-column">
-              <h4>Resources</h4>
-              <ul>
-                <li><a href="#">Practicals</a></li>
-                <li><a href="#">Safety Guide</a></li>
-                <li><a href="#">Equipment</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <p>© 2024 SmartChem Lab. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

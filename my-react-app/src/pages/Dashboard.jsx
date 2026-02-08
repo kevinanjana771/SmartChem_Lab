@@ -2,8 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Dashboard.css";
+import Footer from "../components/Footer";
 
-// Placeholder images 
+// Placeholder images
 const lessons = [
   {
     id: 1,
@@ -15,15 +16,13 @@ const lessons = [
     id: 2,
     title: "Salt Crystal Formation Cryptic",
     lesson: "LESSON 2.5",
-    image:
-      "https://via.placeholder.com/300x200/3b82f6/ffffff?text=Salt",
+    image: "https://via.placeholder.com/300x200/3b82f6/ffffff?text=Salt",
   },
   {
     id: 3,
     title: "Ester Preparation Experiment",
     lesson: "LESSON 2.6",
-    image:
-      "https://via.placeholder.com/300x200/8b5cf6/ffffff?text=Ester",
+    image: "https://via.placeholder.com/300x200/8b5cf6/ffffff?text=Ester",
   },
 ];
 
@@ -61,15 +60,11 @@ const Dashboard = () => {
   const handleSpark = (e) => {
     const spark = document.createElement("span");
     spark.classList.add("spark");
-
     const x = e.clientX;
     const y = e.clientY;
-
     spark.style.left = `${x}px`;
     spark.style.top = `${y}px`;
-
     document.body.appendChild(spark);
-
     setTimeout(() => {
       spark.remove();
     }, 1000);
@@ -78,14 +73,20 @@ const Dashboard = () => {
   return (
     <div className="dashboard-wrapper" onClick={handleSpark}>
       
+      {/* SCIENTIFIC BALATRO BACKGROUND */}
+      <div className="balatro-bg">
+        <div className="blob blob-1"></div>
+        <div className="blob blob-2"></div>
+        <div className="blob blob-3"></div>
+        <div className="noise-overlay"></div>
+      </div>
 
       <div className="dashboard">
+        
         {/* Practices Section */}
         <section className="dashboard-section glass-panel">
           <div className="section-header">
             <h3>Practices</h3>
-
-            {/* View All Link */}
             <Link to="/practicals" className="view-all-link">
               View All
             </Link>
@@ -103,7 +104,6 @@ const Dashboard = () => {
                   alt={lesson.title}
                   className="card-image"
                 />
-
                 <div className="card-content">
                   <span className="lesson-tag">{lesson.lesson}</span>
                   <h4>{lesson.title}</h4>
@@ -116,26 +116,21 @@ const Dashboard = () => {
 
         {/* Learn More & Progress Split */}
         <div className="dashboard-split">
+          
           {/* Learn More */}
           <section className="dashboard-section learn-more glass-panel">
             <div className="section-header">
               <h3>Learn More</h3>
             </div>
-
             <div className="learn-grid">
               <div className="learn-card glare-card">
                 <div className="learn-icon">🔬</div>
                 <h4>Equipments</h4>
                 <p>Master laboratory tools.</p>
-
-                <button
-                  className="learn-btn"
-                  onClick={() => navigate("/equipments")}
-                >
+                <button className="learn-btn" onClick={() => navigate("/equipments")}>
                   Learn Now
                 </button>
               </div>
-
               <div className="learn-card glare-card">
                 <div className="learn-icon">🧤</div>
                 <h4>Safety Methods</h4>
@@ -150,7 +145,6 @@ const Dashboard = () => {
             <div className="section-header">
               <h3>Progress</h3>
             </div>
-
             <div className="progress-grid">
               {progressData.map((item, index) => (
                 <div key={index} className="progress-item">
@@ -161,11 +155,8 @@ const Dashboard = () => {
                       "--color": item.color,
                     }}
                   >
-                    <span className="progress-value">
-                      {item.percentage}%
-                    </span>
+                    <span className="progress-value">{item.percentage}%</span>
                   </div>
-
                   <div className="progress-info">
                     <h5>{item.label}</h5>
                     <p>{item.value}</p>
@@ -176,8 +167,7 @@ const Dashboard = () => {
           </section>
         </div>
       </div>
-
-      
+      <Footer />  
     </div>
   );
 };
