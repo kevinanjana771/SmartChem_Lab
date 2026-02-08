@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Practicals.css';
+import Footer from '../components/Footer';
 
 const courses = [
   { id: 1, title: 'Introduction to Chemistry in Advanced', lesson: 'LESSON 2.4', image: 'https://via.placeholder.com/300x200?text=Glassware' },
@@ -36,6 +37,7 @@ const Practicals = () => {
           </div>
         ))}
       </div>
+    <Footer />  
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Equipments.css";
+import Footer from "../components/Footer";
 
 const equipmentList = [
   { id: 1, name: "Test Tube", image: "https://via.placeholder.com/150?text=Balance" },
@@ -88,7 +89,7 @@ const Equipments = () => {
         ))}
       </div>
 
-      {/* FOOTER */}
+      <Footer />
       
     </div>
   );

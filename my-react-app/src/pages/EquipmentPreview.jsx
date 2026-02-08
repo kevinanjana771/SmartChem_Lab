@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './EquipmentPreview.css';
 import './Equipments.jsx';
+import Footer from '../components/Footer.jsx';
 
 const EquipmentPreview = () => {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ const EquipmentPreview = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './PracticalPreview.css';
+import Footer from '../components/Footer';
 
 const PracticalPreview = () => {
   const { id } = useParams();
@@ -42,6 +43,7 @@ const PracticalPreview = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
