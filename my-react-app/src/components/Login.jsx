@@ -64,11 +64,11 @@ const Login = () => {
     
     <div className="login-page-wrapper">
       <div className="color-bend-bg"></div>
-      <div className="practical-preview">
+      <div className="practical-preview-login">
         
         {/* Left Side: Interactive Lab Design */}
         <div 
-          className="visual-side" 
+          className="visual-side-login" 
           ref={visualSideRef}
           onMouseMove={handleMouseMove}
         >
@@ -101,10 +101,10 @@ const Login = () => {
         </div>
 
         {/* Right Side: Form */}
-        <div className="preview-content">
-          <div className="preview-header">
+        <div className="preview-content-login">
+          <div className="preview-header-login">
             <h1>Student Portal</h1>
-            <p className="preview-text">Access the virtual laboratory and start your practicals.</p>
+            <p className="preview-text-login">Access the virtual laboratory and start your practicals.</p>
           </div>
 
           <form onSubmit={handleSubmit} className="login-form">
@@ -149,8 +149,8 @@ const Login = () => {
               />
             </div>
 
-            <div className="action-area">
-              <button type="submit" className="start-action-btn">Enter Lab</button>
+            <div className="action-area-login">
+              <button type="submit" className="start-action-btn-login">Enter Lab</button>
             </div>
           </form>
 

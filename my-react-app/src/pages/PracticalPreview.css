@@ -1,6 +1,39 @@
+/*BRIGHT COLOR BEND BACKGROUND*/
+.color-bend-bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #ecfdf5 0deg,
+    #10b981 90deg,
+    #06b6d4 180deg,
+    #34d399 270deg,
+    #ecfdf5 360deg
+  );
+  filter: blur(100px);
+  z-index: -1;
+  animation: spinBg 20s linear infinite;
+}
+
+@keyframes spinBg {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
 .practical-preview {
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  z-index: 0
+  
 }
 
 .preview-header {

@@ -79,11 +79,11 @@ const Signup = () => {
   return (
     <div className="signup-page-wrapper">
       <div className="color-bend-bg"></div>  
-      <div className="practical-preview">
+      <div className="practical-preview-signup">
         
         {/* Left Side: Interactive Atom Design */}
         <div 
-          className="visual-side" 
+          className="visual-side-signup" 
           ref={visualSideRef}
           onMouseMove={handleMouseMove}
         >
@@ -120,8 +120,8 @@ const Signup = () => {
         </div>
 
         {/* Right Side: Form */}
-        <div className="preview-content">
-          <div className="preview-header">
+        <div className="preview-content-signup">
+          <div className="preview-header-signup">
             <h1>Student Registration</h1>
             <p className="preview-text">Create your profile to access experiments.</p>
           </div>
@@ -185,8 +185,8 @@ const Signup = () => {
               />
             </div>
 
-            <div className="action-area">
-              <button type="submit" className="start-action-btn">Join Lab</button>
+            <div className="action-area-signup">
+              <button type="submit" className="start-action-btn-signup">Join Lab</button>
             </div>
           </form>
 

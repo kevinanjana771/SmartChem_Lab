@@ -56,6 +56,7 @@ const Equipments = () => {
 
   return (
     <div className="equipments-page">
+      <div className="color-bend-bg"></div>
       {/* Header */}
       <div className="equip-header">
         <h2>Equipments</h2>
