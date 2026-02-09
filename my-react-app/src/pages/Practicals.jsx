@@ -19,6 +19,7 @@ const Practicals = () => {
 
   return (
     <div className="practicals-page">
+      <div className="color-bend-bg"></div>
       <h2 className="page-header">Chemistry Practicals</h2>
       <div className="practicals-grid">
         {courses.map((course) => (
@@ -37,7 +38,7 @@ const Practicals = () => {
           </div>
         ))}
       </div>
-    <Footer />  
+    <Footer />
     </div>
   );
 };

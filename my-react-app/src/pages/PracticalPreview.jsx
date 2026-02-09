@@ -9,6 +9,7 @@ const PracticalPreview = () => {
 
   return (
     <div className="practical-preview">
+      <div className="color-bend-bg"></div>
       <div className="preview-header">
         <h1>LESSON 2.4 Introduction to Chemistry in Advanced</h1>
         <div className="tabs">
