@@ -42,7 +42,7 @@
   z-index: 0;
 }
 
-.practical-preview {
+.practical-preview-signup {
   width: 100%;
   max-width: 1000px;
   background: rgba(255, 255, 255, 0.9); 
@@ -56,7 +56,7 @@
 }
 
 /*LEFT SIDE: INTERACTIVE DESIGN*/
-.visual-side {
+.visual-side-signup {
   flex: 1;
   width: 45%;
   display: none;
@@ -66,7 +66,7 @@
 }
 
 @media (min-width: 768px) {
-  .visual-side {
+  .visual-side-signup {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -166,7 +166,7 @@
 }
 
 /*RIGHT SIDE: CONTENT*/
-.preview-content {
+.preview-content-signup {
   flex: 1;
   width: 100%;
   padding: 3rem;
@@ -177,7 +177,7 @@
 }
 
 @media (min-width: 768px) {
-  .preview-content {
+  .preview-content-signup {
     width: 55%;
   }
 }
@@ -187,14 +187,14 @@
   text-align: center;
 }
 
-.preview-header h1 {
+.preview-header-signup h1 {
   font-size: 2.25rem;
   color: #064e3b;
   margin-bottom: 0.75rem;
   font-weight: 800;
 }
 
-.preview-text {
+.preview-text-signup {
   color: #6b7280;
   font-size: 1.1rem;
 }
@@ -237,11 +237,11 @@
   box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
 }
 
-.action-area {
+.action-area-signup {
   margin-top: 1.5rem;
 }
 
-.start-action-btn {
+.start-action-btn-signup {
   width: 100%;
   background: linear-gradient(135deg, #10b981, #059669);
   color: white;
@@ -256,7 +256,7 @@
   letter-spacing: 0.5px;
 }
 
-.start-action-btn:hover {
+.start-action-btn-signup:hover {
   transform: translateY(-2px);
   box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.5);
 }
