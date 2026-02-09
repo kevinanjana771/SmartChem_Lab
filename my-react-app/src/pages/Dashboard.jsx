@@ -4,25 +4,35 @@ import { Link } from "react-router-dom";
 import "./Dashboard.css";
 import Footer from "../components/Footer";
 
+import practicalImg1 from "../images/homepage/e1.png";
+import practicalImg2 from "../images/homepage/e2.png";
+import practicalImg3 from "../images/homepage/e3.png";
+import practicalImg4 from "../images/homepage/e4.png";
 // Placeholder images
 const lessons = [
   {
     id: 1,
     title: "Introduction to Chemistry",
     lesson: "LESSON 2.4",
-    image: "https://via.placeholder.com/300x200/10b981/ffffff?text=Chemistry"
+    image: practicalImg1,
   },
   {
     id: 2,
     title: "Salt Crystal Formation Cryptic",
     lesson: "LESSON 2.5",
-    image: "https://via.placeholder.com/300x200/3b82f6/ffffff?text=Salt",
+    image: practicalImg2,
   },
   {
     id: 3,
     title: "Ester Preparation Experiment",
     lesson: "LESSON 2.6",
-    image: "https://via.placeholder.com/300x200/8b5cf6/ffffff?text=Ester",
+    image: practicalImg3,
+  },
+  {
+    id: 4,
+    title: "Ester Preparation Experiment",
+    lesson: "LESSON 2.7",
+    image: practicalImg4,
   },
 ];
 
@@ -72,15 +82,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-wrapper" onClick={handleSpark}>
-      
-      {/* SCIENTIFIC BALATRO BACKGROUND */}
-      <div className="balatro-bg">
-        <div className="blob blob-1"></div>
-        <div className="blob blob-2"></div>
-        <div className="blob blob-3"></div>
-        <div className="noise-overlay"></div>
-      </div>
-
+      <div className="color-bend-bg"></div>
       <div className="dashboard">
         
         {/* Practices Section */}
