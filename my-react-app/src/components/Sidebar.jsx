@@ -13,7 +13,7 @@ const Sidebar = () => {
     { name: 'Home', path: '/dashboard', icon: '🏠' },
     { name: 'Practicals', path: '/practicals', icon: '🧪' },
     { name: 'Equipments', path: '/equipments', icon: '⚖️' },
-    { name: 'Safety Methods', path: '/safety', icon: '🛡️' },
+    { name: 'Safety Methods', path: '/safetymethods', icon: '🛡️' },
     { name: 'Report', path: '/report', icon: '📊' },
     { name: 'Settings', path: '/settings', icon: '⚙️', badge: 2 },
   ];

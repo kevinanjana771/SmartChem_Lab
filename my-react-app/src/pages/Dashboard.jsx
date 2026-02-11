@@ -89,7 +89,7 @@ const Dashboard = () => {
         <section className="dashboard-section glass-panel">
           <div className="section-header">
             <h3>Practices</h3>
-            <Link to="/practicals" className="view-all-link">
+            <Link to="/safetymethods" className="view-all-link">
               View All
             </Link>
           </div>
@@ -137,7 +137,9 @@ const Dashboard = () => {
                 <div className="learn-icon">🧤</div>
                 <h4>Safety Methods</h4>
                 <p>Stay safe in the lab.</p>
-                <button className="learn-btn">Learn Now</button>
+                <button className="learn-btn" onClick={() => { navigate("/safetymethods")}}>
+                  Learn Now
+                </button>
               </div>
             </div>
           </section>
