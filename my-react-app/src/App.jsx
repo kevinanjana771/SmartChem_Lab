@@ -10,6 +10,7 @@ import Quiz from './pages/Quiz';
 import Equipments from './pages/Equipments';
 import EquipmentPreview from './pages/EquipmentPreview';
 import AboutUs from './pages/AboutUs';
+import Safetymethods from './pages/Safetymethod';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/quiz/:id" element={<Quiz />} />
           <Route path="/equipments" element={<Equipments />} />
           <Route path="/equipments/:id" element={<EquipmentPreview />} />
+          <Route path="/safetymethods" element={<Safetymethods />} />
         </Route>
       </Routes>
     </BrowserRouter>
