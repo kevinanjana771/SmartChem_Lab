@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b555991e-5422-4e31-a5f5-79cb95c8516e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/my-react-app/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Darveil.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Darveil.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Footer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Footer.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Login.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Login.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Signup.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Signup.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/images/homepage/e1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/images/homepage/e2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/images/homepage/e3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/images/homepage/e4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/pages/AboutUs.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/pages/AboutUs.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/pages/Safetymethod.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/pages/Safetymethods.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/components/Sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/components/Sidebar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/components/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/components/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/components/TopBar.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/components/TopBar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/components/TopBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/components/TopBar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Dashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Dashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/EquipmentPreview.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/EquipmentPreview.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Equipments.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Equipments.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Equipments.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Equipments.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/LandingPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/LandingPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/PracticalPreview.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/PracticalPreview.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/PracticalPreview.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/PracticalPreview.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Practicals.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Practicals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Practicals.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Practicals.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Quiz.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Quiz.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/my-react-app/package.json" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="395zPwvKib0B4GyjAAcJt1nstfQ" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.SelectionSort.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/kevinanjana/Desktop/react/new code 2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="SelectionSort" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="selectionsort.SelectionSort" />
+      <module name="new code 2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="selectionsort.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.138" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.138" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b555991e-5422-4e31-a5f5-79cb95c8516e" name="Changes" comment="" />
+      <created>1770000698614</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1770000698614</updated>
+      <workItem from="1770000699780" duration="39000" />
+      <workItem from="1770868789865" duration="3951000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
