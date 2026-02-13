@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AnimatePresence } from "framer-motion";
 import LandingPage from './pages/LandingPage';
 import Login from './components/Login';
 import Signup from './components/Signup'; 
@@ -15,24 +16,26 @@ import Safetymethods from './pages/Safetymethod';
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Public Routes  */}
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} /> 
-        
-        {/* App Routes  */}
-        <Route element={<MainLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/practicals" element={<Practicals />} />
-          <Route path="/practicals/:id" element={<PracticalPreview />} />
-          <Route path="/quiz/:id" element={<Quiz />} />
-          <Route path="/equipments" element={<Equipments />} />
-          <Route path="/equipments/:id" element={<EquipmentPreview />} />
-          <Route path="/safetymethods" element={<Safetymethods />} />
-        </Route>
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes>
+          {/* Public Routes  */}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} /> 
+          
+          {/* App Routes  */}
+          <Route element={<MainLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/practicals" element={<Practicals />} />
+            <Route path="/practicals/:id" element={<PracticalPreview />} />
+            <Route path="/quiz/:id" element={<Quiz />} />
+            <Route path="/equipments" element={<Equipments />} />
+            <Route path="/equipments/:id" element={<EquipmentPreview />} />
+            <Route path="/safetymethods" element={<Safetymethods />} />
+          </Route>
+        </Routes>
+      </AnimatePresence>
     </BrowserRouter>
   );
 }

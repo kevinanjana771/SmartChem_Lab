@@ -1,3 +1,5 @@
+
+
 /* SAFETY METHODS PAGE - SCOPED CSS */
 
 /* --- Layout Wrapper --- */
@@ -7,6 +9,8 @@
     line-height: 1.6;
     /* Ensure it takes full width if needed, though container handles max-width */
     width: 100%;
+    z-index: 2;
+    position: relative;
 }
 
 .safety-methods a { text-decoration: none; color: inherit; }
@@ -14,9 +18,10 @@
 
 /* --- Utility --- */
 .safety-methods .container {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 24px;
+    
 }
 
 .safety-methods .btn {
@@ -498,7 +503,7 @@
 }
 
 /* --- Responsive --- */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
     .safety-methods .hero-grid, 
     .safety-methods .checklist-wrapper {
         grid-template-columns: 1fr;

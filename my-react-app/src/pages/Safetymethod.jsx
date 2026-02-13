@@ -26,10 +26,12 @@ const Safetymethods = () => {
     };
 
     return (
+        
         <div className="safety-methods">
             
           {/* Hero Section */}
           <section className="hero">
+            
             <div className="container hero-grid">
                 <div className="hero-content" style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'flex-start' }}>
                     <h1>

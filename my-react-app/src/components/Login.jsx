@@ -1,5 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { motion } from "framer-motion";
+import logo from '../images/landing/sdgp-logo.png';
+
 import './Login.css';
 
 const Login = () => {
@@ -62,7 +65,12 @@ const Login = () => {
 
   return (
     
-    <div className="login-page-wrapper">
+    <motion.div className="login-page-wrapper"
+    initial={{ x: -100, opacity: 0 }}
+    animate={{ x: 0, opacity: 1 }}
+    exit={{ x: 100, opacity: 0 }}
+    transition={{ duration: 0.5 }}
+    >
       <div className="color-bend-bg"></div>
       <div className="practical-preview-login">
         
@@ -102,6 +110,9 @@ const Login = () => {
 
         {/* Right Side: Form */}
         <div className="preview-content-login">
+          <Link to="/" className="auth-top-brand">
+            <img src={logo} alt="SmartChem Lab Logo" className="logo-img" />
+          </Link>
           <div className="preview-header-login">
             <h1>Student Portal</h1>
             <p className="preview-text-login">Access the virtual laboratory and start your practicals.</p>
@@ -159,7 +170,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

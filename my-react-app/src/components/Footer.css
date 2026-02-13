@@ -2,7 +2,8 @@
 .footer {
   background: #111827;
   color: white;
-  padding: 4rem 2rem 2rem;
+  padding: 2rem 2rem 2rem;
+  margin-bottom: 0;
 }
 
 .footer-content {
