@@ -4,13 +4,13 @@
 
 /* --- Layout Wrapper --- */
 .safety-methods {
-    font-family: 'Inter', sans-serif;
     color: #374151;
     line-height: 1.6;
-    /* Ensure it takes full width if needed, though container handles max-width */
     width: 100%;
     z-index: 2;
     position: relative;
+    background: #f8fafc06;
+    overflow-x: clip;
 }
 
 .safety-methods a { text-decoration: none; color: inherit; }
@@ -18,10 +18,11 @@
 
 /* --- Utility --- */
 .safety-methods .container {
-    max-width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;
-    
+    padding: 0 28px;
+    width: 100%;
+    min-width: 0;
 }
 
 .safety-methods .btn {
@@ -57,14 +58,19 @@
 }
 
 .safety-methods .section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
     text-align: center;
     margin-bottom: 3.5rem;
 }
 .safety-methods .section-header h2 {
     font-size: 2.25rem;
-    color: #047857;
+    color: #111827;
     margin-bottom: 1rem;
     font-weight: 700;
+    line-height: 1.2;
 }
 .safety-methods .section-header p {
     color: #374151;
@@ -76,11 +82,13 @@
 /* --- Hero Section --- */
 .safety-methods .hero {
     background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-    padding: 80px 0;
+    padding: clamp(56px, 8vw, 96px) 0;
     position: relative;
     overflow: hidden;
-    border-radius: 15px;
-    margin-bottom: 40px; /* Spacing from top of page */
+    border-radius: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 24px auto 52px;
 }
 
 .safety-methods .hero::before {
@@ -99,23 +107,41 @@
 .safety-methods .hero-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 48px;
     align-items: center;
+}
+
+.safety-methods .hero-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
 }
 
 .safety-methods .hero-content h1 {
     font-size: 3.5rem;
     line-height: 1.1;
     margin-bottom: 1.5rem;
-    color: #047857;
+    color: #111827;
     letter-spacing: -1px;
+}
+
+.safety-methods .hero-title-accent {
+    color: #111827;
 }
 
 .safety-methods .hero-content p {
     font-size: 1.2rem;
     color: #374151;
     margin-bottom: 2.5rem;
-    max-width: 500px;
+    max-width: 560px;
+}
+
+.safety-methods .hero-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .safety-methods .hero-visual {
@@ -157,9 +183,11 @@
 }
 
 .safety-methods .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 30px;
+    justify-content: center;
+    align-items: stretch;
 }
 
 .safety-methods .ppe-card {
@@ -171,6 +199,9 @@
     text-align: center;
     position: relative;
     overflow: hidden;
+    flex: 1 1 260px;
+    width: 100%;
+    max-width: 340px;
 }
 
 .safety-methods .ppe-card:hover {
@@ -249,6 +280,7 @@
     align-items: center;
     margin-top: 60px;
     padding: 20px 0; /* Space for shadows */
+    overflow: hidden;
 }
 
 .safety-methods .hazard-slider {
@@ -258,7 +290,8 @@
     overflow-y: hidden;
     scroll-behavior: smooth;
     width: 100%;
-    padding: 20px 80px; /* Padding ensures first/last items can center */
+    padding: 20px 56px; /* Keep centered without causing small-screen overflow */
+    box-sizing: border-box;
     scroll-snap-type: x mandatory;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -392,7 +425,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
-    align-items:start;
+    align-items: start;
 }
 
 .safety-methods .checklist-text h2 {
@@ -406,11 +439,32 @@
     color: #374151;
 }
 
+.safety-methods .checklist-stats {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.safety-methods .checklist-stat h3 {
+    font-size: 2rem;
+    color: #10b981;
+}
+
+.safety-methods .checklist-stat p {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
 .safety-methods .checklist-container {
     background: #ecfdf5;
     padding: 40px;
     border-radius: 20px;
     border: 1px solid #a7f3d0;
+}
+
+.safety-methods .checklist-cta {
+    margin-top: 25px;
+    text-align: right;
 }
 
 .safety-methods .checklist-group {
@@ -474,6 +528,10 @@
     color: #be123c;
 }
 
+.safety-methods .emergency-header {
+    margin-bottom: 2rem;
+}
+
 .safety-methods .emergency-actions {
     display: flex;
     justify-content: center;
@@ -487,8 +545,9 @@
     padding: 30px;
     border-radius: 16px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    width: 220px;
+    width: 240px;
     border: 1px solid #fecdd3;
+    text-align: center;
 }
 
 .safety-methods .action-card i {
@@ -512,4 +571,71 @@
     .safety-methods .hero-content p { margin: 0 auto 2rem; }
     .safety-methods .hero-content h1 { font-size: 2.5rem; }
     .safety-methods .floating-card { display: none; }
+}
+
+@media (max-width: 1024px) {
+    .safety-methods .container {
+        padding: 0 20px;
+    }
+
+    .safety-methods .hazard-section {
+        padding: 72px 0;
+    }
+
+    .safety-methods .hazard-slider {
+        gap: 38px;
+        padding: 20px 40px;
+    }
+
+    .safety-methods .slide-btn {
+        width: 42px;
+        height: 42px;
+    }
+
+    .safety-methods .diamond-icon {
+        width: 96px;
+        height: 96px;
+    }
+}
+
+@media (max-width: 768px) {
+    .safety-methods .container {
+        padding: 0 18px;
+    }
+
+    .safety-methods .section-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .safety-methods .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .safety-methods .hero-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .safety-methods .hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .safety-methods .hazard-slider {
+        gap: 28px;
+        padding: 16px 20px;
+    }
+
+    .safety-methods .slide-btn {
+        display: none;
+    }
+
+    .safety-methods .checklist-container {
+        padding: 24px;
+    }
+
+    .safety-methods .checklist-stats {
+        flex-wrap: wrap;
+        gap: 14px;
+    }
 }

@@ -1,6 +1,6 @@
 .dashboard-wrapper {
   min-height: 100vh;
-  background-color: #f0fdf4; /* Light Emerald Base */
+  background-color: transparent;
   position: relative;
   overflow-x: hidden;
   padding: 2rem 2rem 0rem 2rem;
