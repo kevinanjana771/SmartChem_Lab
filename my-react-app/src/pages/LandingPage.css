@@ -34,22 +34,21 @@
   gap: 0.75rem;
 }
 
-.logo-icon {
-  width: 40px;
-  height: 40px;
-  background: #10b981;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-}
 
+
+.logo-img {
+  height: 63px;        /* Fits inside navbar */
+  width: 250px;         /* Keeps correct proportions */
+  object-fit: cover;     /* Zoom and crop */
+  object-position:left;
+  margin-top: 0.1rem;
+}
 .logo-text {
   font-size: 1.25rem;
   font-weight: 700;
   color: #111;
 }
+
 
 .nav-links {
   display: flex;

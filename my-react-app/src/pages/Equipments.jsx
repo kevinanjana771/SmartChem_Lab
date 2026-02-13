@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import "./Equipments.css";
 import Footer from "../components/Footer";
 
@@ -55,7 +56,11 @@ const Equipments = () => {
   );
 
   return (
-    <div className="equipments-page">
+    <motion.div className="equipments-page"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 1 }}>
       <div className="color-bend-bg"></div>
       {/* Header */}
       <div className="equip-header">
@@ -92,7 +97,7 @@ const Equipments = () => {
 
       <Footer />
       
-    </div>
+    </motion.div>
   );
 };
 

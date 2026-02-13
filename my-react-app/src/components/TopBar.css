@@ -1,6 +1,10 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
 .topbar {
   height: 70px;
-  background: white;
+  background: rgb(255, 255, 255);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,13 +16,18 @@
   left: 260px;
   width: calc(100% - 260px);
   z-index: 9998;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
 }
 
+.topbar-left h2{
+  color: #258263;
+  font-family:'Poppins', sans-serif;
+  font-weight: 800px;
+}
 .page-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1f2937;
+  color: #000000;
   margin: 0;
 }
 

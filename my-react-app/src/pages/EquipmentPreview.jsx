@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
 import './EquipmentPreview.css';
 import './Equipments.jsx';
 import Footer from '../components/Footer.jsx';
@@ -16,7 +17,11 @@ const EquipmentPreview = () => {
   ];
 
   return (
-    <div className="equip-preview">
+    <motion.div className="equip-preview"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 1 }}>
       <button className="back-btn" onClick={() => navigate(-1)}>← Back to Equipments</button>
       
       <div className="preview-layout">
@@ -51,7 +56,7 @@ const EquipmentPreview = () => {
         </div>
       </div>
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 
