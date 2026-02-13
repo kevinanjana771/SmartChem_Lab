@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import logo from '../images/landing/sdgp-logo.png';
 import './Signup.css';
+import GoogleAuthButton from "../components/GoogleAuthButton";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -201,6 +202,13 @@ const Signup = () => {
               <button type="submit" className="start-action-btn-signup">Join Lab</button>
             </div>
           </form>
+          <div className="auth-divider">
+            <span>or</span>
+          </div>
+
+          <GoogleAuthButton />
+        
+
 
           <div className="login-footer">
             <p>Already have an account? <Link to="/login">Log In</Link></p>

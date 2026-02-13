@@ -93,7 +93,7 @@ const Dashboard = () => {
         <section className="dashboard-section glass-panel">
           <div className="section-header">
             <h3>Practices</h3>
-            <Link to="/safetymethods" className="view-all-link">
+            <Link to="/practicals" className="view-all-link">
               View All
             </Link>
           </div>
