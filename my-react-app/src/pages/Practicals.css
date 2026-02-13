@@ -1,27 +1,4 @@
-/*BRIGHT COLOR BEND BACKGROUND*/
-.color-bend-bg {
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: conic-gradient(
-    from 180deg at 50% 50%,
-    #ecfdf5 0deg,
-    #10b981 90deg,
-    #06b6d4 180deg,
-    #34d399 270deg,
-    #ecfdf5 360deg
-  );
-  filter: blur(100px);
-  z-index: -1;
-  animation: spinBg 20s linear infinite;
-}
 
-@keyframes spinBg {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 
 .practicals-page {
   max-width: 1400px;
@@ -29,20 +6,51 @@
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
-  z-index: 0}
-
+  z-index: 0;
+  padding: 2rem 2rem 0rem 2rem;
+}
 
 .page-header {
   font-size: 2rem;
   font-weight: 800;
-  color: #1f2937;
+  color: #064e3b;
   margin-bottom: 2rem;
 }
+
+.search-bar {
+  position: relative;
+  width: 300px;
+  margin-bottom: 2rem;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 50px;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.search-bar input:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
 
 .practicals-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 .course-card {

@@ -3,32 +3,8 @@
   background-color: #f0fdf4; /* Light Emerald Base */
   position: relative;
   overflow-x: hidden;
-  padding: 2rem;
+  padding: 2rem 2rem 0rem 2rem;
   z-index: 2;
-}
-/*BRIGHT COLOR BEND BACKGROUND*/
-.color-bend-bg {
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: conic-gradient(
-    from 180deg at 50% 50%,
-    #ecfdf5 0deg,
-    #10b981 90deg,
-    #06b6d4 180deg,
-    #34d399 270deg,
-    #ecfdf5 360deg
-  );
-  filter: blur(100px);
-  z-index: -1;
-  animation: spinBg 20s linear infinite;
-}
-
-@keyframes spinBg {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 /*  MAIN DASHBOARD CONTAINER */

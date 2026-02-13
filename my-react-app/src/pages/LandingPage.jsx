@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from "../images/landing/sdgp-logo.png";
 import './LandingPage.css';
 
 import landingImage from "../images/landing/landing-image.png";
@@ -50,8 +51,10 @@ export default function LandingPage() {
       <nav className="navbar">
         <div className="nav-container">
           <div className="logo">
-            <div className="logo-icon">⚗</div>
-            <span className="logo-text">SmartChem Lab</span>
+            
+              <img src={logo} alt="SmartChem Lab Logo" className="logo-img" />
+            
+            
           </div>
           <ul className="nav-links">
             <li><a href="#home">Home</a></li>

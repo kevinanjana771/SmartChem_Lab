@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, Link } from 'react-router-dom';
+import logo from '../images/landing/sdgp-logo.png';
 import './Sidebar.css';
 
 const Sidebar = () => {
@@ -51,10 +52,14 @@ const Sidebar = () => {
     >
       
       {/* MAIN HEADER */}
-      <div className="sidebar-header">
-        <div className="logo-icon">⚗</div>
-        <span className="sidebar-brand">SmartChem Lab</span>
-      </div>
+      <Link to="/" className="sidebar-header-link">
+        <div className="sidebar-header">
+          <div className="logo-sidebar">
+            <img src={logo} alt="SmartChem Lab Logo" className="logo-img" />
+          </div>
+        </div>
+      </Link>
+        
 
       {/* NAVIGATION */}
       <nav className="sidebar-nav">
