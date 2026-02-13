@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './TopBar.css';
 
+
 const TopBar = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -28,7 +29,7 @@ const TopBar = () => {
     <div className="topbar">
       <div className="topbar-left">
         <h2 className="page-title">
-          Welcome Back, {user ? user.name : 'Guest'} 🖐
+          Welcome Back, {user ? user.name : 'Guest'} 👨‍🔬
         </h2>
       </div>
       <div className="topbar-right">

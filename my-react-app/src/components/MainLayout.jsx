@@ -10,6 +10,7 @@ const MainLayout = () => {
       <Sidebar />
       <div className="content-wrapper">
         <TopBar />
+        <div className="color-bend-bg"></div>
         <main className="main-content">
           <Outlet />
         </main>

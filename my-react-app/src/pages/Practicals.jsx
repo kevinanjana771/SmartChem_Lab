@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
 import './Practicals.css';
 import Footer from '../components/Footer';
 
@@ -54,13 +55,32 @@ const courses = [
 
 const Practicals = () => {
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = React.useState('');
+
+  const filteredCourses = courses.filter(course =>
+    course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    course.lesson.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className="practicals-page">
-      <div className="color-bend-bg"></div>
+    <motion.div className="practicals-page"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.4 }}>
+      
+      <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search practicals..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <span className="search-icon">🔍</span>
+        </div>
       <h2 className="page-header">Chemistry Practicals</h2>
       <div className="practicals-grid">
-        {courses.map((course) => (
+        {filteredCourses.map((course) => (
           <div key={course.id} className="course-card">
             <img src={course.image} alt={course.title} className="course-img" />
             <div className="course-body">
@@ -77,7 +97,7 @@ const Practicals = () => {
         ))}
       </div>
     <Footer />
-    </div>
+    </motion.div>
   );
 };
 

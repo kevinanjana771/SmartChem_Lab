@@ -1,5 +1,6 @@
 import React from 'react';
 import './Footer.css';
+import logo from '../images/landing/sdgp-logo.png';
 
 const Footer = () => {
   return (
@@ -7,8 +8,7 @@ const Footer = () => {
         <div className="footer-content">
             <div className="footer-brand">
             <div className="logo">
-                <div className="logo-icon">⚗</div>
-                <span className="logo-text">SmartChem Lab</span>
+                <img src={logo} alt="SmartChem Lab Logo" className="logo-img" /> 
             </div>
             <p className="footer-description">
                 Empowering students with cutting-edge digital chemistry labs for practical mastery.

@@ -286,3 +286,33 @@
   color: #047857;
   text-decoration: underline;
 }
+
+/* TOP BRAND LINK BUTTON*/
+
+.auth-top-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #064e3b;
+  margin-bottom: 2rem;
+  justify-content: center;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.auth-brand-icon {
+  font-size: 1.5rem;
+}
+
+.auth-top-brand:hover {
+  transform: scale(1.05);
+  opacity: 0.85;
+}
+
+.auth-brand-text {
+  background: linear-gradient(to right, #10b981, #06b6d4);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

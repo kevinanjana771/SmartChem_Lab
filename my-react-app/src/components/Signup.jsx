@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { motion } from "framer-motion";
+import logo from '../images/landing/sdgp-logo.png';
 import './Signup.css';
 
 const Signup = () => {
@@ -77,7 +79,12 @@ const Signup = () => {
   ));
 
   return (
-    <div className="signup-page-wrapper">
+    <motion.div className="signup-page-wrapper"
+    initial={{ x: -100, opacity: 0 }}
+    animate={{ x: 0, opacity: 1 }}
+    exit={{ x: 100, opacity: 0 }}
+    transition={{ duration: 0.5 }}
+    >
       <div className="color-bend-bg"></div>  
       <div className="practical-preview-signup">
         
@@ -121,6 +128,11 @@ const Signup = () => {
 
         {/* Right Side: Form */}
         <div className="preview-content-signup">
+
+          <Link to="/" className="auth-top-brand">
+            <img src={logo} alt="SmartChem Lab Logo" className="logo-img" />
+          </Link>
+          
           <div className="preview-header-signup">
             <h1>Student Registration</h1>
             <p className="preview-text">Create your profile to access experiments.</p>
@@ -195,7 +207,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

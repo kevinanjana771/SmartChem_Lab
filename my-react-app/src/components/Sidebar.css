@@ -49,14 +49,20 @@
 
 /*HEADER & LOGO*/
 .sidebar-header {
-  display: flex;
+  display:flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   position: relative;
   z-index: 2; 
 }
 
+.logo-sidebar img{
+  height: 80px;
+  width: 250px;
+  margin-left: -15px;
+}
+/*
 .logo-icon {
   font-size: 2rem;
   background: linear-gradient(135deg, #34d399, #059669);
@@ -74,6 +80,7 @@
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-3px) rotate(5deg); }
 }
+  */
 
 .sidebar-brand {
   font-size: 1.25rem;
