@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import logo from '../images/landing/sdgp-logo.png';
+import GoogleAuthButton from "../components/GoogleAuthButton";
+
 
 import './Login.css';
 
@@ -164,6 +166,13 @@ const Login = () => {
               <button type="submit" className="start-action-btn-login">Enter Lab</button>
             </div>
           </form>
+          <div className="auth-divider">
+            <span>or</span>
+          </div>
+
+          {/* Google Login */}
+          <GoogleAuthButton />
+          
 
           <div className="login-footer">
             <p>New to SmartChem? <Link to="/signup">Create an Account</Link></p>
