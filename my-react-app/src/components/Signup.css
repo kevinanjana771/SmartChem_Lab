@@ -271,6 +271,13 @@
   margin-bottom: 1rem;
   border: 1px solid #fca5a5;
 }
+.auth-divider{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  
+}
 
 .login-footer {
   margin-top: 2rem;
