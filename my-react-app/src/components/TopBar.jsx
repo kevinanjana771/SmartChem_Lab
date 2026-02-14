@@ -5,19 +5,14 @@ import './TopBar.css';
 
 const TopBar = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
-      console.log("User is logged in:", parsedUser);
-      setUser(parsedUser);
-    } else {
-      console.log("No user found in localStorage");
-      setUser(null);
+  const [user, setUser] = useState(() => {
+    try {
+      const storedUser = localStorage.getItem('user');
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch (e) {
+      return null;
     }
-  }, []);
+  });
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -41,7 +36,7 @@ const TopBar = () => {
             </button>
             <div className="user-profile">
               <span className="user-name">{user.name}</span>
-              <img src={user.avatar} alt={user.name} className="user-avatar" />
+              <img src={user.avatar} alt="User Avatar" style={{ width: "50px", borderRadius: "50%" }} />
             </div>
           </>
         ) : (
