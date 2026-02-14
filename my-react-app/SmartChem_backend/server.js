@@ -4,6 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 import equipmentRoutes from "./routes/equipmentRoutes.js";
 import errorMiddleware from "./middleware/errorMiddleware.js";
+import authRoutes from "./routes/authRoutes.js";
 
 // Load environment variables
 dotenv.config();
@@ -12,9 +13,13 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173", // frontend URL
+    credentials: true
+}));
 app.use(morgan("dev"));
 app.use(express.json());
+
 
 // Root route
 app.get("/", (req, res) => {
@@ -23,6 +28,10 @@ app.get("/", (req, res) => {
 
 // API Routes
 app.use("/api/equipment", equipmentRoutes);
+;
+
+// Auth Routes
+app.use("/api/auth", authRoutes);
 
 // 404 Handler (Must be before error handler)
 app.use((req, res, next) => {
