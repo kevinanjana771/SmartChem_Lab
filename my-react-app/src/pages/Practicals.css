@@ -1,5 +1,3 @@
-
-
 .practicals-page {
   max-width: 1400px;
   margin: 0 auto;
@@ -10,17 +8,31 @@
   padding: 2rem 2rem 0rem 2rem;
 }
 
+/* NEW: Wrapper to put Title on Left and Search on Right */
+.page-header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  /* Pushes items to edges */
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  /* Wraps on small screens */
+  gap: 1rem;
+}
+
 .page-header {
   font-size: 2rem;
   font-weight: 800;
   color: #064e3b;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
+  /* Removed margin because wrapper handles spacing */
 }
 
 .search-bar {
   position: relative;
   width: 300px;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
+  /* Removed margin because wrapper handles spacing */
 }
 
 .search-bar input {
@@ -45,7 +57,6 @@
   color: #9ca3af;
 }
 
-
 .practicals-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -57,7 +68,7 @@
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s;
 }
 

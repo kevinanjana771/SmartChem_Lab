@@ -85,10 +85,10 @@ const Equipments = () => {
 
   return (
     <motion.div className="equipments-page"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 1 }}>
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1 }}>
       <div className="color-bend-bg"></div>
       {/* Header */}
       <div className="equip-header">
@@ -124,7 +124,7 @@ const Equipments = () => {
       </div>
 
       <Footer />
-      
+
     </motion.div>
   );
 };

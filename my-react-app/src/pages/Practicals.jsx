@@ -64,12 +64,16 @@ const Practicals = () => {
 
   return (
     <motion.div className="practicals-page"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.4 }}>
-      
-      <div className="search-bar">
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4 }}>
+
+      {/* UPDATED WRAPPER: Aligns Title Left and Search Right */}
+      <div className="page-header-wrapper">
+        <h2 className="page-header">Chemistry Practicals</h2>
+
+        <div className="search-bar">
           <input
             type="text"
             placeholder="Search practicals..."
@@ -78,7 +82,8 @@ const Practicals = () => {
           />
           <span className="search-icon">🔍</span>
         </div>
-      <h2 className="page-header">Chemistry Practicals</h2>
+      </div>
+
       <div className="practicals-grid">
         {filteredCourses.map((course) => (
           <div key={course.id} className="course-card">
@@ -86,8 +91,8 @@ const Practicals = () => {
             <div className="course-body">
               <span className="course-badge">{course.lesson}</span>
               <h3>{course.title}</h3>
-              <button 
-                className="start-btn-lg" 
+              <button
+                className="start-btn-lg"
                 onClick={() => navigate(`/practicals/${course.id}`)}
               >
                 START NOW
@@ -96,7 +101,7 @@ const Practicals = () => {
           </div>
         ))}
       </div>
-    <Footer />
+      <Footer />
     </motion.div>
   );
 };
