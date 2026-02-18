@@ -5,11 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const pool = new Pool({
-    user: 'postgres.kwbuvntvutrihygxaxqo',
-    host: 'aws-1-ap-southeast-1.pooler.supabase.com',
-    database: 'postgres',
-    password: 'SmartChem_Lab@se32',
-    port: 5432,
+    connectionString: process.env.DATABASE_URL,
     ssl: process.env.NODE_ENV === "production"
         ? { rejectUnauthorized: false }
         : false

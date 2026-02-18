@@ -149,46 +149,6 @@
 }
 
 
-/* ================= CERTIFICATE PAGE ================= */
-
-.certificate {
-  text-align: center;
-  margin-top: 50px;
-  padding: 30px;
-  border: 5px solid #198754;
-  border-radius: 14px;
-  background: #ffffff;
-  color: #000000;
-}
-
-.certificate h2 {
-  margin-bottom: 20px;
-  color: #198754;
-}
-
-.certificate p {
-  font-size: 20px;
-  font-weight: bold;
-  color: #000000;
-}
-
-
-/* ================= CERTIFICATE WITH BACKGROUND ================= */
-
-.certificate-bg {
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  padding: 80px 90px;
-}
-
-
 /* ================= QUIZ FEEDBACK PAGE ================= */
 
 .quiz-feedback-page {
