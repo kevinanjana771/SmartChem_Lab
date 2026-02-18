@@ -1,46 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom'; // Import useParams
 import './Quiz.css';
 import Footer from '../components/Footer';
-import certBg from '../images/Quiz/certificate.jpeg';
 import bannerImg from '../images/Quiz/QuizF.jpg';
 
 const Quiz = () => {
     const navigate = useNavigate();
+    const { id } = useParams(); // Get the p_id from the URL (e.g., /quiz/1)
+
     const [started, setStarted] = useState(false);
 
-    const questions = [
-        {
-            id: "q1",
-            question: "What is the primary function of a conical flask?",
-            options: [
-                { id: "correct", text: "To hold liquids and perform mixing/titration" },
-                { id: "wrong1", text: "To measure precise volumes" },
-                { id: "wrong2", text: "To heat substances to high temperatures" },
-                { id: "wrong3", text: "To store acids only" }
-            ]
-        },
-        {
-            id: "q2",
-            question: "Which equipment is best used to transfer small amounts of liquid?",
-            options: [
-                { id: "wrong1", text: "Beaker" },
-                { id: "correct", text: "Dropper" },
-                { id: "wrong2", text: "Funnel" },
-                { id: "wrong3", text: "Test tube" }
-            ]
-        },
-        {
-            id: "q3",
-            question: "Always wear safety goggles when handling chemicals.",
-            options: [
-                { id: "correct", text: "True" },
-                { id: "wrong", text: "False" }
-            ]
-        },
-    ];
+    // States for Data Fetching
+    const [questions, setQuestions] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
+    // Quiz Logic States
     const totalTime = 120;
     const [timeLeft, setTimeLeft] = useState(totalTime);
     const [timeSpent, setTimeSpent] = useState(0);
@@ -48,8 +24,28 @@ const Quiz = () => {
     const [answers, setAnswers] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [score, setScore] = useState(0);
-    const [showFeedback, setShowFeedback] = useState(false);
 
+    // Fetch Questions on Component Mount
+    useEffect(() => {
+        const fetchQuestions = async () => {
+            try {
+                const response = await fetch(`http://localhost:5001/api/quizzes/${id}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch questions');
+                }
+                const data = await response.json();
+                setQuestions(data);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchQuestions();
+    }, [id]);
+
+    // Timer Logic
     useEffect(() => {
         let timer;
         if (started && timeLeft > 0 && !submitted) {
@@ -82,17 +78,34 @@ const Quiz = () => {
     const handleSubmit = () => {
         let newScore = 0;
         questions.forEach(q => {
+            // The logic relies on the option ID being "correct"
             if (answers[q.id] === "correct") newScore++;
         });
         setScore(newScore);
         setSubmitted(true);
-        setShowFeedback(true);
     };
 
     const currentQuestion = questions[currentIndex];
 
-    /* ================= START PAGE ================= */
+    /* ================= START PAGE (WITH LOADING) ================= */
     if (!started) {
+        if (loading) {
+            return (
+                <div className="quiz-start" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white' }}>
+                    <h2>Loading Quiz Questions...</h2>
+                </div>
+            );
+        }
+
+        if (error) {
+            return (
+                <div className="quiz-start" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', color: 'white' }}>
+                    <h2>Error: {error}</h2>
+                    <button className="start-btn" onClick={() => navigate(-1)}>Go Back</button>
+                </div>
+            );
+        }
+
         return (
             <div
                 className="quiz-start"
@@ -152,7 +165,7 @@ const Quiz = () => {
     }
 
     /* ================= FEEDBACK PAGE ================= */
-    if (submitted && showFeedback) {
+    if (submitted) {
         return (
             <div className="quiz-feedback-page">
                 <h2 style={{ textAlign: "center", marginBottom: "30px" }}>
@@ -204,76 +217,14 @@ const Quiz = () => {
 
                     <button
                         className="start-btn"
-                        onClick={() => setShowFeedback(false)}
+                        onClick={() => navigate(-1)}
                         style={{ marginLeft: "10px" }}
                     >
-                        View Certificate
+                        Exit Quiz
                     </button>
                 </div>
 
                 <Footer />
-            </div>
-        );
-    }
-
-    /* ================= CERTIFICATE PAGE ================= */
-    if (submitted && !showFeedback) {
-        const minutes = Math.floor(timeSpent / 60);
-        const seconds = timeSpent % 60;
-
-        return (
-            <div
-                className="certificate"
-                style={{
-                    backgroundImage: `url(${certBg})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    padding: "220px 20px",
-                    textAlign: "center",
-                    minHeight: "100vh",
-                    fontFamily: "'Playfair Display', serif"
-                }}
-            >
-                <h1 style={{
-                    fontSize: "60px",
-                    fontWeight: "bold",
-                    letterSpacing: "3px",
-                    marginBottom: "20px",
-                    color: "#2c3e50",
-                    textTransform: "uppercase"
-                }}>
-                    Certificate of Completion
-                </h1>
-
-                <p style={{ fontSize: "22px", marginBottom: "15px" }}>
-                    This is to certify that you have successfully completed the quiz.
-                </p>
-
-                <h2 style={{ fontSize: "30px", margin: "20px 0" }}>
-                    Score: {score} / {questions.length}
-                </h2>
-
-                <p style={{ fontSize: "20px" }}>
-                    Time Spent: {minutes} min {seconds} sec
-                </p>
-
-                <br />
-
-                <button
-                    className="start-btn"
-                    onClick={() => window.location.reload()}
-                >
-                    Retry Quiz
-                </button>
-
-                <button
-                    className="start-btn"
-                    onClick={() => navigate(-1)}
-                    style={{ marginLeft: "10px" }}
-                >
-                    Exit Quiz
-                </button>
             </div>
         );
     }
@@ -289,9 +240,9 @@ const Quiz = () => {
             <div className="timer">⏱️ Time Left: {timeLeft}s</div>
 
             <div className="question-card">
-                <h4>{currentIndex + 1}. {currentQuestion.question}</h4>
+                <h4>{currentIndex + 1}. {currentQuestion?.question}</h4>
 
-                {currentQuestion.options.map(opt => (
+                {currentQuestion?.options.map(opt => (
                     <div
                         key={opt.id}
                         className={`option ${answers[currentQuestion.id] === opt.id ? "selected" : ""}`}
