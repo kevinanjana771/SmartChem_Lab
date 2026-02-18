@@ -5,6 +5,8 @@ import morgan from "morgan";
 import equipmentRoutes from "./routes/equipmentRoutes.js";
 import errorMiddleware from "./middleware/errorMiddleware.js";
 import authRoutes from "./routes/authRoutes.js";
+import practicalRoutes from "./routes/practicalRoutes.js";
+import quizRoutes from "./routes/quizRoutes.js";
 
 // Load environment variables
 dotenv.config();
@@ -28,7 +30,8 @@ app.get("/", (req, res) => {
 
 // API Routes
 app.use("/api/equipment", equipmentRoutes);
-;
+app.use("/api/practicals", practicalRoutes);
+app.use("/api/quizzes", quizRoutes);
 
 // Auth Routes
 app.use("/api/auth", authRoutes);
