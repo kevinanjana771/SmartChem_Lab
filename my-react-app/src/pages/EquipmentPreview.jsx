@@ -110,7 +110,7 @@ const EquipmentPreview = () => {
                   <ambientLight intensity={1} />
                   <directionalLight position={[5, 10, 5]} intensity={1.5} />
                   <Suspense fallback={<Html center>Loading 3D...</Html>}>
-                    <GLBModel url={modelUrl} scale={modelScale} />
+                    <GLBModel url={modelUrl} scale={19} />
                     <Environment preset="city" />
                   </Suspense>
                   <OrbitControls enableZoom={false} enableDamping />
@@ -169,11 +169,11 @@ const EquipmentPreview = () => {
               <button className="viewer-close" onClick={() => setShowViewer(false)}>Close</button>
             </div>
             <div className="viewer-canvas-wrap">
-              <Canvas camera={{ position: [0, 1.5, 4], fov: 45 }}>
+              <Canvas camera={{ position: [0, 1.5, 4], fov: 50 }}>
                 <ambientLight intensity={0.85} />
-                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+                <directionalLight position={[3, 5, 2]} intensity={1} />
                 <Suspense fallback={null}>
-                  <GLBModel url={modelUrl} scale={modelScale} />
+                  <GLBModel url={modelUrl} scale={19} />
                   <Environment preset="city" />
                 </Suspense>
                 <OrbitControls enableDamping />
