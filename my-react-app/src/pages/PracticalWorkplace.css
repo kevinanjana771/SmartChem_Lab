@@ -1,0 +1,78 @@
+.workplace-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f0fdf4;
+}
+
+/* Header */
+.workplace-header {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background: white;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.back-btn {
+  background: #10b981;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+/* Canvas */
+.workplace-canvas {
+  flex: 1;
+  margin: 20px;
+  border-radius: 20px;
+  border: 2px dashed #10b981;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.placed-item {
+  padding: 10px 20px;
+  background: #d1fae5;
+  border-radius: 12px;
+  margin: 10px;
+}
+
+.feedback-msg {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+/* Shelf */
+.equipment-shelf {
+  background: white;
+  padding: 15px;
+  border-top: 2px solid #e5e7eb;
+}
+
+.equipment-list {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+}
+
+.equipment-card {
+  min-width: 120px;
+  background: #f9fafb;
+  padding: 10px;
+  border-radius: 15px;
+  text-align: center;
+  cursor: grab;
+}
+
+.equipment-card img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
