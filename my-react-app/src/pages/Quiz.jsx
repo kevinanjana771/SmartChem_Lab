@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
-import { useNavigate, useParams } from 'react-router-dom'; // Import useParams
+import { useNavigate, useParams } from 'react-router-dom';
 import './Quiz.css';
 import Footer from '../components/Footer';
 import bannerImg from '../images/Quiz/QuizF.jpg';
 
 const Quiz = () => {
     const navigate = useNavigate();
-    const { id } = useParams(); // Get the p_id from the URL (e.g., /quiz/1)
+    const { id } = useParams(); // Get the p_id from the URL 
 
     const [started, setStarted] = useState(false);
 
