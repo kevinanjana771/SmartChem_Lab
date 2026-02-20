@@ -2,11 +2,52 @@ import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Safetymethods.css';
 import Footer from '../components/Footer';
+import bi from '../images/safetymethod/boximage.png';
 
 const Safetymethods = () => {
     const navigate = useNavigate();
     const sliderRef = useRef(null);
 
+    // 1. DATA ARRAY (The "Loop" Source)
+    const hazards = [
+        {
+            name: "Poison Material",
+            icon: "fa-skull-crossbones",
+            desc: "Fatal if swallowed, inhaled, or in contact with skin."
+        },
+        {
+            name: "Corrosive",
+            icon: "fa-droplet",
+            desc: "Causes severe skin burns and eye damage."
+        },
+        {
+            name: "Flammable",
+            icon: "fa-fire",
+            desc: "Catches fire easily if exposed to ignition sources."
+        },
+        {
+            name: "Explosive",
+            icon: "fa-bomb",
+            desc: "May explode under heat or shock."
+        },
+        {
+            name: "Oxidiser",
+            icon: "fa-bolt",
+            desc: "Intensifies fire and may cause combustibles to explode."
+        },
+        {
+            name: "Radioactive",
+            icon: "fa-radiation",
+            desc: "Emits ionizing radiation; hazardous to health."
+        },
+        {
+            name: "Toxic",
+            icon: "fa-skull",
+            desc: "Harmful to health; may cause long-term effects."
+        }
+    ];
+
+    // 2. SCROLL LOGIC
     const scrollLeft = () => {
         if (sliderRef.current) {
             sliderRef.current.scrollBy({
@@ -50,7 +91,7 @@ const Safetymethods = () => {
 
                 <div className="hero-visual">
                     <img 
-                        src="https://picsum.photos/seed/greenc/600/450" 
+                        src={bi}
                         alt="Digital Chemistry Lab" 
                     />
                     <div className="floating-card">
@@ -147,49 +188,16 @@ const Safetymethods = () => {
                     </button>
 
                     <div className="hazard-slider" ref={sliderRef}>
-
-                        <div className="hazard-item">
-                            <div className="diamond-icon">
-                                <i className="fa-solid fa-fire"></i>
+                        {/* 3. DYNAMIC LOOP RENDERING */}
+                        {hazards.map((hazard, index) => (
+                            <div className="hazard-item" key={index}>
+                                <h3>{hazard.name}</h3>
+                                <div className="diamond-icon">
+                                    <i className={`fa-solid ${hazard.icon}`}></i>
+                                </div>
+                                <p className="hazard-desc">{hazard.desc}</p>
                             </div>
-                            <span>Flammable</span>
-                        </div>
-
-                        <div className="hazard-item">
-                            <div className="diamond-icon">
-                                <i className="fa-solid fa-skull-crossbones"></i>
-                            </div>
-                            <span>Toxic</span>
-                        </div>
-
-                        <div className="hazard-item">
-                            <div className="diamond-icon">
-                                <i className="fa-solid fa-droplet"></i>
-                            </div>
-                            <span>Corrosive</span>
-                        </div>
-
-                        <div className="hazard-item">
-                            <div className="diamond-icon">
-                                <i className="fa-solid fa-biohazard"></i>
-                            </div>
-                            <span>Health Hazard</span>
-                        </div>
-
-                        <div className="hazard-item">
-                            <div className="diamond-icon">
-                                <i className="fa-solid fa-bolt"></i>
-                            </div>
-                            <span>Oxidizer</span>
-                        </div>
-
-                        <div className="hazard-item">
-                            <div className="diamond-icon">
-                                <i className="fa-solid fa-skull"></i>
-                            </div>
-                            <span>Environmental</span>
-                        </div>
-
+                        ))}
                     </div>
 
                     <button className="slide-btn right" onClick={scrollRight} aria-label="Scroll Right">
@@ -290,7 +298,7 @@ const Safetymethods = () => {
                     <div className="action-card">
                         <i className="fa-solid fa-eye-dropper"></i>
                         <h4>Eye Contamination</h4>
-                        <p style={{ fontSize: '0.85rem', color: '#881337' }}>
+                        <p style={{ fontSize: '1.0rem', color: '#881337' }}>
                             Rinse in eyewash station for 15 minutes.
                         </p>
                     </div>
@@ -298,7 +306,7 @@ const Safetymethods = () => {
                     <div className="action-card">
                         <i className="fa-solid fa-fire-extinguisher"></i>
                         <h4>Fire Outbreak</h4>
-                        <p style={{ fontSize: '0.85rem', color: '#881337' }}>
+                        <p style={{ fontSize: '1.0rem', color: '#881337' }}>
                             Evacuate immediately. Pull alarm.
                         </p>
                     </div>
@@ -306,7 +314,7 @@ const Safetymethods = () => {
                     <div className="action-card">
                         <i className="fa-solid fa-house-medical"></i>
                         <h4>Spill Response</h4>
-                        <p style={{ fontSize: '0.85rem', color: '#881337' }}>
+                        <p style={{ fontSize: '1.0rem', color: '#881337' }}>
                             Alert supervisor. Do not touch spill.
                         </p>
                     </div>
