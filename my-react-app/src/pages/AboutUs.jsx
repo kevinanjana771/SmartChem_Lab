@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../images/landing/sdgp-logo.png';
 import './AboutUs.css'; 
 
 
@@ -30,8 +31,7 @@ export default function AboutUs() {
       <nav className="navbar">
         <div className="nav-container">
           <div className="logo">
-            <div className="logo-icon">⚗</div>
-            <span className="logo-text">SmartChem Lab</span>
+            <img src={logo} alt="SmartChem Lab Logo" className="logo-img" />
           </div>
           <ul className="nav-links">
             <li><a href="#" onClick={() => navigate('/')}>Home</a></li>
