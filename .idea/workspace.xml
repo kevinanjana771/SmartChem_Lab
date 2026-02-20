@@ -4,46 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b555991e-5422-4e31-a5f5-79cb95c8516e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/my-react-app/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Darveil.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Darveil.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Footer.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Footer.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Login.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Login.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Signup.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/Signup.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/images/homepage/e1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/images/homepage/e2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/images/homepage/e3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/images/homepage/e4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/pages/AboutUs.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/pages/AboutUs.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/pages/Safetymethod.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/pages/Safetymethods.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/components/Sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/components/Sidebar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/components/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/components/Sidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/components/TopBar.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/components/TopBar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/components/TopBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/components/TopBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Dashboard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Dashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/EquipmentPreview.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/EquipmentPreview.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Equipments.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Equipments.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Equipments.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Equipments.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/LandingPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/LandingPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/PracticalPreview.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/PracticalPreview.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/PracticalPreview.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/PracticalPreview.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Practicals.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Practicals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Practicals.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Practicals.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/src/pages/Quiz.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/pages/Quiz.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/vite.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-    </list>
+    <list default="true" id="b555991e-5422-4e31-a5f5-79cb95c8516e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,10 +36,11 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "quizbackend",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/kevinanjana/Desktop/react/new code 2",
@@ -124,6 +86,7 @@
       <updated>1770000698614</updated>
       <workItem from="1770000699780" duration="39000" />
       <workItem from="1770868789865" duration="3951000" />
+      <workItem from="1771402105333" duration="665000" />
     </task>
     <servers />
   </component>

@@ -1,7 +1,7 @@
 import pool from "../config/db.js";
 
-// @desc Get all practicals
-// @route GET /api/practicals
+// Get all practicals
+// GET /api/practicals
 export const getAllPracticals = async (req, res, next) => {
     try {
         const result = await pool.query("SELECT * FROM practical ORDER BY p_id ASC");
