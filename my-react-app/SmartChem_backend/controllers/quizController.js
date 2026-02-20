@@ -1,7 +1,7 @@
 import pool from "../config/db.js";
 
-// @desc Get questions for a specific practical
-// @route GET /api/quizzes/:id
+// Get questions for a specific practical
+// GET /api/quizzes/:id
 export const getQuestionsByPracticalId = async (req, res, next) => {
     const { id } = req.params; // This is the p_id
 
