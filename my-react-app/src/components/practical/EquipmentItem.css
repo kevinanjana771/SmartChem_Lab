@@ -1,0 +1,31 @@
+.equipment-item {
+  min-width: 90px;
+  height: 100px;
+  background: #ecfdf5;
+  border: 2px solid #10b981;
+  border-radius: 18px;
+  padding: 10px;
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.equipment-item:hover {
+  transform: scale(1.05);
+}
+
+.equipment-item img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.equipment-item p {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 5px;
+  text-align: center;
+}

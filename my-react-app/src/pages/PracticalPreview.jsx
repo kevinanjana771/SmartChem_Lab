@@ -94,6 +94,9 @@ const PracticalPreview = () => {
             <button className="start-action-btn" onClick={() => navigate(`/quiz/${id}`)}>
               Start Now
             </button>
+            <button className="start-action-btn" onClick={() => navigate(`/practicals/${id}/workplace`)}>
+              Start Simulation
+            </button>
           </div>
         </div>
       </div>

@@ -8,6 +8,8 @@ import authRoutes from "./routes/authRoutes.js";
 import practicalRoutes from "./routes/practicalRoutes.js";
 import quizRoutes from "./routes/quizRoutes.js";
 
+
+
 // Load environment variables
 dotenv.config();
 

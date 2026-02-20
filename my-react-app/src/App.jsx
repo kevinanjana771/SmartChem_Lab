@@ -12,6 +12,7 @@ import Equipments from './pages/Equipments';
 import EquipmentPreview from './pages/EquipmentPreview';
 import AboutUs from './pages/AboutUs';
 import Safetymethods from './pages/Safetymethod';
+import PracticalWorkplace from "./pages/PracticalWorkplace";
 
 function App() {
   return (
@@ -33,7 +34,11 @@ function App() {
             <Route path="/equipments" element={<Equipments />} />
             <Route path="/equipments/:id" element={<EquipmentPreview />} />
             <Route path="/safetymethods" element={<Safetymethods />} />
+            
           </Route>
+          
+          <Route path="/practicals/:id/workplace" element={<PracticalWorkplace />} />
+
         </Routes>
       </AnimatePresence>
     </BrowserRouter>
