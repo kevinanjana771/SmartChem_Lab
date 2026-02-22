@@ -30,10 +30,11 @@ router.get("/:id/equipments", async (req, res) => {
 
     const result = await pool.query(
       `
-      SELECT e.*
+      SELECT e.*, pe.zone_id, pe.shelf_order
       FROM practical_equipments pe
-      JOIN equipment e ON pe.equipment_id = e.e_id
-      WHERE pe.practical_id = $1
+      JOIN equipment e ON pe.e_id = e.e_id
+      WHERE pe.p_id = $1
+      ORDER BY pe.shelf_order ASC
       `,
       [id]
     );

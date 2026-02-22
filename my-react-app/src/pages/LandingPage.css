@@ -37,12 +37,16 @@
 
 
 .logo-img {
-  height: 63px;        /* Fits inside navbar */
-  width: 250px;         /* Keeps correct proportions */
-  object-fit: cover;     /* Zoom and crop */
-  object-position:left;
+  height: 63px;
+  /* Fits inside navbar */
+  width: 250px;
+  /* Keeps correct proportions */
+  object-fit: cover;
+  /* Zoom and crop */
+  object-position: left;
   margin-top: 0.1rem;
 }
+
 .logo-text {
   font-size: 1.25rem;
   font-weight: 700;

@@ -10,27 +10,41 @@ import "./PracticalWorkplace.css";
 
 const PracticalWorkplace = () => {
   const { id } = useParams();
-
+  const [practical, setPractical] = useState(null);
   const [equipments, setEquipments] = useState([]);
   const [toast, setToast] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Load equipments from backend
+  // Load data from backend
   useEffect(() => {
-    const fetchEquipments = async () => {
-      const res = await fetch(
-        `http://localhost:5001/api/practicals/${id}/equipments`
-      );
-      const data = await res.json();
-      setEquipments(data);
+    const fetchData = async () => {
+      const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
+      try {
+        // Fetch practical info
+        const practicalRes = await fetch(`${baseUrl}/practicals/${id}`);
+        const practicalData = await practicalRes.json();
+        setPractical(practicalData);
+
+        // Fetch equipments for this practical
+        const equipmentsRes = await fetch(`${baseUrl}/practicals/${id}/equipments`);
+        const equipmentsData = await equipmentsRes.json();
+        setEquipments(equipmentsData);
+      } catch (error) {
+        console.error("Error fetching workplace data:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    fetchEquipments();
+    fetchData();
   }, [id]);
+
+  if (loading) return <div className="loading-container"><p>Setting up your lab...</p></div>;
 
   return (
     <div className="workplace-page">
       {/* Header */}
-      <WorkplaceHeader practicalName="Titration Practical" />
+      <WorkplaceHeader practicalName={practical?.p_name || "Simulation"} />
 
       {/* Toast Feedback */}
       {toast && (
@@ -42,9 +56,7 @@ const PracticalWorkplace = () => {
       )}
 
       {/* Main Canvas */}
-      <LabCanvas
-        setToast={setToast}
-      />
+      <LabCanvas setToast={setToast} />
 
       {/* Equipment Shelf */}
       <EquipmentShelf equipments={equipments} />
