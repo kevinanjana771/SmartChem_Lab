@@ -5,10 +5,11 @@ import { motion } from "framer-motion";
 import "./Dashboard.css";
 import Footer from "../components/Footer";
 
-import practicalImg1 from "../images/homepage/e1.png";
-import practicalImg2 from "../images/homepage/e2.png";
-import practicalImg3 from "../images/homepage/e3.png";
-import practicalImg4 from "../images/homepage/e4.png";
+import practicalImg1 from "../images/practical/p1.png";
+import practicalImg2 from "../images/practical/p2.png";
+import practicalImg3 from "../images/practical/p3.png";
+import practicalImg4 from "../images/practical/p4.png";
+import practicalImg5 from "../images/practical/p5.png";
 // Placeholder images
 const lessons = [
   {
