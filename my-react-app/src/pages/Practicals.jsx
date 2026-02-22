@@ -4,12 +4,18 @@ import { motion } from "framer-motion";
 import './Practicals.css';
 import Footer from '../components/Footer';
 
+import practicalImg1 from "../images/practical/p1.png";
+import practicalImg2 from "../images/practical/p2.png";
+import practicalImg3 from "../images/practical/p3.png";
+import practicalImg4 from "../images/practical/p4.png";
+import practicalImg5 from "../images/practical/p5.png";
+
 const courses = [
-  { id: 1, title: 'Properties of Cathode Rays', lesson: 'LESSON 1.1', image: 'https://via.placeholder.com/300x200?text=Glassware' },
-  { id: 2, title: 'Molecular and Ionic Shapes Using Models', lesson: 'LESSON 2.1', image: 'https://via.placeholder.com/300x200?text=Crystals' },
-  { id: 3, title: 'Safe Handling of Glassware and Four-Beam Balance', lesson: 'LESSON 3.1', image: 'https://via.placeholder.com/300x200?text=Ester' },
-  { id: 4, title: 'Preparation of Standard Solutions', lesson: 'LESSON 3.2', image: 'https://via.placeholder.com/300x200?text=Titration' },
-  { id: 5, title: 'Determination of Molar Volume of a Gas', lesson: 'LESSON 4.1', image: 'https://via.placeholder.com/300x200?text=Acid' },
+  { id: 1, title: 'Properties of Cathode Rays', lesson: 'LESSON 1.1', image: practicalImg1 },
+  { id: 2, title: 'Molecular and Ionic Shapes Using Models', lesson: 'LESSON 2.1', image: practicalImg2 },
+  { id: 3, title: 'Safe Handling of Glassware and Four-Beam Balance', lesson: 'LESSON 3.1', image: practicalImg3 },
+  { id: 4, title: 'Preparation of Standard Solutions', lesson: 'LESSON 3.2', image: practicalImg4 },
+  { id: 5, title: 'Determination of Molar Volume of a Gas', lesson: 'LESSON 4.1', image: practicalImg5 },
   { id: 6, title: 'Determination of the Relative Atomic Mass of Magnesium', lesson: 'LESSON 4.2', image: 'https://via.placeholder.com/300x200?text=Redox' },
   { id: 7, title: 'Enthalpy of Acid–Base Neutralisation', lesson: 'LESSON 5.1', image: 'https://via.placeholder.com/300x200?text=Redox' },
   { id: 8, title: 'Verification of Hess’s Law', lesson: 'LESSON 5.2', image: 'https://via.placeholder.com/300x200?text=Redox' },

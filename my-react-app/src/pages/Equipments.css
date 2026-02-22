@@ -86,12 +86,14 @@
 
 .equip-card {
   background: white;
-  padding: 1.5rem;
+  padding: 0;
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 
 .equip-card:hover {
@@ -100,17 +102,18 @@
 }
 
 .equip-img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  margin-bottom: 1rem;
-  border-radius: 8px;
+  width: 100%;
+  height: 120px;
+  object-fit:cover;
+  margin-bottom: 0.5rem;
+  border-radius: 8px 8px 0px 0px;
 }
 
 .equip-name {
   font-weight: 600;
   color: #374151;
   font-size: 0.95rem;
+  padding: 0.5rem;
 }
 
 /* Loading & Error States */
