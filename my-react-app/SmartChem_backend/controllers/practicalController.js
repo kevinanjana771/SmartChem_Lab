@@ -27,3 +27,21 @@ export const getPracticalById = async (req, res, next) => {
         next(error);
     }
 };
+
+// Get steps for a specific practical
+// GET /api/practicals/:id/steps
+// This matches the fetch call in your PracticalPreview.jsx
+export const getPracticalSteps = async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        // Select steps from practical_steps table matching the practical ID
+        const result = await pool.query(
+            "SELECT * FROM practical_steps WHERE p_id = $1 ORDER BY step_num ASC",
+            [id]
+        );
+
+        res.json(result.rows);
+    } catch (error) {
+        next(error);
+    }
+};

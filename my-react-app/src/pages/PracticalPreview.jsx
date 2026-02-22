@@ -8,24 +8,32 @@ const PracticalPreview = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // State to hold data, loading status, and errors
+  // State for Practical details (from 'practical' table)
   const [practical, setPractical] = useState(null);
+
+  // State for Steps (from 'practical_steps' table)
+  const [steps, setSteps] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch data when component mounts
   useEffect(() => {
-    const fetchPractical = async () => {
+    const fetchData = async () => {
       try {
-        // Replace with your actual backend URL
-        const response = await fetch(`http://localhost:5001/api/practicals/${id}`);
+        setLoading(true);
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch practical data');
-        }
+        // 1. Fetch Main Practical Details from 'practical' table
+        const practicalRes = await fetch(`http://localhost:5001/api/practicals/${id}`);
+        if (!practicalRes.ok) throw new Error('Failed to fetch practical data');
+        const practicalData = await practicalRes.json();
+        setPractical(practicalData);
 
-        const data = await response.json();
-        setPractical(data);
+        // 2. Fetch Steps from 'practical_steps' table
+        const stepsRes = await fetch(`http://localhost:5001/api/practicals/${id}/steps`);
+        if (!stepsRes.ok) throw new Error('Failed to fetch steps');
+        const stepsData = await stepsRes.json();
+        setSteps(stepsData);
+
       } catch (err) {
         setError(err.message);
       } finally {
@@ -33,7 +41,7 @@ const PracticalPreview = () => {
       }
     };
 
-    fetchPractical();
+    fetchData();
   }, [id]);
 
   // Render Loading State
@@ -55,7 +63,6 @@ const PracticalPreview = () => {
     );
   }
 
-  // Render Content
   return (
     <motion.div
       className="practical-preview"
@@ -65,7 +72,7 @@ const PracticalPreview = () => {
       transition={{ duration: 1 }}
     >
       <div className="preview-header">
-        {/* Dynamic Title using p_name */}
+        {/* Header Data from 'practical' table */}
         <h1>{practical.p_lesson} {practical.p_name}</h1>
         <div className="tabs">
           <button className="tab active">About</button>
@@ -75,24 +82,46 @@ const PracticalPreview = () => {
       </div>
 
       <div className="preview-content">
+        {/* Image from 'practical' table */}
         <div className="preview-image-section">
-          {/* Dynamic Image using p_image, with fallback to placeholder */}
           <img
-            src={practical.p_image || "https://via.placeholder.com/800x400/000000/FFFFFF?text=Lab+Glassware+Setup"}
+            src={practical.p_image || "https://via.placeholder.com/800x400/000000/FFFFFF?text=Lab+Setup"}
             alt="Experiment Setup"
             className="lab-main-img"
           />
         </div>
 
         <div className="preview-details">
-          {/* Dynamic Description using p_description */}
+          {/* Description from 'practical' table */}
           <p className="preview-text">
             {practical.p_description}
           </p>
 
+          {/* --- STEPS SECTION (Data from 'practical_steps' table) --- */}
+          {steps.length > 0 && (
+            <div className="practical-steps-container">
+              <h3 className="steps-title">Procedure Steps</h3>
+              <div className="steps-list">
+                {steps.map((step) => (
+                  <div key={step.s_id} className="step-item">
+                    {/* Circle with step_num */}
+                    <div className="step-marker">{step.step_num}</div>
+
+                    <div className="step-content">
+                      <h4 className="step-heading">Step {step.step_num}</h4>
+                      {/* s_description */}
+                      <p className="step-desc">{step.s_description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {/* -------------------------------------------------------- */}
+
           <div className="action-area">
-            <button className="start-action-btn" onClick={() => navigate(`/quiz/${id}`)}>
-              Start Now
+            <button className="start-action-btn secondary" onClick={() => navigate(`/quiz/${id}`)}>
+              Start Quiz
             </button>
             <button className="start-action-btn" onClick={() => navigate(`/practicals/${id}/workplace`)}>
               Start Simulation

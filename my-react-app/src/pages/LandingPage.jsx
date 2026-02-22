@@ -11,7 +11,7 @@ const AnimatedCounter = ({ target, suffix = "" }) => {
 
   useEffect(() => {
     let startTimestamp = null;
-    const duration = 4000; 
+    const duration = 4000;
     const step = (timestamp) => {
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = Math.min((timestamp - startTimestamp) / duration, 1);
@@ -51,17 +51,17 @@ export default function LandingPage() {
       <nav className="navbar">
         <div className="nav-container">
           <div className="logo">
-            
-              <img src={logo} alt="SmartChem Lab Logo" className="logo-img" />
-            
-            
+
+            <img src={logo} alt="SmartChem Lab Logo" className="logo-img" />
+
+
           </div>
           <ul className="nav-links">
             <li><a href="#home">Home</a></li>
             {/* Updated: Click triggers navigation to About page */}
             <li>
-              <a 
-                href="#about" 
+              <a
+                href="#about"
                 onClick={(e) => {
                   e.preventDefault();
                   navigate('/about');
