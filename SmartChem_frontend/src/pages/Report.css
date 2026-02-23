@@ -1,0 +1,285 @@
+/* Main Rectangle Container */
+.feedback-container {
+  width: 100%;
+  padding: 2rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.15);
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  animation: fadeSlide 0.6s ease forwards;
+}
+
+/* Soft Glow Effect */
+.feedback-container::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: rgba(16, 185, 129, 0.15);
+  border-radius: 50%;
+  top: -100px;
+  right: -100px;
+  filter: blur(80px);
+}
+
+/* Content */
+.feedback-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Creative Heading */
+.feedback-heading {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #065f46;
+  margin-bottom: 1rem;
+}
+
+/* Feedback Message */
+.feedback-message {
+  font-size: 1rem;
+  color: #064e3b;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Highlight Badge */
+.feedback-highlight {
+  background: #10b981;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Entrance Animation */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*--------*/
+
+/* Completed Practicals */
+
+/* Container Card */
+.progress-container-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(15px);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  max-width: 60%;
+  margin: 0;
+  flex: 3;
+}
+
+/* Title */
+.progress-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #064e3b;
+  margin-bottom: 1.5rem;
+}
+
+/* Wrapper for Bars */
+.bars-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Base Bar */
+.practical-bar {
+  height: 35px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: 0.3s ease;
+}
+
+/* Completed */
+.practical-bar.completed {
+  background: linear-gradient(90deg, #10b981, #34d399);
+  color: white;
+}
+
+/* Not Completed */
+.practical-bar.not-completed {
+  background: #e5e7eb;
+  color: #6b7280;
+  border: 2px dashed #cbd5e1;
+}
+
+/* Hover Effect */
+.practical-bar:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+/*--------------------------*/
+
+/* Equipment Progress*/
+
+/* Container */
+.equipment-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(15px);
+  padding: 8.5rem;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 40%;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  flex: 1;
+}
+
+/* Heading */
+.equipment-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #064e3b;
+  margin-bottom: 1.5rem;
+}
+
+/* Outer Circle */
+.circle {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* Inner Cutout */
+.circle-inner {
+  width: 160px;
+  height: 160px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Percentage */
+.percent {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: hsl(179, 94%, 46%);
+}  /*#10b981*/
+
+/* Label */
+.label {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Bottom Text */
+.equipment-footer {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #064e3b;
+}
+
+/* ===== Layout for Bottom Two Cards ===== */
+.report-flex {
+  display: flex;              /* makes items horizontal */
+  gap: 2rem;                  /* space between them */
+  align-items: flex-start;    /* align to top */
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+/*////////////////////////////////////*/
+/* Main Chart Container */
+.quiz-chart-container {
+  width: 100%;
+  max-width: 900px;
+  padding: 2rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.15);
+  margin: 2rem auto;
+  margin-top: 2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Quiz Chart Card */
+.quiz-chart-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(15px);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  margin-top: 3rem;
+}
+
+/* Title */
+.quiz-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #064e3b;
+  margin-bottom: 1.5rem;
+}
+
+
+
+/* Hover effect */
+.quiz-chart-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 50px rgba(16, 185, 129, 0.25);
+}
+
+/* Title Styling */
+.quiz-chart-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #064e3b;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Chart Wrapper (Important for height control) */
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  height: 350px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .quiz-chart-container {
+    padding: 1.2rem;
+  }
+
+  .quiz-chart-title {
+    font-size: 1.3rem;
+  }
+
+  .chart-wrapper {
+    height: 300px;
+  }
+}
