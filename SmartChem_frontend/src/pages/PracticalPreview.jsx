@@ -104,8 +104,6 @@ const PracticalPreview = () => {
               <div className="steps-list">
                 {steps.map((step) => (
                   <div key={step.s_id} className="step-item">
-                    {/* Circle with step_num */}
-                    <div className="step-marker">{step.step_num}</div>
 
                     <div className="step-content">
                       <h4 className="step-heading">Step {step.step_num}</h4>
