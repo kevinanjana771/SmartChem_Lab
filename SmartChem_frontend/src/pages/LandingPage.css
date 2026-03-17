@@ -277,28 +277,30 @@
 
 .hero-circle {
   position: relative;
-  width: 450px;
-  height: 450px;
+  width: 700px;
+  height: 700px;
 }
 
 .hero-circle::before {
   content: '';
   position: absolute;
-  top: 50%;
+  top: 97%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 110%;
-  height: 110%;
+  transform: translate(-51%, -50%);
+  width: 130%;
+  height: 130%;
   background: linear-gradient(135deg, #10b981, #059669);
   border-radius: 50%;
   z-index: -1;
 }
 
 .hero-image {
-  width: 100%;
-  height: 100%;
+  top: 95%;
+  left: 50%;
+  transform: translate(-4%, 0%);
+  width: 750px;
+  height: 800px;
   object-fit: cover;
-  border-radius: 50%;
 }
 
 /* FEATURES SECTION */
@@ -661,6 +663,478 @@
   }
 
   .features-grid {
+<<<<<<< Updated upstream
       grid-template-columns: 1fr;
+=======
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- TAILWIND COMPATIBILITY FOR CAROUSEL --- */
+/* These classes mimic Tailwind utilities used in the FeatureCarousel component */
+
+.w-full {
+  width: 100%;
+}
+
+.max-w-7xl {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.md\:p-8 {
+  padding: 2rem;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.inset-x-0 {
+  left: 0;
+  right: 0;
+}
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.bottom-0 {
+  bottom: 0;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.right-0 {
+  right: 0;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.z-20 {
+  z-index: 20;
+}
+
+.z-30 {
+  z-index: 30;
+}
+
+.z-40 {
+  z-index: 40;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.rounded-\[2\.5rem\] {
+  border-radius: 2.5rem;
+}
+
+.lg\:rounded-\[4rem\] {
+  border-radius: 4rem;
+}
+
+.rounded-\[2rem\] {
+  border-radius: 2rem;
+}
+
+.md\:rounded-\[2\.8rem\] {
+  border-radius: 2.8rem;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.gap-3 {
+  gap: 0.75rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.min-h-\[600px\] {
+  min-height: 600px;
+}
+
+.md\:min-h-\[450px\] {
+  min-height: 450px;
+}
+
+.lg\:h-full {
+  height: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.min-h-\[500px\] {
+  min-height: 500px;
+}
+
+.md\:min-h-\[600px\] {
+  min-height: 600px;
+}
+
+.bg-\[\#10b981\] {
+  background-color: #10b981;
+}
+
+/* Green */
+.bg-white {
+  background-color: white;
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+
+.from-\[\#10b981\] {
+  --tw-gradient-from: #10b981;
+  --tw-gradient-to: rgba(16, 185, 129, 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.via-\[\#10b981\]\/80 {
+  --tw-gradient-to: rgba(16, 185, 129, 0);
+  --tw-gradient-stops: var(--tw-gradient-from), rgba(16, 185, 129, 0.8), var(--tw-gradient-to);
+}
+
+.to-transparent {
+  --tw-gradient-to: transparent;
+}
+
+.bg-background {
+  background-color: white;
+}
+
+.bg-secondary\/30 {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.border {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.border-border\/40 {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.border-white {
+  border-color: white;
+}
+
+.border-white\/20 {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.border-white\/40 {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.border-border\/20 {
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.border-border\/50 {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.border-4 {
+  border-width: 4px;
+}
+
+.md\:border-8 {
+  border-width: 8px;
+}
+
+.text-white {
+  color: white;
+}
+
+.text-white\/60 {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.text-white\/40 {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.text-\[\#10b981\] {
+  color: #10b981;
+}
+
+/* Green Text */
+.text-foreground {
+  color: black;
+}
+
+.text-\[10px\] {
+  font-size: 10px;
+}
+
+.text-\[11px\] {
+  font-size: 11px;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.md\:text-\[15px\] {
+  font-size: 15px;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.md\:text-2xl {
+  font-size: 1.5rem;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+
+.tracking-\[0\.2em\] {
+  letter-spacing: 0.2em;
+}
+
+.tracking-\[0\.3em\] {
+  letter-spacing: 0.3em;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.font-mono {
+  font-family: monospace;
+}
+
+.py-3\.5 {
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.md\:py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.md\:px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.lg\:px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.lg\:pl-16 {
+  padding-left: 4rem;
+}
+
+.md\:px-16 {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.md\:px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.lg\:px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.md\:p-8 {
+  padding: 2rem;
+}
+
+.p-10 {
+  padding: 2.5rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.transition-all {
+  transition-property: all;
+}
+
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.duration-500 {
+  transition-duration: 500ms;
+}
+
+.duration-700 {
+  transition-duration: 700ms;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-\[0\_0\_10px_white\] {
+  box-shadow: 0 0 10px white;
+}
+
+.drop-shadow-md {
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.07));
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+.aspect-\[4\/5\] {
+  aspect-ratio: 4/5;
+}
+
+.origin-center {
+  transform-origin: center;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.pointer-events-auto {
+  pointer-events: auto;
+}
+
+
+.group:hover .group-hover\:text-white {
+  color: white;
+}
+
+/* Specific Tailwind Classes for Carousel Styles */
+@media (min-width: 1024px) {
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+
+  .lg\:w-\[40\%\] {
+    width: 40%;
+  }
+
+  .lg\:aspect-video {
+    aspect-ratio: 16/9;
+  }
+
+  .lg\:border-t-0 {
+    border-top-width: 0;
+  }
+
+  .lg\:border-l {
+    border-left-width: 1px;
+  }
+
+  .lg\:rounded-\[4rem\] {
+    border-radius: 4rem;
+  }
+
+  .lg\:justify-start {
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:p-8 {
+    padding: 2rem;
+  }
+
+  .md\:rounded-\[2\.8rem\] {
+    border-radius: 2.8rem;
+>>>>>>> Stashed changes
   }
 }
