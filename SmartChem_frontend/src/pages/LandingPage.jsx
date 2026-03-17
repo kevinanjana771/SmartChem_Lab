@@ -5,6 +5,8 @@ import './LandingPage.css';
 
 import landingImage from "../images/landing/landing-image.png";
 import Footer from '../components/Footer';
+// IMPORT THE NEW CAROUSEL COMPONENT
+import FeatureCarousel from './FeatureCarousel';
 
 // Custom Hook for Scroll Animations
 const useScrollAnimation = () => {
@@ -36,7 +38,7 @@ const AnimatedCounter = ({ target, suffix = "" }) => {
 
   useEffect(() => {
     let startTimestamp = null;
-    const duration = 2000; 
+    const duration = 2000;
     const step = (timestamp) => {
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = Math.min((timestamp - startTimestamp) / duration, 1);
@@ -57,7 +59,7 @@ const AnimatedCounter = ({ target, suffix = "" }) => {
 export default function LandingPage() {
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: '', email: '', message: '' });
-  
+
   // Ref for the background canvas
   const canvasRef = useRef(null);
 
@@ -72,7 +74,7 @@ export default function LandingPage() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
     let animationFrameId;
     let particles = [];
@@ -145,12 +147,12 @@ export default function LandingPage() {
     // Animation Loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+
       particles.forEach(p => {
         p.update();
         p.draw();
       });
-      
+
       connectParticles();
       animationFrameId = requestAnimationFrame(animate);
     };
@@ -223,8 +225,8 @@ export default function LandingPage() {
               Covers all 42 A/L Chemistry practicals with clear guidance, interactive steps, and easy virtual learning.
             </p>
             <div className="stat-badge">
-                <div className="stat-number">42+</div>
-                <div className="stat-label">Practicals</div>
+              <div className="stat-number">42+</div>
+              <div className="stat-label">Practicals</div>
             </div>
           </div>
 
@@ -243,8 +245,8 @@ export default function LandingPage() {
               Learn 100+ equipment, safety procedures, and correct handling through guided simulations.
             </p>
             <div className="stat-badge">
-                <div className="stat-number">100+</div>
-                <div className="stat-label">Lab Equipment</div>
+              <div className="stat-number">100+</div>
+              <div className="stat-label">Lab Equipment</div>
             </div>
           </div>
         </div>
@@ -260,19 +262,19 @@ export default function LandingPage() {
         <div className="stats-container">
           <div className={`stat-card glass-card ${achieveVisible ? 'animate-fade-up' : ''}`}>
             <div className="stat-value green">
-                {achieveVisible ? <AnimatedCounter target={42} /> : '0'}
+              {achieveVisible ? <AnimatedCounter target={42} /> : '0'}
             </div>
             <div className="stat-name">Practicals</div>
           </div>
           <div className={`stat-card glass-card delay-1 ${achieveVisible ? 'animate-fade-up' : ''}`}>
             <div className="stat-value green">
-                {achieveVisible ? <AnimatedCounter target={100} suffix="+" /> : '0'}
+              {achieveVisible ? <AnimatedCounter target={100} suffix="+" /> : '0'}
             </div>
             <div className="stat-name">Equipments</div>
           </div>
           <div className={`stat-card glass-card delay-2 ${achieveVisible ? 'animate-fade-up' : ''}`}>
             <div className="stat-value green">
-                {achieveVisible ? <AnimatedCounter target={40} suffix="+" /> : '0'}
+              {achieveVisible ? <AnimatedCounter target={40} suffix="+" /> : '0'}
             </div>
             <div className="stat-name">Safety Methods</div>
           </div>
@@ -282,64 +284,69 @@ export default function LandingPage() {
       {/* FEATURES SECTION */}
       <section id="features" className="features-section" ref={featRef}>
         <div className="container">
-            <h2 className={`section-title dark ${featVisible ? 'animate-fade-up' : ''}`}>
-                Why Choose SmartChem?
-            </h2>
-            <p className={`section-subtitle dark ${featVisible ? 'animate-fade-up delay-1' : ''}`}>
-                Revolutionizing chemistry education with immersive technology.
-            </p>
+          <h2 className={`section-title dark ${featVisible ? 'animate-fade-up' : ''}`}>
+            Why Choose SmartChem?
+          </h2>
+          <p className={`section-subtitle dark ${featVisible ? 'animate-fade-up delay-1' : ''}`}>
+            Revolutionizing chemistry education with immersive technology.
+          </p>
 
-            <div className="features-grid">
-                <div className={`feature-card ${featVisible ? 'animate-scale-in' : ''}`}>
-                    <div className="feature-icon">🧪</div>
-                    <h3>Virtual Simulations</h3>
-                    <p>Perform experiments in a risk-free virtual environment with realistic reactions and outcomes.</p>
-                </div>
-                <div className={`feature-card delay-1 ${featVisible ? 'animate-scale-in' : ''}`}>
-                    <div className="feature-icon">📊</div>
-                    <h3>Progress Tracking</h3>
-                    <p>Monitor your learning journey with detailed analytics and performance reports.</p>
-                </div>
-                <div className={`feature-card delay-2 ${featVisible ? 'animate-scale-in' : ''}`}>
-                    <div className="feature-icon">🧠</div>
-                    <h3>Smart Quizzes</h3>
-                    <p>Test your knowledge with AI-generated quizzes tailored to your syllabus.</p>
-                </div>
+          <div className="features-grid">
+            <div className={`feature-card ${featVisible ? 'animate-scale-in' : ''}`}>
+              <div className="feature-icon">🧪</div>
+              <h3>Virtual Simulations</h3>
+              <p>Perform experiments in a risk-free virtual environment with realistic reactions and outcomes.</p>
             </div>
+            <div className={`feature-card delay-1 ${featVisible ? 'animate-scale-in' : ''}`}>
+              <div className="feature-icon">📊</div>
+              <h3>Progress Tracking</h3>
+              <p>Monitor your learning journey with detailed analytics and performance reports.</p>
+            </div>
+            <div className={`feature-card delay-2 ${featVisible ? 'animate-scale-in' : ''}`}>
+              <div className="feature-icon">🧠</div>
+              <h3>Smart Quizzes</h3>
+              <p>Test your knowledge with AI-generated quizzes tailored to your syllabus.</p>
+            </div>
+          </div>
         </div>
       </section>
 
+      {/* ========================================= */}
+      {/* NEW: INSERT FEATURE CAROUSEL HERE        */}
+      {/* ========================================= */}
+      <FeatureCarousel />
+
       {/* PROCESS SECTION */}
       <section className="process-section" ref={processRef}>
-          <div className="container">
-            <h2 className={`section-title dark ${processVisible ? 'animate-fade-up' : ''}`}>
-                How It Works
-            </h2>
-            
-            <div className="process-timeline">
-                <div className={`process-step ${processVisible ? 'animate-slide-right' : ''}`}>
-                    <div className="step-number">1</div>
-                    <h3>Choose a Practical</h3>
-                    <p>Select from a comprehensive list of A/L chemistry experiments.</p>
-                </div>
-                
-                <div className="process-line"></div>
+        <div className="container">
+          <h2 className={`section-title dark ${processVisible ? 'animate-fade-up' : ''}`}>
+            How It Works
+          </h2>
 
-                <div className={`process-step delay-1 ${processVisible ? 'animate-slide-left' : ''}`}>
-                    <div className="step-number">2</div>
-                    <h3>Perform Simulation</h3>
-                    <p>Follow guided steps to mix chemicals and use equipment virtually.</p>
-                </div>
+          <div className="process-timeline">
+            <div className={`process-step ${processVisible ? 'animate-slide-right' : ''}`}>
+              <div className="step-number">1</div>
+              <h3>Choose a Practical</h3>
+              <p>Select from a comprehensive list of A/L chemistry experiments.</p>
+            </div>
 
-                <div className="process-line"></div>
+            <div className="process-line"></div>
 
-                <div className={`process-step delay-2 ${processVisible ? 'animate-slide-right' : ''}`}>
-                    <div className="step-number">3</div>
-                    <h3>Analyze Results</h3>
-                    <p>Get instant feedback and understand the science behind the reaction.</p>
-                </div>
+            <div className={`process-step delay-1 ${processVisible ? 'animate-slide-left' : ''}`}>
+              <div className="step-number">2</div>
+              <h3>Perform Simulation</h3>
+              <p>Follow guided steps to mix chemicals and use equipment virtually.</p>
+            </div>
+
+            <div className="process-line"></div>
+
+            <div className={`process-step delay-2 ${processVisible ? 'animate-slide-right' : ''}`}>
+              <div className="step-number">3</div>
+              <h3>Analyze Results</h3>
+              <p>Get instant feedback and understand the science behind the reaction.</p>
             </div>
           </div>
+        </div>
       </section>
 
       {/* CONTACT US SECTION */}
