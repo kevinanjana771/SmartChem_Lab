@@ -1,210 +1,267 @@
 /* FeatureCarousel.css */
 
 .feature-carousel-section {
-    width: 100%;
-    padding: 6rem 1rem;
-    background-color: #0f172a; /* Dark theme to make it stand out */
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+  width: 100%;
+  padding: 6rem 1rem;
+  background-color: #0f172a;
+  /* Dark theme to make it stand out */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.carousel-container {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* Left panel for list */
+.carousel-panel {
+  flex: 1;
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-panel-gradient-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, #0f172a, transparent);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.carousel-panel-gradient-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to top, #0f172a, transparent);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.carousel-list-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.carousel-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.carousel-item-btn.active {
+  color: white;
+  /* subtle background highlight */
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.carousel-item-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Right panel for images */
+.carousel-display {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.carousel-image-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3rem 2rem 2rem 2rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 60%, transparent 100%);
+  color: white;
+}
+
+.carousel-badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: #10b981;
+  /* Emerald green */
+  color: white;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.carousel-desc {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0;
+}
+
+.carousel-live-indicator {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  backdrop-filter: blur(8px);
+  transition: opacity 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background: #ef4444;
+  /* Red */
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
   }
-  
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+/* Utilities for fallback tailwind classes used in the component */
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.max-w-\[420px\] {
+  max-width: 420px;
+}
+
+.aspect-\[4\/5\] {
+  aspect-ratio: 4/5;
+}
+
+.transition-colors {
+  transition-property: color, background-color, border-color, fill, stroke;
+}
+
+.duration-500 {
+  transition-duration: 500ms;
+}
+
+.text-\[\#047857\] {
+  color: #047857;
+}
+
+.text-white\/40 {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.opacity-100 {
+  opacity: 1;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+@media (max-width: 1024px) {
   .carousel-container {
-    display: flex;
-    max-width: 1200px;
-    width: 100%;
-    gap: 4rem;
-    align-items: center;
-  }
-  
-  /* Left panel for list */
-  .carousel-panel {
-    flex: 1;
-    position: relative;
-    height: 500px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-  }
-  
-  .carousel-panel-gradient-top {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100px;
-    background: linear-gradient(to bottom, #0f172a, transparent);
-    z-index: 10;
-    pointer-events: none;
-  }
-  
-  .carousel-panel-gradient-bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100px;
-    background: linear-gradient(to top, #0f172a, transparent);
-    z-index: 10;
-    pointer-events: none;
-  }
-  
-  .carousel-list-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 2rem;
   }
-  
-  .carousel-item-btn {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    padding: 1rem 1.5rem;
-    border-radius: 16px;
-    background: transparent;
-    border: none;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 1.25rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
-    text-align: left;
+
+  .carousel-panel {
+    height: 300px;
   }
-  
-  .carousel-item-btn.active {
-    color: white;
-    /* subtle background highlight */
-    background: rgba(255, 255, 255, 0.05);
-  }
-  
-  .carousel-item-btn:hover {
-    color: rgba(255, 255, 255, 0.8);
-  }
-  
-  /* Right panel for images */
+
   .carousel-display {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 1000px;
-  }
-  
-  .carousel-image-card {
-    position: absolute;
     width: 100%;
-    height: 100%;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    background: #1e293b;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: 500px;
   }
-  
-  .carousel-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .carousel-card-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 3rem 2rem 2rem 2rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
-    color: white;
-  }
-  
-  .carousel-badge {
-    display: inline-block;
-    padding: 0.35rem 1rem;
-    background: #10b981; /* Emerald green */
-    color: white;
-    border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  
-  .carousel-desc {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.95);
-    margin: 0;
-  }
-  
-  .carousel-live-indicator {
-    position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 0.35rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: white;
-    backdrop-filter: blur(8px);
-    transition: opacity 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .live-dot {
-    width: 8px;
-    height: 8px;
-    background: #ef4444; /* Red */
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  
-  @keyframes pulse {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-  }
-  
-  /* Utilities for fallback tailwind classes used in the component */
-  .absolute { position: absolute; }
-  .relative { position: relative; }
-  .flex { display: flex; }
-  .items-center { align-items: center; }
-  .justify-start { justify-content: flex-start; }
-  .justify-center { justify-content: center; }
-  .w-full { width: 100%; }
-  
-  .max-w-\[420px\] { max-width: 420px; }
-  .aspect-\[4\/5\] { aspect-ratio: 4/5; }
-  .transition-colors { transition-property: color, background-color, border-color, fill, stroke; }
-  .duration-500 { transition-duration: 500ms; }
-  .text-\[\#047857\] { color: #047857; }
-  .text-white\/40 { color: rgba(255, 255, 255, 0.4); }
-  .opacity-100 { opacity: 1; }
-  .opacity-0 { opacity: 0; }
-  
-  @media (max-width: 1024px) {
-    .carousel-container {
-      flex-direction: column;
-      gap: 2rem;
-    }
-  
-    .carousel-panel {
-      height: 300px;
-    }
-  
-    .carousel-display {
-      width: 100%;
-      height: 500px;
-    }
-  }
+}
