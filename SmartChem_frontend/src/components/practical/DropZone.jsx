@@ -2,10 +2,21 @@ import React from "react";
 import "./DropZone.css";
 
 const DropZone = ({ id, label, onDrop }) => {
+
   const handleDrop = (e) => {
     e.preventDefault();
-    const item = e.dataTransfer.getData("equipment");
-    onDrop(item, id);
+
+    const equipmentId = e.dataTransfer.getData("equipmentId");
+    const chemicalId = e.dataTransfer.getData("chemicalId");
+
+    if (equipmentId) {
+      onDrop({ type: "equipment", id: equipmentId }, id);
+    }
+
+    if (chemicalId) {
+      onDrop({ type: "chemical", id: chemicalId }, id);
+    }
+
   };
 
   return (

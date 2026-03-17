@@ -1,9 +1,10 @@
-.lab-canvas {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+.lab-canvas{
+  height:100%;
+  width:100%;
+  background:white;
+  border-radius:6px;
+  overflow:hidden;
+
 }
 
 .lab-dropzones {
