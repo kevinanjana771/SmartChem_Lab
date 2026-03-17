@@ -3,7 +3,9 @@ import {
   getAllPracticals,
   getPracticalById,
   getPracticalSteps,
-  getPracticalEquipments 
+  getPracticalEquipments, 
+  getPracticalChemicals
+
 } from "../controllers/practicalController.js";
 
 const router = express.Router();
@@ -31,5 +33,8 @@ router.get("/:id/steps", getPracticalSteps);
 //GET /api/practicals/:id/equipments
 
 router.get("/:id/equipments", getPracticalEquipments);
+
+router.get("/:id/chemicals", getPracticalChemicals);
+
 
 export default router;
