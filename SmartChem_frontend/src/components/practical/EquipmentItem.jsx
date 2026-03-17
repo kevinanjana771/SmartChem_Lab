@@ -2,8 +2,10 @@ import React from "react";
 import "./EquipmentItem.css";
 
 const EquipmentItem = ({ equipment }) => {
+
   const handleDragStart = (e) => {
-    e.dataTransfer.setData("equipment", equipment.e_name.toLowerCase());
+    // send equipment ID
+    e.dataTransfer.setData("equipmentId", equipment.e_id);
   };
 
   return (

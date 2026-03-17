@@ -65,3 +65,28 @@ export const getPracticalEquipments = async (req, res, next) => {
         next(error);
     }
 };
+
+// Get chemicals for a practical
+export const getPracticalChemicals = async (req, res, next) => {
+
+    const { id } = req.params;
+
+    try {
+
+        const result = await pool.query(
+            `
+            SELECT c.*, pc.zone_id, pc.shelf_order
+            FROM practical_chemicals pc
+            JOIN chemicals c ON pc.c_id = c.c_id
+            WHERE pc.p_id = $1
+            ORDER BY pc.shelf_order ASC
+            `,
+            [id]
+        );
+
+        res.json(result.rows);
+
+    } catch (error) {
+        next(error);
+    }
+};
