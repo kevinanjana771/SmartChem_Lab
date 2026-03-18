@@ -1,9 +1,9 @@
-.lab-canvas{
-  height:100%;
-  width:100%;
-  background:white;
-  border-radius:6px;
-  overflow:hidden;
+.lab-canvas {
+  height: 100%;
+  width: 100%;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
 
 }
 
@@ -12,7 +12,7 @@
   height: 75%;
   background: white;
   border-radius: 25px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 25px;
