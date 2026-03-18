@@ -1,10 +1,11 @@
 .lab-canvas {
-  height: 100%;
+  height: calc(100% - 60px); /* Adjust height to account for larger margin */
   width: 100%;
   background: white;
-  border-radius: 6px;
+  border-radius: 12px;
   overflow: hidden;
-
+  margin-top: 60px;
+  border: 1px solid #e2e8f0;
 }
 
 .lab-dropzones {
