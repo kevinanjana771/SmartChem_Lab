@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from 'react';
+import React, { Suspense, useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
@@ -37,6 +37,25 @@ const GLBModel = ({ url, scale = 1 }) => {
   );
 };
 
+const ViewerScene = ({ url, scale, controlsRef }) => {
+  return (
+    <>
+      <ambientLight intensity={0.85} />
+      <directionalLight position={[3, 5, 2]} intensity={1} />
+      <Suspense fallback={null}>
+        <GLBModel url={url} scale={scale} />
+        <Environment preset="city" />
+      </Suspense>
+      <OrbitControls
+        ref={controlsRef}
+        enableDamping
+        minDistance={2.5}
+        maxDistance={10}
+      />
+    </>
+  );
+};
+
 // --- 3. Main Equipment Component ---
 const EquipmentPreview = () => {
   const navigate = useNavigate();
@@ -49,6 +68,7 @@ const EquipmentPreview = () => {
 
   // State for Modal
   const [showViewer, setShowViewer] = useState(false);
+  const viewerControlsRef = useRef(null);
 
   // --- 4. Data Fetching (Database) ---
   useEffect(() => {
@@ -83,6 +103,19 @@ const EquipmentPreview = () => {
 
   const modelUrl = modelKey ? MODEL_FILES[modelKey] : null;
   const modelScale = equipment?.model_scale || 1;
+
+  const adjustViewerZoom = (direction) => {
+    const controls = viewerControlsRef.current;
+
+    if (!controls) return;
+
+    const zoomFactor = direction === 'in' ? 0.8 : 1.2;
+    const offset = controls.object.position.clone().sub(controls.target);
+    const nextOffset = offset.multiplyScalar(zoomFactor);
+
+    controls.object.position.copy(controls.target.clone().add(nextOffset));
+    controls.update();
+  };
 
   // --- 6. Render States ---
   if (loading) return <div className="loading-container"><p>Loading equipment details...</p></div>;
@@ -169,14 +202,28 @@ const EquipmentPreview = () => {
               <button className="viewer-close" onClick={() => setShowViewer(false)}>Close</button>
             </div>
             <div className="viewer-canvas-wrap">
+              <div className="viewer-zoom-controls">
+                <button
+                  type="button"
+                  className="viewer-zoom-btn"
+                  onClick={() => adjustViewerZoom('in')}
+                >
+                  <span className="viewer-zoom-icon viewer-zoom-icon-plus">+</span>
+                </button>
+                <button
+                  type="button"
+                  className="viewer-zoom-btn"
+                  onClick={() => adjustViewerZoom('out')}
+                >
+                  <span className="viewer-zoom-icon viewer-zoom-icon-minus">-</span>
+                </button>
+              </div>
               <Canvas camera={{ position: [0, 1.5, 4], fov: 50 }}>
-                <ambientLight intensity={0.85} />
-                <directionalLight position={[3, 5, 2]} intensity={1} />
-                <Suspense fallback={null}>
-                  <GLBModel url={modelUrl} scale={19} />
-                  <Environment preset="city" />
-                </Suspense>
-                <OrbitControls enableDamping />
+                <ViewerScene
+                  url={modelUrl}
+                  scale={19}
+                  controlsRef={viewerControlsRef}
+                />
               </Canvas>
             </div>
           </div>
@@ -189,3 +236,4 @@ const EquipmentPreview = () => {
 };
 
 export default EquipmentPreview;
+
