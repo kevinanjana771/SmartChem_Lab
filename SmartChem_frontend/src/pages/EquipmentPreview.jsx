@@ -13,6 +13,8 @@ const MODEL_FILES = import.meta.glob("/src/images/models/*.glb", {
   import: "default"
 });
 
+const STORAGE_URL = "https://kwbuvntvutrihygxaxqo.supabase.co/storage/v1/object/public/equipments_image";
+
 // --- 2. 3D Model Component ---
 const GLBModel = ({ url, scale = 1 }) => {
   console.log("Loading GLB from URL:", url);
@@ -103,6 +105,9 @@ const EquipmentPreview = () => {
 
   const modelUrl = modelKey ? MODEL_FILES[modelKey] : null;
   const modelScale = equipment?.model_scale || 1;
+  const previewImageUrl = equipment?.image
+    ? `${STORAGE_URL}/${equipment.image}`
+    : `https://via.placeholder.com/400x400/3b82f6/ffffff?text=${encodeURIComponent(equipment?.e_name || "Equipment")}`;
 
   const adjustViewerZoom = (direction) => {
     const controls = viewerControlsRef.current;
@@ -132,65 +137,52 @@ const EquipmentPreview = () => {
     >
       <button className="back-btn" onClick={() => navigate(-1)}>← Back to Equipments</button>
 
-      <div className="preview-layout">
-        {/* Left: 3D Model or Placeholder Image */}
-        <div className="equip-img-section">
-          <div className="img-wrapper">
-            {modelUrl ? (
-              // If DB has a valid filename and file exists locally
-              <div className="inline-model-box">
-                <Canvas camera={{ position: [0, 1.5, 4], fov: 45 }}>
-                  <ambientLight intensity={1} />
-                  <directionalLight position={[5, 10, 5]} intensity={1.5} />
-                  <Suspense fallback={<Html center>Loading 3D...</Html>}>
-                    <GLBModel url={modelUrl} scale={19} />
-                    <Environment preset="city" />
-                  </Suspense>
-                  <OrbitControls enableZoom={false} enableDamping />
-                </Canvas>
-              </div>
-            ) : (
-              // Fallback if no model is linked
+      <div className="preview-shell">
+        <div className="preview-layout">
+          {/* Left: 3D Model or Placeholder Image */}
+          <div className="equip-img-section">
+            <div className="img-wrapper">
               <img
-                src={equipment.image || `https://via.placeholder.com/400x400/3b82f6/ffffff?text=${encodeURIComponent(equipment.e_name)}`}
+                src={previewImageUrl}
                 alt={equipment.e_name}
               />
-            )}
 
-            <button
-              className="view-360-btn"
-              onClick={() => modelUrl && setShowViewer(true)}
-              disabled={!modelUrl}
-              style={{ opacity: modelUrl ? 1 : 0.5, cursor: modelUrl ? 'pointer' : 'not-allowed' }}
-            >
-              {modelUrl ? "360 View" : "No 3D Model Available"}
-            </button>
+              <button
+                className="view-360-btn"
+                onClick={() => modelUrl && setShowViewer(true)}
+                disabled={!modelUrl}
+                style={{ opacity: modelUrl ? 1 : 0.5, cursor: modelUrl ? 'pointer' : 'not-allowed' }}
+              >
+                {modelUrl ? "360 View" : "No 3D Model Available"}
+              </button>
+            </div>
+          </div>
+
+          {/* Right: Details from Database */}
+          <div className="equip-info-section">
+            <h1>{equipment.e_name}</h1>
+
+            <p className="equip-desc">
+              {equipment.e_description}
+            </p>
+
+            <div className="parts-list">
+              <h3>Parts</h3>
+
+              {equipment.parts && equipment.parts.length > 0 ? (
+                equipment.parts.map((part, idx) => (
+                  <div key={idx} className="part-item">
+                    <div className="part-name">{part.part_name}</div>
+                    <div className="part-desc">{part.part_description}</div>
+                  </div>
+                ))
+              ) : (
+                <p>No parts listed for this equipment.</p>
+              )}
+            </div>
           </div>
         </div>
-
-        {/* Right: Details from Database */}
-        <div className="equip-info-section">
-          <h1>{equipment.e_name}</h1>
-
-          <p className="equip-desc">
-            {equipment.e_description}
-          </p>
-
-          <div className="parts-list">
-            <h3>Parts</h3>
-
-            {equipment.parts && equipment.parts.length > 0 ? (
-              equipment.parts.map((part, idx) => (
-                <div key={idx} className="part-item">
-                  <div className="part-name">{part.part_name}</div>
-                  <div className="part-desc">{part.part_description}</div>
-                </div>
-              ))
-            ) : (
-              <p>No parts listed for this equipment.</p>
-            )}
-          </div>
-        </div>
+        <Footer />
       </div>
 
       {/* Fullscreen 3D Viewer Modal */}
@@ -229,11 +221,8 @@ const EquipmentPreview = () => {
           </div>
         </div>
       )}
-
-      <Footer />
     </motion.div>
   );
 };
 
 export default EquipmentPreview;
-
