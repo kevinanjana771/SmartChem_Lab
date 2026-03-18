@@ -5,19 +5,17 @@
   min-height: 100vh;
   overflow-x: hidden;
   z-index: 0;
-  padding: 2rem 2rem 0rem 2rem;
 }
 
 /* NEW: Wrapper to put Title on Left and Search on Right */
 .page-header-wrapper {
   display: flex;
   justify-content: space-between;
-  /* Pushes items to edges */
   align-items: center;
   margin-bottom: 2rem;
   flex-wrap: wrap;
-  /* Wraps on small screens */
   gap: 1rem;
+  padding: 0 2rem;
 }
 
 .page-header {
@@ -25,14 +23,12 @@
   font-weight: 800;
   color: #064e3b;
   margin-bottom: 0;
-  /* Removed margin because wrapper handles spacing */
 }
 
 .search-bar {
   position: relative;
   width: 300px;
   margin-bottom: 0;
-  /* Removed margin because wrapper handles spacing */
 }
 
 .search-bar input {
@@ -61,6 +57,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 2rem;
+  padding: 0 2rem 2rem 2rem;
   margin-bottom: 2rem;
 }
 
@@ -70,6 +67,8 @@
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 
 .course-card:hover {
@@ -84,6 +83,9 @@
 
 .course-body {
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .course-badge {
@@ -101,6 +103,7 @@
   margin-bottom: 1.5rem;
   line-height: 1.4;
   color: #111;
+  min-height: 3.1rem;
 }
 
 .start-btn-lg {
@@ -113,6 +116,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
+  margin-top: auto;
 }
 
 .start-btn-lg:hover {
