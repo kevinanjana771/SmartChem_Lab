@@ -155,7 +155,7 @@
 }
 
 .logo-img {
-  height: 55px;
+  height: 65px;
   width: auto;
   object-fit: contain;
 }
@@ -213,7 +213,7 @@
 
 /* HERO SECTION */
 .hero {
-  padding: 160px 2rem 100px;
+  padding: 130px 2rem 100px;
   max-width: 1280px;
   margin: 0 auto;
   position: relative;
@@ -288,7 +288,7 @@
 .stat-badge {
   display: inline-block;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: linear-gradient(145deg, #1e293b91, #223053d3);
   /* Slight transparency */
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
@@ -305,7 +305,7 @@
 
 .stat-label {
   font-size: 0.9rem;
-  color: #6b7280;
+  color: #ffffff;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -320,14 +320,14 @@
 
 .hero-circle {
   position: relative;
-  width: 700px;
-  height: 700px;
+  width: 500px;
+  height: 500px;
 }
 
 .hero-circle::before {
   content: '';
   position: absolute;
-  top: 97%;
+  top: 110%;
   left: 50%;
   transform: translate(-51%, -50%);
   width: 130%;
@@ -338,11 +338,11 @@
 }
 
 .hero-image {
-  top: 95%;
+  top: 98%;
   left: 50%;
-  transform: translate(-4%, 0%);
-  width: 750px;
-  height: 800px;
+  transform: translate(-6%, 10%);
+  width: 550px;
+  height: 550px;
   object-fit: cover;
 }
 
@@ -420,7 +420,7 @@
 
 /* ACHIEVEMENTS SECTION */
 .achievements {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background: linear-gradient(135deg, #0f172ac0 0%, #1e293b 100%);
   padding: 100px 2rem;
   text-align: center;
   position: relative;
@@ -444,7 +444,7 @@
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.227);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -481,7 +481,6 @@
 /* PROCESS SECTION */
 .process-section {
   padding: 100px 0;
-  background: white;
 }
 
 .process-timeline {
@@ -531,8 +530,8 @@
 
 .process-line {
   flex-grow: 1;
-  height: 2px;
-  background: #e5e7eb;
+  height: 4px;
+  background: #ffffff;
   position: relative;
   top: 0;
 }
@@ -540,7 +539,7 @@
 /* CONTACT SECTION */
 .contact {
   padding: 100px 2rem;
-  background: #f8fafc;
+  
 }
 
 .contact-container {
@@ -610,6 +609,8 @@
 
 .contact-form-container {
   background: white;
+  position: relative;
+  top: 21%;
   padding: 3rem;
   border-radius: 24px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
@@ -1143,7 +1144,6 @@
   pointer-events: auto;
 }
 
-.group:hover {}
 
 .group:hover .group-hover\:text-white {
   color: white;
