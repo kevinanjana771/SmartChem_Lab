@@ -94,7 +94,7 @@ export default function LandingPage() {
         this.y = Math.random() * canvas.height;
         this.vx = (Math.random() - 0.5) * 0.5; // Velocity X
         this.vy = (Math.random() - 0.5) * 0.5; // Velocity Y
-        this.radius = 2;
+        this.radius = 4;
       }
 
       draw() {
@@ -137,7 +137,7 @@ export default function LandingPage() {
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.strokeStyle = `rgba(0, 212, 170, ${1 - dist / maxDist})`; // Line color
-            ctx.lineWidth = 0.5;
+            ctx.lineWidth = 1.0;
             ctx.stroke();
           }
         }
@@ -283,7 +283,6 @@ export default function LandingPage() {
 
       {/* FEATURES SECTION */}
       <section id="features" className="features-section" ref={featRef}>
-        <div className="container">
           <h2 className={`section-title dark ${featVisible ? 'animate-fade-up' : ''}`}>
             Why Choose SmartChem?
           </h2>
@@ -308,7 +307,6 @@ export default function LandingPage() {
               <p>Test your knowledge with AI-generated quizzes tailored to your syllabus.</p>
             </div>
           </div>
-        </div>
       </section>
 
       {/* ========================================= */}
