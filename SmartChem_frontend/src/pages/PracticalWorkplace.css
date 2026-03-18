@@ -10,7 +10,7 @@
 .lab-layout {
   display: grid;
   grid-template-columns: 200px 1fr;
-  grid-template-rows: 1fr 120px;
+  grid-template-rows: 1fr 80px; /* Reduced bottom row to increase canvas box height */
   flex: 1;
   gap: 10px;
   overflow: hidden; /* Grid contents must scroll internally */
