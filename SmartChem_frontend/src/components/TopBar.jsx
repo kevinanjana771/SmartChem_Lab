@@ -4,6 +4,17 @@ import './TopBar.css';
 
 
 const TopBar = () => {
+  
+  useEffect(() => {
+    const updateUser = () => {
+      const storedUser = localStorage.getItem('user');
+      setUser(storedUser ? JSON.parse(storedUser) : null);
+    };
+
+    window.addEventListener('storage', updateUser);
+
+    return () => window.removeEventListener('storage', updateUser);
+  }, []);
   const navigate = useNavigate();
   const [user, setUser] = useState(() => {
     try {
@@ -34,7 +45,10 @@ const TopBar = () => {
             <button className="logout-btn" onClick={handleLogout}>
               Logout
             </button>
-            <div className="user-profile">
+            <div className="user-profile"
+              onClick={() => navigate('/profile')}
+              style={{ cursor: "pointer" }}
+            >
               <span className="user-name">{user.name}</span>
               <img src={user.avatar} alt="User Avatar" style={{ width: "50px", borderRadius: "50%" }} />
             </div>

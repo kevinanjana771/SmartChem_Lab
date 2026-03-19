@@ -1,44 +1,57 @@
-import { GoogleLogin } from "@react-oauth/google";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
 import axios from "axios";
 
 
-const GoogleAuthButton = ({ setUser }) => {
-  const navigate = useNavigate();
-  const handleSuccess = async (response) => {
-    console.log("✅ Google Response:", response);
+const GoogleAuthButton = ({ onLogin }) => {
+  const buttonRef = useRef(null);
 
+  const handleGoogleResponse = async (response) => {
     try {
-      const token = response.credential;
-      console.log("📌 Token:", token);
+      console.log("✅ Google Response:", response);
 
-      const res = await axios.post("http://localhost:5001/api/auth/google", {
-        token,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/auth/google`,
+        { token: response.credential }
+      );
 
       console.log("✅ Backend Response:", res.data);
 
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-
-      if (setUser) setUser(res.data.user);
-
-      alert("Google Login Successful ✅");
-      navigate("/dashboard");
-
+      if (res.data.success && res.data.user) {
+        const user = res.data.user;
+        localStorage.setItem("user", JSON.stringify(user));
+        if (onLogin) onLogin(user);
+      } else {
+        console.error("❌ No user returned", res.data);
+      }
     } catch (err) {
-      console.error("❌ Backend Error:", err.response?.data || err.message);
-      alert("Google Login failed on backend ❌");
+      console.error("❌ Google login error:", err);
     }
   };
 
-  return (
-    <div style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}>
-      <GoogleLogin
-        onSuccess={handleSuccess}
-        onError={() => alert("Google Login Failed ❌")}
-      />
-    </div>
-  );
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (window.google && buttonRef.current) {
+        console.log("✅ Google loaded");
+
+        window.google.accounts.id.initialize({
+          client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+          callback: handleGoogleResponse,
+        });
+
+        window.google.accounts.id.renderButton(buttonRef.current, {
+          theme: "outline",
+          size: "large",
+          text: "signin_with",
+        });
+
+        clearInterval(interval); // stop checking
+      }
+    }, 500); // check every 0.5 sec
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return <div ref={buttonRef}></div>;
 };
 
 export default GoogleAuthButton;
