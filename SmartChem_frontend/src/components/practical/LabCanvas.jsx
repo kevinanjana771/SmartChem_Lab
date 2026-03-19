@@ -29,7 +29,7 @@ function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSe
       // Subtly reduce equipment size (target 2.8 units)
       const calculatedScale = maxDim > 0 ? 2.8 / maxDim : 1;
       setScale(calculatedScale);
-      
+
       // Zero-offset calculation: Shift the mesh up so its floor-base is at Y=0
       setOffsetY(-bbox.min.y * calculatedScale);
     }, [copiedScene]);
@@ -37,7 +37,7 @@ function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSe
     const handleRotateStart = (e) => {
       e.stopPropagation();
       e.preventDefault();
-      
+
       const startX = e.clientX;
       const initialRotation = rotationY;
 
@@ -58,7 +58,7 @@ function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSe
     const handleTiltStart = (e) => {
       e.stopPropagation();
       e.preventDefault();
-      
+
       const startY = e.clientY;
       const initialRotation = rotationX;
 
@@ -80,9 +80,9 @@ function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSe
 
     return (
       <group position={initialPosition}>
-        <DragControls 
-          autoTransform 
-          axisLock="z" 
+        <DragControls
+          autoTransform
+          axisLock="z"
           dragLimits={{
             minX: -6,
             maxX: 6,
@@ -190,9 +190,9 @@ function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSe
             )}
             <group rotation={[0, rotationY, 0]}>
               <group rotation={[rotationX, 0, 0]}>
-                <primitive 
-                  object={copiedScene} 
-                  scale={scale} 
+                <primitive
+                  object={copiedScene}
+                  scale={scale}
                   onClick={(e) => {
                     e.stopPropagation();
                     onSelect();
