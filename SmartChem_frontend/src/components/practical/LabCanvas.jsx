@@ -16,6 +16,8 @@ function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSe
     const [scale, setScale] = useState(1);
     const [offsetY, setOffsetY] = useState(0);
     const [rotationY, setRotationY] = useState(0);
+    const [rotationX, setRotationX] = useState(0);
+
 
     useEffect(() => {
       // Calculate properly sized bounding box once the scene is loaded
@@ -41,7 +43,6 @@ function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSe
 
       const onPointerMove = (moveEvent) => {
         const deltaX = moveEvent.clientX - startX;
-        // Adjust sensitivity (0.02 radians per pixel)
         setRotationY(initialRotation + deltaX * 0.02);
       };
 
@@ -53,6 +54,29 @@ function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSe
       window.addEventListener("pointermove", onPointerMove);
       window.addEventListener("pointerup", onPointerUp);
     };
+
+    const handleTiltStart = (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      
+      const startY = e.clientY;
+      const initialRotation = rotationX;
+
+      const onPointerMove = (moveEvent) => {
+        const deltaY = moveEvent.clientY - startY;
+        // Tilt sensitivity (X-axis)
+        setRotationX(initialRotation + deltaY * 0.02);
+      };
+
+      const onPointerUp = () => {
+        window.removeEventListener("pointermove", onPointerMove);
+        window.removeEventListener("pointerup", onPointerUp);
+      };
+
+      window.addEventListener("pointermove", onPointerMove);
+      window.addEventListener("pointerup", onPointerUp);
+    };
+
 
     return (
       <group position={initialPosition}>
@@ -71,8 +95,66 @@ function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSe
           <group position={[0, offsetY, 0]}>
             {isSelected && (
               <>
+                {/* Rotate Button (Left) */}
+                <Html position={[-0.7, 1.2, 0]} center style={{ pointerEvents: 'auto' }}>
+                  <button
+                    onPointerDown={handleRotateStart}
+                    style={{
+                      background: "#3b82f6",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "50%",
+                      width: "28px",
+                      height: "28px",
+                      cursor: "ew-resize",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      boxShadow: "0 4px 12px rgba(59, 130, 246, 0.4)",
+                      transition: "all 0.15s ease",
+                      transform: "scale(1)"
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.2)"}
+                    onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+                    title="Drag left/right to rotate"
+                  >
+                    ↻
+                  </button>
+                </Html>
+
+                {/* Tilt Button (Middle) */}
+                <Html position={[0, 1.2, 0]} center style={{ pointerEvents: 'auto' }}>
+                  <button
+                    onPointerDown={handleTiltStart}
+                    style={{
+                      background: "#10b981",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "50%",
+                      width: "28px",
+                      height: "28px",
+                      cursor: "ns-resize",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      boxShadow: "0 4px 12px rgba(16, 185, 129, 0.4)",
+                      transition: "all 0.15s ease",
+                      transform: "scale(1)"
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.2)"}
+                    onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+                    title="Drag up/down to tilt (X-axis)"
+                  >
+                    ⇅
+                  </button>
+                </Html>
+
                 {/* Delete Button (Right) */}
-                <Html position={[0.6, 0.8, 0]} center style={{ pointerEvents: 'auto' }}>
+                <Html position={[0.7, 1.2, 0]} center style={{ pointerEvents: 'auto' }}>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -84,66 +166,41 @@ function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSe
                       color: "white",
                       border: "none",
                       borderRadius: "50%",
-                      width: "24px",
-                      height: "24px",
+                      width: "28px",
+                      height: "28px",
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontSize: "18px",
+                      fontSize: "20px",
                       fontWeight: "bold",
                       boxShadow: "0 4px 12px rgba(255, 77, 79, 0.4)",
                       transition: "all 0.15s ease",
                       transform: "scale(1)"
                     }}
-                    onMouseEnter={(e) => e.target.style.transform = "scale(1.2)"}
-                    onMouseLeave={(e) => e.target.style.transform = "scale(1)"}
+                    onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.2)"}
+                    onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
                     title="Click to remove"
                   >
                     &times;
                   </button>
                 </Html>
 
-                {/* Rotate Button (Left) */}
-                <Html position={[-0.6, 0.8, 0]} center style={{ pointerEvents: 'auto' }}>
-                  <button
-                    onPointerDown={handleRotateStart}
-                    style={{
-                      background: "#3b82f6",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "50%",
-                      width: "24px",
-                      height: "24px",
-                      cursor: "ew-resize",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "14px",
-                      fontWeight: "bold",
-                      boxShadow: "0 4px 12px rgba(59, 130, 246, 0.4)",
-                      transition: "all 0.15s ease",
-                      transform: "scale(1)"
-                    }}
-                    onMouseEnter={(e) => e.target.style.transform = "scale(1.2)"}
-                    onMouseLeave={(e) => e.target.style.transform = "scale(1)"}
-                    title="Drag left/right to rotate"
-                  >
-                    &#8635;
-                  </button>
-                </Html>
               </>
             )}
             <group rotation={[0, rotationY, 0]}>
-              <primitive 
-                object={copiedScene} 
-                scale={scale} 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onSelect();
-                }}
-              />
+              <group rotation={[rotationX, 0, 0]}>
+                <primitive 
+                  object={copiedScene} 
+                  scale={scale} 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onSelect();
+                  }}
+                />
+              </group>
             </group>
+
           </group>
         </DragControls>
       </group>
