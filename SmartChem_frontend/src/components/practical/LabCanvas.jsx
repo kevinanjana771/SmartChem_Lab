@@ -1,8 +1,55 @@
-import React, { Suspense, useState, useMemo, useEffect } from "react";
+import React, { Suspense, useState, useMemo, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF, DragControls, Html } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
+import { OrbitControls, useGLTF, DragControls, Html, useTexture } from "@react-three/drei";
 import * as THREE from "three";
+import tableTextureImage from "../../images/workbench/Table-Texture.jpg";
+import background360Image from "../../images/workbench/360background.jpg";
 import "./LabCanvas.css";
+
+const DEFAULT_CAMERA_POSITION = new THREE.Vector3(0, 2, 8);
+const DEFAULT_CAMERA_TARGET = new THREE.Vector3(0, 1, 0);
+
+function SceneBackground() {
+  const { scene } = useThree();
+  const backgroundTexture = useTexture(background360Image);
+
+  useEffect(() => {
+    backgroundTexture.mapping = THREE.EquirectangularReflectionMapping;
+    backgroundTexture.colorSpace = THREE.SRGBColorSpace;
+    scene.background = backgroundTexture;
+    scene.backgroundBlurriness = 0.0;
+
+    return () => {
+      if (scene.background === backgroundTexture) {
+        scene.background = null;
+      }
+      scene.backgroundBlurriness = 0;
+    };
+  }, [backgroundTexture, scene]);
+
+  return null;
+}
+
+function TableSurface() {
+  const tableTexture = useTexture(tableTextureImage);
+
+  useMemo(() => {
+    tableTexture.wrapS = THREE.RepeatWrapping;
+    tableTexture.wrapT = THREE.RepeatWrapping;
+    tableTexture.repeat.set(2.5, 1.5);
+    tableTexture.anisotropy = 8;
+    tableTexture.colorSpace = THREE.SRGBColorSpace;
+    tableTexture.needsUpdate = true;
+  }, [tableTexture]);
+
+  return (
+    <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+      <planeGeometry args={[12, 6]} />
+      <meshStandardMaterial map={tableTexture} color="#ffffff" />
+    </mesh>
+  );
+}
 
 function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSelect }) {
   if (!model) return null;
@@ -191,6 +238,8 @@ function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSe
               <primitive
                 object={copiedScene}
                 scale={scale}
+                castShadow
+                receiveShadow
                 onClick={(e) => {
                   e.stopPropagation();
                   onSelect();
@@ -207,6 +256,8 @@ function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSe
 
 const LabCanvas = ({ placedItems, setPlacedItems }) => {
   const [selectedId, setSelectedId] = useState(null);
+  const controlsRef = useRef(null);
+  const resetAnimationRef = useRef(null);
 
   const removeItem = (uuid) => {
     setPlacedItems(prev => prev.filter(item => item.uuid !== uuid));
@@ -240,24 +291,117 @@ const LabCanvas = ({ placedItems, setPlacedItems }) => {
     }
   };
 
+  const adjustZoom = (direction) => {
+    const controls = controlsRef.current;
+
+    if (!controls) return;
+
+    const zoomFactor = direction === "in" ? 0.85 : 1.15;
+    const offset = controls.object.position.clone().sub(controls.target);
+    const nextOffset = offset.multiplyScalar(zoomFactor);
+
+    controls.object.position.copy(controls.target.clone().add(nextOffset));
+    controls.update();
+  };
+
+  const resetView = () => {
+    const controls = controlsRef.current;
+
+    if (!controls) return;
+
+    if (resetAnimationRef.current) {
+      cancelAnimationFrame(resetAnimationRef.current);
+    }
+
+    const startPosition = controls.object.position.clone();
+    const startTarget = controls.target.clone();
+    const duration = 450;
+    const startTime = performance.now();
+
+    const animateReset = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      controls.object.position.lerpVectors(
+        startPosition,
+        DEFAULT_CAMERA_POSITION,
+        easedProgress
+      );
+      controls.target.lerpVectors(
+        startTarget,
+        DEFAULT_CAMERA_TARGET,
+        easedProgress
+      );
+      controls.update();
+
+      if (progress < 1) {
+        resetAnimationRef.current = requestAnimationFrame(animateReset);
+      } else {
+        resetAnimationRef.current = null;
+      }
+    };
+
+    resetAnimationRef.current = requestAnimationFrame(animateReset);
+  };
+
   return (
     <div
       className="lab-canvas"
       onDragOver={(e) => e.preventDefault()}
       onDrop={handleDrop}
     >
+      <div className="lab-zoom-controls">
+        <button
+          type="button"
+          className="lab-zoom-btn lab-reset-btn"
+          onClick={resetView}
+          aria-label="Reset view"
+          data-tooltip="Reset Camera View"
+          title="Reset view"
+        >
+          <span className="lab-zoom-icon lab-reset-icon">⟲</span>
+        </button>
+        <button
+          type="button"
+          className="lab-zoom-btn"
+          onClick={() => adjustZoom("in")}
+          aria-label="Zoom in"
+          data-tooltip="Zoom In"
+        >
+          <span className="lab-zoom-icon lab-zoom-icon-plus">+</span>
+        </button>
+        <button
+          type="button"
+          className="lab-zoom-btn"
+          onClick={() => adjustZoom("out")}
+          aria-label="Zoom out"
+          data-tooltip="Zoom Out"
+        >
+          <span className="lab-zoom-icon lab-zoom-icon-minus">-</span>
+        </button>
+      </div>
+
       <Canvas
-        camera={{ position: [0, 2, 8], fov: 40 }}
+        shadows
+        camera={{ position: DEFAULT_CAMERA_POSITION.toArray(), fov: 40 }}
         onPointerMissed={() => setSelectedId(null)}
       >
+        <color attach="background" args={["#ffffff"]} />
+        <SceneBackground />
         <ambientLight intensity={0.9} />
-        <directionalLight position={[5, 10, 5]} intensity={1.5} />
-        <OrbitControls makeDefault target={[0, 1, 0]} />
-        <mesh rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[12, 6]} />
-          <meshStandardMaterial color="#e3e3e3" />
-        </mesh>
+        <directionalLight
+          position={[5, 10, 5]}
+          intensity={1.5}
+          castShadow
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
+        />
+        <OrbitControls ref={controlsRef} makeDefault target={DEFAULT_CAMERA_TARGET.toArray()} />
+
+        <TableSurface />
         <gridHelper args={[12, 12, "#888888", "#cccccc"]} position={[0, 0.01, 0]} />
+
         <Suspense fallback={null}>
           {placedItems.map((item, i) =>
             item.model_filename ? (
