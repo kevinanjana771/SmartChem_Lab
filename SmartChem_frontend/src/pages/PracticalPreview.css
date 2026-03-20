@@ -1,33 +1,77 @@
 .practical-preview {
-  max-width: 1200px;
+  max-width: 1420px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   position: relative;
-  min-height: 100vh;
+  min-height: 80vh;
   overflow-x: hidden;
   z-index: 0;
-  background: #fff;
-  padding: 2rem 0;
+  padding: 2rem 1.5rem;
 }
 
-.preview-header {
+.practical-preview .preview-shell {
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.practical-preview > .practical-back-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #10b981;
+  border: none;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: auto;
+  max-width: max-content;
+  padding: 0.8rem 1.25rem;
+  line-height: 1.2;
+  text-decoration: none;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.18);
+  outline: none;
+  flex: 0 0 auto;
+  align-self: flex-start;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.practical-preview > .practical-back-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(16, 185, 129, 0.24);
+}
+
+.practical-preview .preview-layout {
+  display: block;
+  background: #fff;
+  padding: 2.5rem 2.5rem;
+  border-radius: 20px 20px 0 0;
+}
+
+.practical-preview .preview-header {
   margin-bottom: 2rem;
 }
 
-.preview-header h1 {
+.practical-preview .preview-header h1 {
   font-size: 2rem;
   color: #1f2937;
   margin-bottom: 1.5rem;
 }
 
-.tabs {
+.practical-preview .tabs {
   display: flex;
   gap: 1rem;
   border-bottom: 2px solid #e5e7eb;
 }
 
-.tab {
+.practical-preview .tab {
   padding: 0.75rem 1.5rem;
   background: transparent;
   border: none;
@@ -38,12 +82,12 @@
   position: relative;
 }
 
-.tab.active {
+.practical-preview .tab.active {
   color: #10b981;
   font-weight: 700;
 }
 
-.tab.active::after {
+.practical-preview .tab.active::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -53,27 +97,30 @@
   background: #10b981;
 }
 
-.preview-content {
-  background: white;
+.practical-preview .preview-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  margin-bottom: 2rem;
+  align-items: start;
 }
 
 @media (max-width: 768px) {
-  .preview-content {
+  .practical-preview .preview-layout {
+    padding: 2rem 1.25rem;
+  }
+
+  .practical-preview .preview-content {
     grid-template-columns: 1fr;
   }
 }
 
-.preview-image-section {
+.practical-preview .preview-image-section {
   border-radius: 20px;
   overflow: hidden;
   height: 100%;
 }
 
-.lab-main-img {
+.practical-preview .lab-main-img {
   width: 100%;
   height: 100%;
   min-height: 400px;
@@ -82,13 +129,14 @@
   display: block;
 }
 
-.preview-details {
-  padding: 0 1rem;
+.practical-preview .preview-details {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  padding: 0 1rem;
 }
 
-.preview-text {
+.practical-preview .preview-text {
   font-size: 1.1rem;
   color: #374151;
   line-height: 1.8;
@@ -96,7 +144,7 @@
   /* UPDATED: Justifies the paragraph text */
 }
 
-.action-area {
+.practical-preview .action-area {
   margin-top: auto;
   display: flex;
   gap: 1rem;
@@ -104,7 +152,12 @@
   padding-top: 2rem;
 }
 
-.start-action-btn {
+.practical-preview .preview-shell .footer {
+  margin-top: 0;
+  border-radius: 0 0 20px 20px;
+}
+
+.practical-preview .start-action-btn {
   background: #10b981;
   color: white;
   padding: 1rem 2rem;
@@ -117,30 +170,30 @@
   transition: all 0.3s;
 }
 
-.start-action-btn:hover {
+.practical-preview .start-action-btn:hover {
   transform: translateY(-2px);
   background: #059669;
 }
 
-.start-action-btn.secondary {
+.practical-preview .start-action-btn.secondary {
   background: white;
   color: #1f2937;
   border: 2px solid #e5e7eb;
   box-shadow: none;
 }
 
-.start-action-btn.secondary:hover {
+.practical-preview .start-action-btn.secondary:hover {
   border-color: #1f2937;
 }
 
 /* --- STYLES FOR PRACTICAL STEPS --- */
-.practical-steps-container {
+.practical-preview .practical-steps-container {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid #e5e7eb;
 }
 
-.steps-title {
+.practical-preview .steps-title {
   font-size: 1.25rem;
   color: #1f2937;
   margin-bottom: 1.5rem;
@@ -149,7 +202,7 @@
   gap: 0.5rem;
 }
 
-.steps-title::before {
+.practical-preview .steps-title::before {
   content: '';
   display: block;
   width: 6px;
@@ -158,7 +211,7 @@
   border-radius: 3px;
 }
 
-.steps-list {
+.practical-preview .steps-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -166,7 +219,7 @@
 }
 
 /* Vertical line connecting steps */
-.steps-list::before {
+.practical-preview .steps-list::before {
   content: '';
   position: absolute;
   left: 14px;
@@ -177,18 +230,18 @@
   z-index: 0;
 }
 
-.step-item {
+.practical-preview .step-item {
   display: flex;
   margin-bottom: 1.5rem;
   position: relative;
   z-index: 1;
 }
 
-.step-item:last-child {
+.practical-preview .step-item:last-child {
   margin-bottom: 0;
 }
 
-.step-marker {
+.practical-preview .step-marker {
   flex-shrink: 0;
   width: 30px;
   height: 30px;
@@ -205,7 +258,7 @@
   z-index: 2;
 }
 
-.step-content {
+.practical-preview .step-content {
   background: #f9fafb;
   padding: 1rem 1.5rem;
   border-radius: 12px;
@@ -213,7 +266,7 @@
   border-left: px solid #10b981;
 }
 
-.step-heading {
+.practical-preview .step-heading {
   margin: 0 0 0.5rem 0;
   font-size: 1rem;
   color: #1f2937;
