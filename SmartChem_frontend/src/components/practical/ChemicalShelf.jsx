@@ -19,7 +19,8 @@ const ChemicalShelf = ({ chemicals }) => {
             draggable
             onDragStart={(e) => handleDragStart(e, c)}
           >
-            {c.c_name || "Unnamed"}
+            {c.img && <img src={c.img} alt="" className="chem-icon" />}
+            <span className="chem-name">{c.c_name || "Unnamed"}</span>
           </div>
         ))}
       </div>
