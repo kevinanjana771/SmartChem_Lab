@@ -71,63 +71,70 @@ const PracticalPreview = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
     >
-      <div className="preview-header">
-        {/* Header Data from 'practical' table */}
-        <h1>{practical.p_lesson} {practical.p_name}</h1>
-        <div className="tabs">
-          <button className="tab active">About</button>
-          <button className="tab">Equipments</button>
-          <button className="tab">Lesson</button>
-        </div>
-      </div>
+      <button className="practical-back-btn" onClick={() => navigate('/practicals')}>
+        ← Back to Practicals
+      </button>
 
-      <div className="preview-content">
-        {/* Image from 'practical' table */}
-        <div className="preview-image-section">
-          <img
-            src={practical.p_image || "https://via.placeholder.com/800x400/000000/FFFFFF?text=Lab+Setup"}
-            alt="Experiment Setup"
-            className="lab-main-img"
-          />
-        </div>
+      <div className="preview-shell">
+        <div className="preview-layout">
+          <div className="preview-header">
+            {/* Header Data from 'practical' table */}
+            <h1>{practical.p_lesson} {practical.p_name}</h1>
+            <div className="tabs">
+              <button className="tab active">About</button>
+              <button className="tab">Equipments</button>
+              <button className="tab">Lesson</button>
+            </div>
+          </div>
 
-        <div className="preview-details">
-          {/* Description from 'practical' table */}
-          <p className="preview-text">
-            {practical.p_description}
-          </p>
+          <div className="preview-content">
+            {/* Image from 'practical' table */}
+            <div className="preview-image-section">
+              <img
+                src={practical.p_image || "https://via.placeholder.com/800x400/000000/FFFFFF?text=Lab+Setup"}
+                alt="Experiment Setup"
+                className="lab-main-img"
+              />
+            </div>
 
-          {/* --- STEPS SECTION (Data from 'practical_steps' table) --- */}
-          {steps.length > 0 && (
-            <div className="practical-steps-container">
-              <h3 className="steps-title">Procedure Steps</h3>
-              <div className="steps-list">
-                {steps.map((step) => (
-                  <div key={step.s_id} className="step-item">
+            <div className="preview-details">
+              {/* Description from 'practical' table */}
+              <p className="preview-text">
+                {practical.p_description}
+              </p>
 
-                    <div className="step-content">
-                      <h4 className="step-heading">Step {step.step_num}</h4>
-                      {/* s_description */}
-                      <p className="step-desc">{step.s_description}</p>
-                    </div>
+              {/* --- STEPS SECTION (Data from 'practical_steps' table) --- */}
+              {steps.length > 0 && (
+                <div className="practical-steps-container">
+                  <h3 className="steps-title">Procedure Steps</h3>
+                  <div className="steps-list">
+                    {steps.map((step) => (
+                      <div key={step.s_id} className="step-item">
+                        <div className="step-content">
+                          <h4 className="step-heading">Step {step.step_num}</h4>
+                          {/* s_description */}
+                          <p className="step-desc">{step.s_description}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
+              )}
+              {/* -------------------------------------------------------- */}
+
+              <div className="action-area">
+                <button className="start-action-btn secondary" onClick={() => navigate(`/quiz/${id}`)}>
+                  Start Quiz
+                </button>
+                <button className="start-action-btn" onClick={() => navigate(`/practicals/${id}/workplace`)}>
+                  Start Simulation
+                </button>
               </div>
             </div>
-          )}
-          {/* -------------------------------------------------------- */}
-
-          <div className="action-area">
-            <button className="start-action-btn secondary" onClick={() => navigate(`/quiz/${id}`)}>
-              Start Quiz
-            </button>
-            <button className="start-action-btn" onClick={() => navigate(`/practicals/${id}/workplace`)}>
-              Start Simulation
-            </button>
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </motion.div>
   );
 };
