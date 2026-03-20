@@ -4,22 +4,14 @@ import { motion } from "framer-motion";
 import logo from '../images/landing/sdgp-logo.png';
 import GoogleAuthButton from "../components/GoogleAuthButton";
 
+
 import './Login.css';
 
 const Login = () => {
   const navigate = useNavigate();
   const visualSideRef = useRef(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  const [user, setUser] = useState(() => {
-    try {
-      const stored = localStorage.getItem("user");
-      return stored ? JSON.parse(stored) : null;
-    } catch (e) {
-      return null;
-    }
-  });
-
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,8 +21,8 @@ const Login = () => {
   const handleMouseMove = (e) => {
     if (!visualSideRef.current) return;
     const rect = visualSideRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
+    const x = (e.clientX - rect.left) / rect.width; // 0 to 1
+    const y = (e.clientY - rect.top) / rect.height; // 0 to 1
     setMousePosition({ x, y });
   };
 
@@ -45,16 +37,13 @@ const Login = () => {
       return;
     }
 
-    const normalizedUser = {
+    localStorage.setItem('user', JSON.stringify({
       name: formData.name || 'Scientist',
       email: formData.email,
+      role: 'student',
       avatar: `https://ui-avatars.com/api/?name=${formData.name || 'User'}&background=10b981&color=fff`
-    };
+    }));
 
-    localStorage.setItem('user', JSON.stringify(normalizedUser));
-    window.dispatchEvent(new Event("storage"));
-
-    setUser(normalizedUser); // update state
     navigate('/dashboard');
   };
 
@@ -77,14 +66,17 @@ const Login = () => {
   ));
 
   return (
+    
     <motion.div className="login-page-wrapper"
-      initial={{ x: -100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: 100, opacity: 0 }}
-      transition={{ duration: 0.5 }}
+    initial={{ x: -100, opacity: 0 }}
+    animate={{ x: 0, opacity: 1 }}
+    exit={{ x: 100, opacity: 0 }}
+    transition={{ duration: 0.5 }}
     >
       <div className="color-bend-bg"></div>
       <div className="practical-preview-login">
+        
+        {/* Left Side: Interactive Lab Design */}
         <div 
           className="visual-side-login" 
           ref={visualSideRef}
@@ -93,6 +85,7 @@ const Login = () => {
           <div className="gradient-bg"></div>
           <div className="particles">{bubbles}</div>
 
+          {/* Central Icon: Bubbling Flask */}
           <div 
             className="center-icon"
             style={{ transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)` }}
@@ -101,16 +94,23 @@ const Login = () => {
               <path d="M10 2v7.31" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M14 2v7.31" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M8.5 2h7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              {/* The Flask Body */}
               <path d="M6 19a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4l-3.5-8.5h-5L6 19z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="rgba(255,255,255,0.1)"/>
+              
+              {/* Animated Liquid inside Flask */}
               <path className="flask-liquid" d="M7.5 17a1.5 1.5 0 0 1 1.5-1.5h6a1.5 1.5 0 0 1 1.5 1.5v.5a2 2 0 0 1-2 2H9.5a2 2 0 0 1-2-2v-.5z" fill="#a7f3d0"/>
+              
+              {/* Bubbles inside liquid */}
               <circle className="bubble-anim-1" cx="10" cy="17" r="0.5" fill="white" />
               <circle className="bubble-anim-2" cx="14" cy="17.5" r="0.7" fill="white" />
             </svg>
+            
             <h2 className="lab-title-text">Welcome Back, Scientist</h2>
             <p className="lab-sub-text">Ready to conduct your experiments?</p>
           </div>
         </div>
 
+        {/* Right Side: Form */}
         <div className="preview-content-login">
           <Link to="/" className="auth-top-brand">
             <img src={logo} alt="SmartChem Lab Logo" className="logo-img" />
@@ -133,6 +133,7 @@ const Login = () => {
                 className="form-input"
               />
             </div>
+
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
               <input
@@ -146,6 +147,7 @@ const Login = () => {
                 required
               />
             </div>
+
             <div className="form-group">
               <label htmlFor="password">Password</label>
               <input
@@ -159,22 +161,19 @@ const Login = () => {
                 required
               />
             </div>
+
             <div className="action-area-login">
               <button type="submit" className="start-action-btn-login">Enter Lab</button>
             </div>
           </form>
-
           <div className="auth-divider">
             <span>or</span>
           </div>
 
-          {/* Always show Google login */}
-          <GoogleAuthButton onLogin={(u) => {
-            setUser(u);
-            localStorage.setItem('user', JSON.stringify(u));
-            navigate("/dashboard");}} />
-
+          {/* Google Login */}
+          <GoogleAuthButton />
           
+
           <div className="login-footer">
             <p>New to SmartChem? <Link to="/signup">Create an Account</Link></p>
           </div>
