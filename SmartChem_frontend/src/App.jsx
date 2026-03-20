@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AnimatePresence } from "framer-motion";
 import LandingPage from './pages/LandingPage';
 import Login from './components/Login';
-import Signup from './components/Signup'; 
+import Signup from './components/Signup';
 import MainLayout from './components/MainLayout';
 import Dashboard from './pages/Dashboard';
 import Practicals from './pages/Practicals';
@@ -24,8 +24,8 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} /> 
-          
+          <Route path="/signup" element={<Signup />} />
+
           {/* App Routes  */}
           <Route element={<MainLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
@@ -36,10 +36,10 @@ function App() {
             <Route path="/equipments/:id" element={<EquipmentPreview />} />
             <Route path="/safetymethods" element={<Safetymethods />} />
             <Route path="/report" element={<Report />} />
-            
-            
+
+
           </Route>
-          
+
           <Route path="/practicals/:id/workplace" element={<PracticalWorkplace />} />
 
         </Routes>
