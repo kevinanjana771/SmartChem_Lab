@@ -190,7 +190,7 @@ const Report = () => {
   );
 
   return (
-    <>
+    <div className="report-page">
         {/* Top Section */}
         <FeedbackCard />
 
@@ -225,7 +225,8 @@ const Report = () => {
 
         {/* Line Chart Below */}
         <QuizProgressChart />
-    </>
+        <Footer />
+    </div>
   );
 };
 export default Report;

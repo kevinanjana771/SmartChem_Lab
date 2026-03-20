@@ -1,3 +1,19 @@
+.report-page .footer {
+  margin-top: 3rem;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.report-page .footer-content,
+.report-page .footer-bottom {
+  max-width: none;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 /* Main Rectangle Container */
 .feedback-container {
   width: 100%;
