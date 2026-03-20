@@ -122,3 +122,16 @@
 .start-btn-lg:hover {
   background: #059669;
 }
+
+.practicals-page .footer {
+  margin-top: 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.practicals-page .footer-content,
+.practicals-page .footer-bottom {
+  max-width: none;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
