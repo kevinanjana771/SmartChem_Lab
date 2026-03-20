@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import EquipmentShelf from "../components/practical/EquipmentShelf";
 import ChemicalShelf from "../components/practical/ChemicalShelf";
 import LabCanvas from "../components/practical/LabCanvas";
@@ -7,7 +8,8 @@ import axios from "axios";
 import "./PracticalWorkplace.css";
 
 const PracticalWorkplace = () => {
-  const practicalId = 36;
+  const { id } = useParams();
+  const practicalId = id || 36;
 
   const [practical, setPractical] = useState(null);
   const [equipments, setEquipments] = useState([]);
@@ -35,8 +37,10 @@ const PracticalWorkplace = () => {
       }
     };
 
-    loadData();
-  }, []);
+    if (practicalId) {
+      loadData();
+    }
+  }, [practicalId]);
 
   return (
     <div className="workplace-page">
@@ -44,8 +48,10 @@ const PracticalWorkplace = () => {
 
       <div className="lab-layout">
         <EquipmentShelf equipments={equipments} />
-        <LabCanvas placedItems={placedItems} setPlacedItems={setPlacedItems} />
-        <ChemicalShelf chemicals={chemicals} />
+        <div className="main-work-area">
+          <LabCanvas placedItems={placedItems} setPlacedItems={setPlacedItems} />
+          <ChemicalShelf chemicals={chemicals} />
+        </div>
       </div>
     </div>
   );

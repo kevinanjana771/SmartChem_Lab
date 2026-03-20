@@ -2,17 +2,25 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #eef2f7;
-  padding: 10px;
-  overflow: hidden; /* Lock the page height */
+  background: #f8fafc;
+  overflow: hidden;
 }
 
 .lab-layout {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  grid-template-rows: 1fr 80px; /* Reduced bottom row to increase canvas box height */
+  display: flex;
   flex: 1;
-  gap: 10px;
-  overflow: hidden; /* Grid contents must scroll internally */
-  min-height: 0;   /* Fix for CSS Grid items not shrinking */
+  width: 100%;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.main-work-area {
+  flex: 1;
+  display: grid;
+  grid-template-rows: 1fr 120px;
+  gap: 15px;
+  padding: 15px;
+  background: #eef2f7;
+  overflow: hidden;
+  min-height: 0;
 }
