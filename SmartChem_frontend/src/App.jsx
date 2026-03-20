@@ -13,7 +13,7 @@ import EquipmentPreview from './pages/EquipmentPreview';
 import AboutUs from './pages/AboutUs';
 import Safetymethods from './pages/Safetymethod';
 import PracticalWorkplace from "./pages/PracticalWorkplace";
-import Report from './pages/report';
+import Report from './pages/Report';
 
 function App() {
   return (
