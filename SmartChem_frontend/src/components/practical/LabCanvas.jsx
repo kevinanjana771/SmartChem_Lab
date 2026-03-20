@@ -9,6 +9,8 @@ import "./LabCanvas.css";
 
 const DEFAULT_CAMERA_POSITION = new THREE.Vector3(0, 2, 8);
 const DEFAULT_CAMERA_TARGET = new THREE.Vector3(0, 1, 0);
+const MIN_CAMERA_DISTANCE = 4.5;
+const MAX_CAMERA_DISTANCE = 14;
 
 function SceneBackground() {
   const { scene } = useThree();
@@ -19,12 +21,14 @@ function SceneBackground() {
     backgroundTexture.colorSpace = THREE.SRGBColorSpace;
     scene.background = backgroundTexture;
     scene.backgroundBlurriness = 0.0;
+    scene.backgroundIntensity = 0.40;
 
     return () => {
       if (scene.background === backgroundTexture) {
         scene.background = null;
       }
       scene.backgroundBlurriness = 0;
+      scene.backgroundIntensity = 1;
     };
   }, [backgroundTexture, scene]);
 
@@ -37,17 +41,42 @@ function TableSurface() {
   useMemo(() => {
     tableTexture.wrapS = THREE.RepeatWrapping;
     tableTexture.wrapT = THREE.RepeatWrapping;
-    tableTexture.repeat.set(2.5, 1.5);
+    tableTexture.repeat.set(2.5, 2.5);
     tableTexture.anisotropy = 8;
     tableTexture.colorSpace = THREE.SRGBColorSpace;
     tableTexture.needsUpdate = true;
   }, [tableTexture]);
 
   return (
-    <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-      <planeGeometry args={[12, 6]} />
-      <meshStandardMaterial map={tableTexture} color="#ffffff" />
-    </mesh>
+    <group>
+      <mesh position={[0, -0.18, 0]} receiveShadow>
+        <boxGeometry args={[12, 0.36, 12]} />
+        <meshStandardMaterial map={tableTexture} color="#b8b8b8" />
+      </mesh>
+    </group>
+  );
+}
+
+function TableGrid() {
+  return (
+    <gridHelper
+      args={[12, 12, "#a3a3a3", "#dddddd"]}
+      position={[0, 0.01, 0]}
+      ref={(grid) => {
+        if (!grid) return;
+
+        const materials = Array.isArray(grid.material)
+          ? grid.material
+          : [grid.material];
+
+        materials.forEach((material) => {
+          material.transparent = true;
+          material.opacity = 0.20;
+          material.needsUpdate = true;
+          material.depthWrite = false;
+        });
+      }}
+    />
   );
 }
 
@@ -299,6 +328,13 @@ const LabCanvas = ({ placedItems, setPlacedItems }) => {
     const zoomFactor = direction === "in" ? 0.85 : 1.15;
     const offset = controls.object.position.clone().sub(controls.target);
     const nextOffset = offset.multiplyScalar(zoomFactor);
+    const nextDistance = nextOffset.length();
+
+    if (nextDistance < MIN_CAMERA_DISTANCE) {
+      nextOffset.setLength(MIN_CAMERA_DISTANCE);
+    } else if (nextDistance > MAX_CAMERA_DISTANCE) {
+      nextOffset.setLength(MAX_CAMERA_DISTANCE);
+    }
 
     controls.object.position.copy(controls.target.clone().add(nextOffset));
     controls.update();
@@ -397,10 +433,16 @@ const LabCanvas = ({ placedItems, setPlacedItems }) => {
           shadow-mapSize-width={2048}
           shadow-mapSize-height={2048}
         />
-        <OrbitControls ref={controlsRef} makeDefault target={DEFAULT_CAMERA_TARGET.toArray()} />
+        <OrbitControls
+          ref={controlsRef}
+          makeDefault
+          target={DEFAULT_CAMERA_TARGET.toArray()}
+          minDistance={MIN_CAMERA_DISTANCE}
+          maxDistance={MAX_CAMERA_DISTANCE}
+        />
 
         <TableSurface />
-        <gridHelper args={[12, 12, "#888888", "#cccccc"]} position={[0, 0.01, 0]} />
+        <TableGrid />
 
         <Suspense fallback={null}>
           {placedItems.map((item, i) =>
