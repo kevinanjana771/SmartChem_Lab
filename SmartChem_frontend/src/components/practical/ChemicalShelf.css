@@ -1,33 +1,47 @@
-.chemical-shelf{
+.chemical-shelf {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+}
 
-grid-column:2;
+.chemical-list {
 
-background:white;
+  display: flex;
 
-padding:10px;
-
-border-top:2px solid #ccc;
-
-overflow-x:auto;
+  gap: 10px;
 
 }
 
-.chemical-list{
-
-display:flex;
-
-gap:10px;
-
+.chemical-item {
+  padding: 10px 18px;
+  background: #f1f5f9;
+  border-radius: 10px;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s;
+  white-space: nowrap;
 }
 
-.chemical-item{
+.chemical-item:hover {
+  background: white;
+  border-color: #3b82f6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
 
-padding:8px 14px;
+.chem-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
 
-background:#d7ecff;
-
-border-radius:6px;
-
-cursor:grab;
-
+.chem-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
 }
