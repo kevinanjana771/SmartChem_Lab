@@ -155,6 +155,14 @@
 .practical-preview .preview-shell .footer {
   margin-top: 0;
   border-radius: 0 0 20px 20px;
+  overflow: hidden;
+}
+
+.practical-preview .preview-shell .footer-content,
+.practical-preview .preview-shell .footer-bottom {
+  max-width: none;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 
 .practical-preview .start-action-btn {
