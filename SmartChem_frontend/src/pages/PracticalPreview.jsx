@@ -79,7 +79,7 @@ const PracticalPreview = () => {
         <div className="preview-layout">
           <div className="preview-header">
             {/* Header Data from 'practical' table */}
-            <h1>{practical.p_lesson} {practical.p_name}</h1>
+            <h1>{practical.p_lesson} - {practical.p_name}</h1>
             <div className="tabs">
               <button className="tab active">About</button>
               <button className="tab">Equipments</button>
