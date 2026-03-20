@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Safetymethods.css';
 import Footer from '../components/Footer';
@@ -7,6 +7,8 @@ import bi from '../images/safetymethod/boximage.png';
 const Safetymethods = () => {
     const navigate = useNavigate();
     const sliderRef = useRef(null);
+    const autoScrollRef = useRef(null);
+    const [activeHazardIndex, setActiveHazardIndex] = useState(0);
 
     // 1. DATA ARRAY (The "Loop" Source)
     const hazards = [
@@ -46,25 +48,165 @@ const Safetymethods = () => {
             desc: "Harmful to health; may cause long-term effects."
         }
     ];
+    const loopedHazards = useMemo(() => [...hazards, ...hazards, ...hazards], [hazards]);
+    const hazardCount = hazards.length;
+
+    const getCardMetrics = (slider) => {
+        const cards = Array.from(slider.querySelectorAll(".hazard-item"));
+        const firstCard = cards[0];
+        if (!firstCard) {
+            return { cards, cardWidth: 280, gap: 30, cardStep: 310 };
+        }
+
+        const cardWidth = firstCard.getBoundingClientRect().width;
+        const sliderStyles = window.getComputedStyle(slider);
+        const gap = parseFloat(sliderStyles.columnGap || sliderStyles.gap || "30");
+        return { cards, cardWidth, gap, cardStep: cardWidth + gap };
+    };
+
+    const centerCardAtIndex = (slider, index, behavior = "auto") => {
+        const { cards, cardWidth } = getCardMetrics(slider);
+        const targetCard = cards[index];
+        if (!targetCard) return;
+
+        const targetLeft = targetCard.offsetLeft - (slider.clientWidth - cardWidth) / 2;
+        slider.scrollTo({ left: targetLeft, behavior });
+    };
+
+    const getClosestCardIndex = (slider) => {
+        const { cards } = getCardMetrics(slider);
+        const sliderCenter = slider.scrollLeft + slider.clientWidth / 2;
+        let closestIndex = 0;
+        let closestDistance = Number.POSITIVE_INFINITY;
+
+        cards.forEach((card, index) => {
+            const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+            const distance = Math.abs(sliderCenter - cardCenter);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
+        });
+
+        return closestIndex;
+    };
 
     // 2. SCROLL LOGIC
     const scrollLeft = () => {
         if (sliderRef.current) {
-            sliderRef.current.scrollBy({
-                left: -300,
-                behavior: "smooth"
-            });
+            const slider = sliderRef.current;
+            const closestIndex = getClosestCardIndex(slider);
+            centerCardAtIndex(slider, closestIndex - 1, "smooth");
         }
     };
 
     const scrollRight = () => {
         if (sliderRef.current) {
-            sliderRef.current.scrollBy({
-                left: 300,
-                behavior: "smooth"
-            });
+            const slider = sliderRef.current;
+            const closestIndex = getClosestCardIndex(slider);
+            centerCardAtIndex(slider, closestIndex + 1, "smooth");
         }
     };
+
+    useEffect(() => {
+        const slider = sliderRef.current;
+
+        if (!slider) return undefined;
+        let isAdjustingLoop = false;
+
+        const preserveInfiniteLoop = () => {
+            if (isAdjustingLoop) return;
+
+            const { cardStep } = getCardMetrics(slider);
+            const segmentWidth = hazardCount * cardStep;
+            const lowerBound = segmentWidth * 0.5;
+            const upperBound = segmentWidth * 2.5;
+
+            if (slider.scrollLeft < lowerBound) {
+                isAdjustingLoop = true;
+                slider.scrollLeft += segmentWidth;
+                requestAnimationFrame(() => {
+                    isAdjustingLoop = false;
+                });
+            } else if (slider.scrollLeft > upperBound) {
+                isAdjustingLoop = true;
+                slider.scrollLeft -= segmentWidth;
+                requestAnimationFrame(() => {
+                    isAdjustingLoop = false;
+                });
+            }
+        };
+
+        const updateActiveCard = () => {
+            const { cards, cardStep } = getCardMetrics(slider);
+            if (!cards.length) return;
+
+            const sliderCenter = slider.scrollLeft + slider.clientWidth / 2;
+            let closestIndex = 0;
+            let closestDistance = Number.POSITIVE_INFINITY;
+
+            cards.forEach((card, index) => {
+                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                const distance = Math.abs(sliderCenter - cardCenter);
+
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestIndex = index;
+                }
+
+                const progress = Math.min(distance / cardStep, 1);
+                const scale = 0.94 + (1 - progress) * 0.06;
+                const translateY = 18 * progress;
+                const opacity = 0.72 + (1 - progress) * 0.28;
+                const saturation = 0.85 + (1 - progress) * 0.15;
+                const shadowOpacity = 0.12 + (1 - progress) * 0.06;
+
+                card.style.setProperty("--hazard-scale", scale.toFixed(3));
+                card.style.setProperty("--hazard-translate-y", `${translateY.toFixed(2)}px`);
+                card.style.setProperty("--hazard-opacity", opacity.toFixed(3));
+                card.style.setProperty("--hazard-saturate", saturation.toFixed(3));
+                card.style.setProperty("--hazard-shadow-opacity", shadowOpacity.toFixed(3));
+            });
+
+            setActiveHazardIndex(closestIndex % hazardCount);
+        };
+
+        const startAutoScroll = () => {
+            if (autoScrollRef.current) return;
+
+            autoScrollRef.current = window.setInterval(() => {
+                const closestIndex = getClosestCardIndex(slider);
+                centerCardAtIndex(slider, closestIndex + 1, "smooth");
+            }, 2800);
+        };
+
+        const stopAutoScroll = () => {
+            if (autoScrollRef.current) {
+                window.clearInterval(autoScrollRef.current);
+                autoScrollRef.current = null;
+            }
+        };
+
+        requestAnimationFrame(() => {
+            centerCardAtIndex(slider, hazardCount, "auto");
+            updateActiveCard();
+        });
+
+        updateActiveCard();
+        startAutoScroll();
+        slider.addEventListener("scroll", preserveInfiniteLoop, { passive: true });
+        slider.addEventListener("scroll", updateActiveCard, { passive: true });
+        slider.addEventListener("mouseenter", stopAutoScroll);
+        slider.addEventListener("mouseleave", startAutoScroll);
+
+        return () => {
+            stopAutoScroll();
+            slider.removeEventListener("scroll", preserveInfiniteLoop);
+            slider.removeEventListener("scroll", updateActiveCard);
+            slider.removeEventListener("mouseenter", stopAutoScroll);
+            slider.removeEventListener("mouseleave", startAutoScroll);
+        };
+    }, [hazardCount]);
 
     return (
         
@@ -189,8 +331,11 @@ const Safetymethods = () => {
 
                     <div className="hazard-slider" ref={sliderRef}>
                         {/* 3. DYNAMIC LOOP RENDERING */}
-                        {hazards.map((hazard, index) => (
-                            <div className="hazard-item" key={index}>
+                        {loopedHazards.map((hazard, index) => (
+                            <div
+                                className={`hazard-item ${activeHazardIndex === (index % hazardCount) ? 'is-active' : ''}`}
+                                key={index}
+                            >
                                 <h3>{hazard.name}</h3>
                                 <div className="diamond-icon">
                                     <i className={`fa-solid ${hazard.icon}`}></i>
@@ -285,45 +430,47 @@ const Safetymethods = () => {
             </div>
           </section>
 
-          {/* Emergency Section */}
-          <section className="emergency-section">
-            <div className="container">
-                <div className="section-header emergency-header">
-                    <h2>Emergency Response</h2>
-                    <p>If a real-world or virtual accident occurs, follow these protocols.</p>
+          <div className="safety-footer-shell">
+            {/* Emergency Section */}
+            <section className="emergency-section">
+              <div className="container">
+                  <div className="section-header emergency-header">
+                      <h2>Emergency Response</h2>
+                      <p>If a real-world or virtual accident occurs, follow these protocols.</p>
+                  </div>
+
+                  <div className="emergency-actions">
+
+                      <div className="action-card">
+                          <i className="fa-solid fa-eye-dropper"></i>
+                          <h4>Eye Contamination</h4>
+                          <p style={{ fontSize: '1.0rem', color: '#881337' }}>
+                              Rinse in eyewash station for 15 minutes.
+                          </p>
+                      </div>
+
+                      <div className="action-card">
+                          <i className="fa-solid fa-fire-extinguisher"></i>
+                          <h4>Fire Outbreak</h4>
+                          <p style={{ fontSize: '1.0rem', color: '#881337' }}>
+                              Evacuate immediately. Pull alarm.
+                          </p>
+                      </div>
+
+                      <div className="action-card">
+                          <i className="fa-solid fa-house-medical"></i>
+                          <h4>Spill Response</h4>
+                          <p style={{ fontSize: '1.0rem', color: '#881337' }}>
+                              Alert supervisor. Do not touch spill.
+                          </p>
+                      </div>
+
+                  </div>
                 </div>
+            </section>
 
-                <div className="emergency-actions">
-
-                    <div className="action-card">
-                        <i className="fa-solid fa-eye-dropper"></i>
-                        <h4>Eye Contamination</h4>
-                        <p style={{ fontSize: '1.0rem', color: '#881337' }}>
-                            Rinse in eyewash station for 15 minutes.
-                        </p>
-                    </div>
-
-                    <div className="action-card">
-                        <i className="fa-solid fa-fire-extinguisher"></i>
-                        <h4>Fire Outbreak</h4>
-                        <p style={{ fontSize: '1.0rem', color: '#881337' }}>
-                            Evacuate immediately. Pull alarm.
-                        </p>
-                    </div>
-
-                    <div className="action-card">
-                        <i className="fa-solid fa-house-medical"></i>
-                        <h4>Spill Response</h4>
-                        <p style={{ fontSize: '1.0rem', color: '#881337' }}>
-                            Alert supervisor. Do not touch spill.
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-          </section>
-
-          <Footer />
+            <Footer />
+          </div>
 
         </div>
     );
