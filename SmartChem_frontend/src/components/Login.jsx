@@ -60,9 +60,9 @@ const Login = () => {
 
   // Generate Bubbles
   const bubbles = Array.from({ length: 20 }).map((_, i) => (
-    <div 
-      key={i} 
-      className="bubble" 
+    <div
+      key={i}
+      className="bubble"
       style={{
         left: `${Math.random() * 100}%`,
         top: `${Math.random() * 100}%`,
@@ -85,24 +85,24 @@ const Login = () => {
     >
       <div className="color-bend-bg"></div>
       <div className="practical-preview-login">
-        <div 
-          className="visual-side-login" 
+        <div
+          className="visual-side-login"
           ref={visualSideRef}
           onMouseMove={handleMouseMove}
         >
           <div className="gradient-bg"></div>
           <div className="particles">{bubbles}</div>
 
-          <div 
+          <div
             className="center-icon"
             style={{ transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)` }}
           >
             <svg viewBox="0 0 24 24" fill="none" className="flask-icon">
-              <path d="M10 2v7.31" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M14 2v7.31" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M8.5 2h7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M6 19a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4l-3.5-8.5h-5L6 19z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="rgba(255,255,255,0.1)"/>
-              <path className="flask-liquid" d="M7.5 17a1.5 1.5 0 0 1 1.5-1.5h6a1.5 1.5 0 0 1 1.5 1.5v.5a2 2 0 0 1-2 2H9.5a2 2 0 0 1-2-2v-.5z" fill="#a7f3d0"/>
+              <path d="M10 2v7.31" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M14 2v7.31" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M8.5 2h7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M6 19a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4l-3.5-8.5h-5L6 19z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="rgba(255,255,255,0.1)" />
+              <path className="flask-liquid" d="M7.5 17a1.5 1.5 0 0 1 1.5-1.5h6a1.5 1.5 0 0 1 1.5 1.5v.5a2 2 0 0 1-2 2H9.5a2 2 0 0 1-2-2v-.5z" fill="#a7f3d0" />
               <circle className="bubble-anim-1" cx="10" cy="17" r="0.5" fill="white" />
               <circle className="bubble-anim-2" cx="14" cy="17.5" r="0.7" fill="white" />
             </svg>
@@ -159,6 +159,11 @@ const Login = () => {
                 required
               />
             </div>
+            {/* Added Forgot Password Link */}
+            <div className="form-options">
+              <Link to="/forgot-password" className="forgot-password-link">Forgot Password?</Link>
+            </div>
+
             <div className="action-area-login">
               <button type="submit" className="start-action-btn-login">Enter Lab</button>
             </div>
@@ -172,9 +177,10 @@ const Login = () => {
           <GoogleAuthButton onLogin={(u) => {
             setUser(u);
             localStorage.setItem('user', JSON.stringify(u));
-            navigate("/dashboard");}} />
+            navigate("/dashboard");
+          }} />
 
-          
+
           <div className="login-footer">
             <p>New to SmartChem? <Link to="/signup">Create an Account</Link></p>
           </div>
