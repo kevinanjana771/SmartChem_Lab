@@ -4,33 +4,32 @@ import React, { useState, useEffect, useCallback } from "react";
 import "./FeatureCarousel.css";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-    FlaskConical,
-    Atom,
     ShieldCheck,
     BarChart3,
-    Microscope,
-    Zap,
     BookOpen,
-    Globe
+    Globe,
+    ClipboardList,
+    Rotate3d,
+    HelpCircle,
 } from "lucide-react"; // Using Lucide for consistency
 
 // Chemistry Themed Features
 const FEATURES = [
     {
-        id: "titration",
-        label: "Virtual Titration",
-        icon: FlaskConical,
-        image:
-            "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80",
-        description: "Master acid-base titration with precise virtual burettes and indicators.",
-    },
-    {
-        id: "modeling",
-        label: "3D Molecular Modeling",
-        icon: Atom,
+        id: "al-practicals",
+        label: "A/L Practical Suite",
+        icon: ClipboardList,
         image:
             "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80",
-        description: "Visualize complex molecular structures in interactive 3D space.",
+        description: "Access all 42 A/L Chemistry practicals with step-by-step virtual guidance.",
+    },
+    {
+        id: "360-view",
+        label: "3D 360° View",
+        icon: Rotate3d,
+        image:
+            "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+        description: "Inspect lab equipment and molecules from every angle with full 360° rotation.",
     },
     {
         id: "safety",
@@ -49,28 +48,20 @@ const FEATURES = [
         description: "Track your experiment accuracy and learning progress instantly.",
     },
     {
-        id: "microscope",
-        label: "Digital Microscopy",
-        icon: Microscope,
-        image:
-            "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=800&q=80",
-        description: "Explore cellular structures with high-definition digital slides.",
-    },
-    {
-        id: "reactions",
-        label: "Reaction Simulation",
-        icon: Zap,
-        image:
-            "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?auto=format&fit=crop&w=800&q=80",
-        description: "Observe chemical reactions safely without hazardous materials.",
-    },
-    {
         id: "theory",
         label: "Theory & Notes",
         icon: BookOpen,
         image:
             "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80",
         description: "Access comprehensive theory notes aligned with your curriculum.",
+    },
+    {
+        id: "quiz",
+        label: "Smart Quizzes",
+        icon: HelpCircle, 
+        image:
+            "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80", // Generic tech/learning image
+        description: "Test your knowledge with AI-generated quizzes tailored to your syllabus.",
     },
     {
         id: "community",
@@ -131,9 +122,6 @@ export function FeatureCarousel() {
             <div className="carousel-container">
                 {/* Left Panel: Text List */}
                 <div className="carousel-panel">
-                    <div className="carousel-panel-gradient-top" />
-                    <div className="carousel-panel-gradient-bottom" />
-
                     <div className="carousel-list-wrapper">
                         {FEATURES.map((feature, index) => {
                             const isActive = index === currentIndex;
@@ -170,7 +158,7 @@ export function FeatureCarousel() {
                                         onMouseLeave={() => setIsPaused(false)}
                                         className={`carousel-item-btn ${isActive ? "active" : ""}`}
                                     >
-                                        <div className={`transition-colors duration-500 ${isActive ? "text-[#047857]" : "text-white/40"}`}>
+                                        <div className={`transition-colors duration-500 ${isActive ? "text-[#047857]" : "text-black/40"}`}>
                                             <Icon size={18} strokeWidth={2} />
                                         </div>
                                         <span>{feature.label}</span>
