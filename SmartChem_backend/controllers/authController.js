@@ -1,5 +1,6 @@
 import { OAuth2Client } from "google-auth-library";
 import pool from "../config/db.js";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -52,5 +53,61 @@ export const googleLogin = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
+  }
+};
+
+//signup
+export const signup = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    // hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await pool.query(
+      "INSERT INTO users (name, email, password) VALUES ($1,$2,$3) RETURNING *",
+      [name, email, hashedPassword]
+    );
+
+    res.json({ success: true, user: user.rows[0] });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Signup failed" });
+  }
+};
+
+// LOGIN
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await pool.query(
+      "SELECT * FROM users WHERE email=$1",
+      [email]
+    );
+
+    if (user.rows.length === 0) {
+      return res.status(400).json({ success: false, message: "User not found" });
+    }
+
+    const validPassword = await bcrypt.compare(
+      password,
+      user.rows[0].password
+    );
+
+    if (!validPassword) {
+      return res.status(400).json({ success: false, message: "Invalid password" });
+    }
+
+    const token = jwt.sign(
+      { id: user.rows[0].id },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    res.json({ success: true, user: user.rows[0], token });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false });
   }
 };
