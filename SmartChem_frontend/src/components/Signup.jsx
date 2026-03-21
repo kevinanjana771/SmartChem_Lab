@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import logo from '../images/landing/sdgp-logo.png';
 import GoogleAuthButton from "../components/GoogleAuthButton";
+import axios from "axios";
 
 import './Signup.css';
 
@@ -40,32 +41,56 @@ const Signup = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
+    // ✅ Keep your validations (unchanged)
     if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
       setError('Please fill in all fields');
       return;
     }
+
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return;
     }
+
     if (formData.password.length < 6) {
       setError('Password must be at least 6 characters');
       return;
     }
 
-    const newUser = {
-      name: formData.name,
-      email: formData.email,
-      avatar: `https://ui-avatars.com/api/?name=${formData.name}&background=10b981&color=fff`
-    };
+    try {
+      // ✅ SEND DATA TO BACKEND
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/signup`,
+        {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password
+        }
+      );
 
-    localStorage.setItem('user', JSON.stringify(newUser));
-    setUser(newUser); // update state
-    navigate('/dashboard'); // redirect after signup
+      // ✅ HANDLE SUCCESS RESPONSE
+      if (res.data.success) {
+        const user = res.data.user;
+
+        // store user locally (same as before)
+        localStorage.setItem('user', JSON.stringify(user));
+
+        setUser(user);
+
+        // redirect
+        navigate('/dashboard');
+      } else {
+        setError(res.data.message || "Signup failed");
+      }
+
+    } catch (err) {
+      console.error(err);
+      setError("Signup failed - server error");
+    }
   };
 
   const bubbles = Array.from({ length: 20 }).map((_, i) => (
