@@ -104,7 +104,6 @@ const EquipmentPreview = () => {
     : null;
 
   const modelUrl = modelKey ? MODEL_FILES[modelKey] : null;
-  const modelScale = equipment?.model_scale || 1;
   const previewImageUrl = equipment?.image
     ? `${STORAGE_URL}/${equipment.image}`
     : `https://via.placeholder.com/400x400/3b82f6/ffffff?text=${encodeURIComponent(equipment?.e_name || "Equipment")}`;
