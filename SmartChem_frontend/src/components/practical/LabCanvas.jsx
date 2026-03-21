@@ -80,7 +80,7 @@ function TableGrid() {
   );
 }
 
-function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSelect }) {
+function EquipmentModel({ id, model, realScale, initialPosition, onRemove, isSelected, onSelect }) {
   if (!model) return null;
 
   // Hooks must be called at the top level, never inside try/catch or if blocks
@@ -100,13 +100,18 @@ function EquipmentModel({ id, model, initialPosition, onRemove, isSelected, onSe
     bbox.getSize(size);
 
     const maxDim = Math.max(size.x, size.y, size.z);
-    // Subtly reduce equipment size (target 2.8 units)
-    const calculatedScale = maxDim > 0 ? 2.8 / maxDim : 1;
+    const parsedRealScale = Number(realScale);
+    // Use per-equipment workspace scale from the database when available.
+    const calculatedScale = Number.isFinite(parsedRealScale)
+      ? parsedRealScale
+      : maxDim > 0
+        ? 2.8 / maxDim
+        : 1;
     setScale(calculatedScale);
 
     // Zero-offset calculation: Shift the mesh up so its floor-base is at Y=0
     setOffsetY(-bbox.min.y * calculatedScale);
-  }, [copiedScene]);
+  }, [copiedScene, realScale]);
 
   const handleRotateStart = (e) => {
     e.stopPropagation();
@@ -458,6 +463,7 @@ const LabCanvas = ({ placedItems, setPlacedItems }) => {
                 key={item.uuid || i}
                 id={item.uuid}
                 model={item.model_filename}
+                realScale={item.real_scale}
                 onRemove={removeItem}
                 isSelected={selectedId === item.uuid}
                 onSelect={() => setSelectedId(item.uuid)}

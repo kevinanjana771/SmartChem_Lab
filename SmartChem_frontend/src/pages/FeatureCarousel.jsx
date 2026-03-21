@@ -4,40 +4,45 @@ import React, { useState, useEffect, useCallback } from "react";
 import "./FeatureCarousel.css";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-    FlaskConical,
-    Atom,
     ShieldCheck,
     BarChart3,
-    Microscope,
-    Zap,
     BookOpen,
-    Globe
+    Globe,
+    ClipboardList,
+    Rotate3d,
+    HelpCircle,
 } from "lucide-react"; // Using Lucide for consistency
-
+import Practical from "../images/Feature/practicale sutie.png";
+import safety from "../images/Feature/Lab-safety.png";
+import GC from "../images/Feature/global-community.jpg";
+import SQ from "../images/Feature/quiz.jpg";    
+import view from "../images/Feature/3D-view.png";
+import tracking from "../images/Feature/tracking.jpg";
+import theory from "../images/Feature/theory.jpg";
 // Chemistry Themed Features
 const FEATURES = [
     {
-        id: "titration",
-        label: "Virtual Titration",
-        icon: FlaskConical,
+        id: "al-practicals",
+        label: "A/L Practical Suite",
+        icon: ClipboardList,
         image:
-            "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80",
-        description: "Master acid-base titration with precise virtual burettes and indicators.",
+            Practical, // Replace with actual image path
+        description: "Access all 42 A/L Chemistry practicals with step-by-step virtual guidance.",
     },
     {
-        id: "modeling",
-        label: "3D Molecular Modeling",
-        icon: Atom,
+        id: "360-view",
+        label: "3D 360° View",
+        icon: Rotate3d,
         image:
-            "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80",
-        description: "Visualize complex molecular structures in interactive 3D space.",
+            view,
+        description: "Inspect lab equipment and molecules from every angle with full 360° rotation.",
     },
     {
         id: "safety",
         label: "Safety Protocols",
         icon: ShieldCheck,
         image:
-            "https://images.unsplash.com/photo-1582719471137-c3967ffb1c42?auto=format&fit=crop&w=800&q=80",
+            safety,
         description: "Learn critical safety procedures before entering a real lab.",
     },
     {
@@ -45,39 +50,31 @@ const FEATURES = [
         label: "Real-time Analytics",
         icon: BarChart3,
         image:
-            "https://images.unsplash.com/photo-1551288049-bbda38a10ad5?auto=format&fit=crop&w=800&q=80",
+            tracking,
         description: "Track your experiment accuracy and learning progress instantly.",
-    },
-    {
-        id: "microscope",
-        label: "Digital Microscopy",
-        icon: Microscope,
-        image:
-            "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=800&q=80",
-        description: "Explore cellular structures with high-definition digital slides.",
-    },
-    {
-        id: "reactions",
-        label: "Reaction Simulation",
-        icon: Zap,
-        image:
-            "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?auto=format&fit=crop&w=800&q=80",
-        description: "Observe chemical reactions safely without hazardous materials.",
     },
     {
         id: "theory",
         label: "Theory & Notes",
         icon: BookOpen,
         image:
-            "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80",
+            theory,
         description: "Access comprehensive theory notes aligned with your curriculum.",
+    },
+    {
+        id: "quiz",
+        label: "Smart Quizzes",
+        icon: HelpCircle, 
+        image:
+            SQ,
+        description: "Test your knowledge with AI-generated quizzes tailored to your syllabus.",
     },
     {
         id: "community",
         label: "Global Community",
         icon: Globe,
         image:
-            "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=80",
+            GC,
         description: "Connect with students and educators worldwide to solve problems.",
     },
 ];
@@ -131,9 +128,6 @@ export function FeatureCarousel() {
             <div className="carousel-container">
                 {/* Left Panel: Text List */}
                 <div className="carousel-panel">
-                    <div className="carousel-panel-gradient-top" />
-                    <div className="carousel-panel-gradient-bottom" />
-
                     <div className="carousel-list-wrapper">
                         {FEATURES.map((feature, index) => {
                             const isActive = index === currentIndex;
@@ -170,7 +164,7 @@ export function FeatureCarousel() {
                                         onMouseLeave={() => setIsPaused(false)}
                                         className={`carousel-item-btn ${isActive ? "active" : ""}`}
                                     >
-                                        <div className={`transition-colors duration-500 ${isActive ? "text-[#047857]" : "text-white/40"}`}>
+                                        <div className={`transition-colors duration-500 ${isActive ? "text-[#047857]" : "text-black/40"}`}>
                                             <Icon size={18} strokeWidth={2} />
                                         </div>
                                         <span>{feature.label}</span>

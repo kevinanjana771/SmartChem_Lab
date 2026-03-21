@@ -467,11 +467,9 @@ const Safetymethods = () => {
 
                   </div>
                 </div>
-            </section>
-
-            <Footer />
+            </section> 
           </div>
-
+        <Footer />
         </div>
     );
 };
