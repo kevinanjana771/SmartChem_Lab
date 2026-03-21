@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import logo from '../images/landing/sdgp-logo.png';
 import GoogleAuthButton from "../components/GoogleAuthButton";
+import axios from "axios";
 
 import './Login.css';
 
@@ -38,24 +39,46 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // ✅ keep validation
     if (!formData.email || !formData.password) {
       alert('Please fill in all fields');
       return;
     }
 
-    const normalizedUser = {
-      name: formData.name || 'Scientist',
-      email: formData.email,
-      avatar: `https://ui-avatars.com/api/?name=${formData.name || 'User'}&background=10b981&color=fff`
-    };
+    try {
+      // ✅ send login request to backend
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
+        {
+          email: formData.email,
+          password: formData.password
+        }
+      );
 
-    localStorage.setItem('user', JSON.stringify(normalizedUser));
-    window.dispatchEvent(new Event("storage"));
+      // ✅ success handling
+      if (res.data.success) {
+        const user = res.data.user;
 
-    setUser(normalizedUser); // update state
-    navigate('/dashboard');
+        // store user locally (same as before)
+        localStorage.setItem('user', JSON.stringify(user));
+
+        // trigger storage event (your existing logic)
+        window.dispatchEvent(new Event("storage"));
+
+        setUser(user);
+
+        navigate('/dashboard');
+      } else {
+        alert(res.data.message || "Login failed");
+      }
+
+    } catch (err) {
+      console.error(err);
+      alert("Login failed - server error");
+    }
   };
 
   // Generate Bubbles
