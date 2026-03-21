@@ -388,7 +388,6 @@ const LabCanvas = ({ placedItems, setPlacedItems }) => {
         onPointerMissed={() => setSelectedId(null)}
       >
         <color attach="background" args={["#ffffff"]} />
-        <SceneBackground />
         <ambientLight intensity={0.9} />
         <directionalLight
           position={[5, 10, 5]}
@@ -399,10 +398,18 @@ const LabCanvas = ({ placedItems, setPlacedItems }) => {
         />
         <OrbitControls ref={controlsRef} makeDefault target={DEFAULT_CAMERA_TARGET.toArray()} />
 
-        <TableSurface />
-        <gridHelper args={[12, 12, "#888888", "#cccccc"]} position={[0, 0.01, 0]} />
+        <Suspense fallback={
+          <Html center>
+            <div className="lab-loader">
+              <div className="spinner"></div>
+              <p>Loading Experiemnt Setup...</p>
+            </div>
+          </Html>
+        }>
+          <SceneBackground />
+          <TableSurface />
+          <gridHelper args={[12, 12, "#888888", "#cccccc"]} position={[0, 0.01, 0]} />
 
-        <Suspense fallback={null}>
           {placedItems.map((item, i) =>
             item.model_filename ? (
               <EquipmentModel
