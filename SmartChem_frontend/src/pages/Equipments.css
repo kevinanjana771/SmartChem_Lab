@@ -140,3 +140,16 @@
   color: #6b7280;
   font-size: 1.1rem;
 }
+
+.equipments-page .footer {
+  margin-top: 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.equipments-page .footer-content,
+.equipments-page .footer-bottom {
+  max-width: none;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}

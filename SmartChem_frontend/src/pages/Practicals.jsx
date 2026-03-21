@@ -74,7 +74,6 @@ const Practicals = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}>
-
       {/* UPDATED WRAPPER: Aligns Title Left and Search Right */}
       <div className="page-header-wrapper">
         <h2 className="page-header">Chemistry Practicals</h2>
