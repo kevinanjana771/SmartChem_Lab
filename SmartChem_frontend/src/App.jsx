@@ -14,7 +14,6 @@ import AboutUs from './pages/AboutUs';
 import Safetymethods from './pages/Safetymethod';
 import PracticalWorkplace from "./pages/PracticalWorkplace";
 import Report from './pages/Report';
-import ForgotPassword from './components/ForgotPassword';
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
 
           {/* App Routes  */}
           <Route element={<MainLayout />}>
