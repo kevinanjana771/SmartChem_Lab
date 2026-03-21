@@ -1,0 +1,71 @@
+name: SmartChem CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "frontendHosting", "simulationV7" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: |
+            SmartChem_backend/package-lock.json
+            SmartChem_frontend/package-lock.json
+
+      - name: Verify Vercel Secrets
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "::error::VERCEL_TOKEN is missing. Please add it to GitHub Secrets."
+            exit 1
+          fi
+          if [ -z "$VERCEL_ORG_ID" ]; then
+            echo "::error::VERCEL_ORG_ID is missing."
+            exit 1
+          fi
+          if [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "::error::VERCEL_PROJECT_ID is missing."
+            exit 1
+          fi
+
+      # --- BACKEND PIPELINE ---
+      - name: Setup Backend
+        run: |
+          cd SmartChem_backend
+          npm install
+
+      # --- FRONTEND PIPELINE ---
+      - name: Setup Frontend
+        run: |
+          cd SmartChem_frontend
+          npm install
+          npm run build
+
+      # --- AUTOMATIC DEPLOYMENT (Vercel) ---
+      - name: Pull Vercel Environment Information
+        run: npx vercel pull --yes --environment=production
+
+      - name: Build Project Artifacts
+        run: npx vercel build --prod
+
+      - name: Deploy Project Artifacts to Vercel
+        run: npx vercel deploy --prebuilt --prod
+
+      - name: Backend Deployment Placeholder
+        run: echo "Deploying SmartChem Backend... (Add your AWS/Heroku commands here)"
