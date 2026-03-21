@@ -4,7 +4,7 @@ import pool from "../config/db.js";
 export const getAllEquipment = async (req, res, next) => {
     try {
         const result = await pool.query(
-            "SELECT e_id, e_name, img FROM equipment ORDER BY e_id ASC"
+            "SELECT e_id, e_name, img, model_scale FROM equipment ORDER BY e_id ASC"
         );
         res.json(result.rows);
     } catch (error) {
@@ -42,6 +42,27 @@ export const getEquipmentById = async (req, res, next) => {
             parts: partsResult.rows
         });
 
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Update equipment scale in database
+export const updateEquipmentScale = async (req, res, next) => {
+    const { id } = req.params;
+    const { model_scale } = req.body;
+
+    try {
+        const result = await pool.query(
+            "UPDATE equipment SET model_scale = $1 WHERE e_id = $2 RETURNING *",
+            [model_scale, id]
+        );
+        
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: "Equipment not found" });
+        }
+
+        res.json({ message: "Scale updated successfully", equipment: result.rows[0] });
     } catch (error) {
         next(error);
     }
