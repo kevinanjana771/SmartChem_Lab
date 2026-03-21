@@ -2,13 +2,23 @@ import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import logo from '../images/landing/sdgp-logo.png';
-import './Signup.css';
 import GoogleAuthButton from "../components/GoogleAuthButton";
+
+import './Signup.css';
 
 const Signup = () => {
   const navigate = useNavigate();
   const visualSideRef = useRef(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const [user, setUser] = useState(() => {
+    try {
+      const stored = localStorage.getItem("user");
+      return stored ? JSON.parse(stored) : null;
+    } catch (e) {
+      return null;
+    }
+  });
 
   const [formData, setFormData] = useState({
     name: '',
@@ -16,7 +26,6 @@ const Signup = () => {
     password: '',
     confirmPassword: ''
   });
-
   const [error, setError] = useState('');
 
   const handleMouseMove = (e) => {
@@ -39,12 +48,10 @@ const Signup = () => {
       setError('Please fill in all fields');
       return;
     }
-
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return;
     }
-
     if (formData.password.length < 6) {
       setError('Password must be at least 6 characters');
       return;
@@ -53,15 +60,14 @@ const Signup = () => {
     const newUser = {
       name: formData.name,
       email: formData.email,
-      role: 'student',
       avatar: `https://ui-avatars.com/api/?name=${formData.name}&background=10b981&color=fff`
     };
 
     localStorage.setItem('user', JSON.stringify(newUser));
-    navigate('/login');
+    setUser(newUser); // update state
+    navigate('/dashboard'); // redirect after signup
   };
 
-  // Generate Bubbles
   const bubbles = Array.from({ length: 20 }).map((_, i) => (
     <div 
       key={i} 
@@ -81,15 +87,13 @@ const Signup = () => {
 
   return (
     <motion.div className="signup-page-wrapper"
-    initial={{ x: -100, opacity: 0 }}
-    animate={{ x: 0, opacity: 1 }}
-    exit={{ x: 100, opacity: 0 }}
-    transition={{ duration: 0.5 }}
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: 100, opacity: 0 }}
+      transition={{ duration: 0.5 }}
     >
       <div className="color-bend-bg"></div>  
       <div className="practical-preview-signup">
-        
-        {/* Left Side: Interactive Atom Design */}
         <div 
           className="visual-side-signup" 
           ref={visualSideRef}
@@ -98,16 +102,13 @@ const Signup = () => {
           <div className="gradient-bg"></div>
           <div className="particles">{bubbles}</div>
 
-          {/* Central Icon - Spinning Atom */}
           <div 
             className="center-icon"
             style={{ transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)` }}
           >
+            {/* Atom SVG */}
             <svg viewBox="0 0 24 24" fill="none" className="atom-icon">
-              {/* Nucleus */}
               <circle cx="12" cy="12" r="3" fill="#a7f3d0" className="nucleus" />
-              
-              {/* Orbit Rings */}
               <g className="orbit-ring-1" style={{ transformOrigin: "center" }}>
                 <ellipse cx="12" cy="12" rx="10" ry="3" stroke="white" strokeWidth="1.5" />
                 <circle cx="22" cy="12" r="1.5" fill="white" className="electron" />
@@ -121,15 +122,12 @@ const Signup = () => {
                 <circle cx="7" cy="3.4" r="1.5" fill="white" className="electron" transform="rotate(-60 12 12)" />
               </g>
             </svg>
-
             <h2 className="lab-title-text">Begin Your Research</h2>
             <p className="lab-sub-text">Join the SmartChem community today.</p>
           </div>
         </div>
 
-        {/* Right Side: Form */}
         <div className="preview-content-signup">
-
           <Link to="/" className="auth-top-brand">
             <img src={logo} alt="SmartChem Lab Logo" className="logo-img" />
           </Link>
@@ -144,71 +142,35 @@ const Signup = () => {
           <form onSubmit={handleSubmit} className="login-form">
             <div className="form-group">
               <label htmlFor="name">Full Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="e.g. Alex Curie"
-                value={formData.name}
-                onChange={handleChange}
-                className="form-input"
-                required
-              />
+              <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} className="form-input" required />
             </div>
-
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="student@lab.edu"
-                value={formData.email}
-                onChange={handleChange}
-                className="form-input"
-                required
-              />
+              <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="form-input" required />
             </div>
-
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="••••••••"
-                value={formData.password}
-                onChange={handleChange}
-                className="form-input"
-                required
-              />
+              <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} className="form-input" required />
             </div>
-
             <div className="form-group">
               <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                placeholder="••••••••"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                className="form-input"
-                required
-              />
+              <input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} className="form-input" required />
             </div>
-
             <div className="action-area-signup">
               <button type="submit" className="start-action-btn-signup">Join Lab</button>
             </div>
           </form>
+
           <div className="auth-divider">
             <span>or</span>
           </div>
 
-          <GoogleAuthButton />
-        
-
+          {/* Always show Google login */}
+          <GoogleAuthButton onLogin={(u) => {
+            setUser(u);
+            localStorage.setItem('user', JSON.stringify(u));
+            navigate("/dashboard");
+          }} />
 
           <div className="login-footer">
             <p>Already have an account? <Link to="/login">Log In</Link></p>
