@@ -46,9 +46,11 @@ export const googleLogin = async (req, res, next) => {
     );
 
     //Send response
+    console.log("🔥 FINAL USER:", user);
+
     res.json({
-      user,
-      token: jwtToken,
+      success: true,
+      user: user || null,
     });
   } catch (error) {
     next(error);
