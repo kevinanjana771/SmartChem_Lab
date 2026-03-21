@@ -104,6 +104,8 @@ const EquipmentPreview = () => {
     : null;
 
   const modelUrl = modelKey ? MODEL_FILES[modelKey] : null;
+  const parsedModelScale = Number(equipment?.model_scale);
+  const modelScale = Number.isFinite(parsedModelScale) ? parsedModelScale : 19;
   const previewImageUrl = equipment?.image
     ? `${STORAGE_URL}/${equipment.image}`
     : `https://via.placeholder.com/400x400/3b82f6/ffffff?text=${encodeURIComponent(equipment?.e_name || "Equipment")}`;
@@ -212,7 +214,7 @@ const EquipmentPreview = () => {
               <Canvas camera={{ position: [0, 1.5, 4], fov: 50 }}>
                 <ViewerScene
                   url={modelUrl}
-                  scale={19}
+                  scale={modelScale}
                   controlsRef={viewerControlsRef}
                 />
               </Canvas>
