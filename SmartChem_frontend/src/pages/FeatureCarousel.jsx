@@ -12,7 +12,13 @@ import {
     Rotate3d,
     HelpCircle,
 } from "lucide-react"; // Using Lucide for consistency
-
+import Practical from "../images/Feature/practicale sutie.png";
+import safety from "../images/Feature/Lab-safety.png";
+import GC from "../images/Feature/global-community.jpg";
+import SQ from "../images/Feature/quiz.jpg";    
+import view from "../images/Feature/3D-view.png";
+import tracking from "../images/Feature/tracking.jpg";
+import theory from "../images/Feature/theory.jpg";
 // Chemistry Themed Features
 const FEATURES = [
     {
@@ -20,7 +26,7 @@ const FEATURES = [
         label: "A/L Practical Suite",
         icon: ClipboardList,
         image:
-            "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80",
+            Practical, // Replace with actual image path
         description: "Access all 42 A/L Chemistry practicals with step-by-step virtual guidance.",
     },
     {
@@ -28,7 +34,7 @@ const FEATURES = [
         label: "3D 360° View",
         icon: Rotate3d,
         image:
-            "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+            view,
         description: "Inspect lab equipment and molecules from every angle with full 360° rotation.",
     },
     {
@@ -36,7 +42,7 @@ const FEATURES = [
         label: "Safety Protocols",
         icon: ShieldCheck,
         image:
-            "https://images.unsplash.com/photo-1582719471137-c3967ffb1c42?auto=format&fit=crop&w=800&q=80",
+            safety,
         description: "Learn critical safety procedures before entering a real lab.",
     },
     {
@@ -44,7 +50,7 @@ const FEATURES = [
         label: "Real-time Analytics",
         icon: BarChart3,
         image:
-            "https://images.unsplash.com/photo-1551288049-bbda38a10ad5?auto=format&fit=crop&w=800&q=80",
+            tracking,
         description: "Track your experiment accuracy and learning progress instantly.",
     },
     {
@@ -52,7 +58,7 @@ const FEATURES = [
         label: "Theory & Notes",
         icon: BookOpen,
         image:
-            "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80",
+            theory,
         description: "Access comprehensive theory notes aligned with your curriculum.",
     },
     {
@@ -60,7 +66,7 @@ const FEATURES = [
         label: "Smart Quizzes",
         icon: HelpCircle, 
         image:
-            "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80", // Generic tech/learning image
+            SQ,
         description: "Test your knowledge with AI-generated quizzes tailored to your syllabus.",
     },
     {
@@ -68,7 +74,7 @@ const FEATURES = [
         label: "Global Community",
         icon: Globe,
         image:
-            "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=80",
+            GC,
         description: "Connect with students and educators worldwide to solve problems.",
     },
 ];

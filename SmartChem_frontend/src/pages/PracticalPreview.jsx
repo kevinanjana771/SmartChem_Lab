@@ -93,7 +93,7 @@ const PracticalPreview = () => {
             {/* Image from 'practical' table */}
             <div className="preview-image-section">
               <img
-                src={practical.p_image || "https://via.placeholder.com/800x400/000000/FFFFFF?text=Lab+Setup"}
+                src={practical.p_image || "https://via.placeholder.com/800x4k00/f3f4f6/FFFFFF?text=Lab+Setup"}
                 alt="Experiment Setup"
                 className="lab-main-img"
               />
@@ -135,8 +135,8 @@ const PracticalPreview = () => {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
+      <Footer />
     </motion.div>
   );
 };
