@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import './PracticalPreview.css';
 import Footer from '../components/Footer';
 
+import practicalImg6 from "../images/practical/p6.png";
+
 const PracticalPreview = () => {
   const { id } = useParams();
   const navigate = useNavigate();

@@ -7,7 +7,7 @@ import './EquipmentPreview.css';
 import Footer from '../components/Footer.jsx';
 
 // --- 1. Configuration for Local Model Loading ---
-const MODEL_FILES = import.meta.glob("/src/images/models/*.glb", {
+const MODEL_FILES = import.meta.glob("/public/models/*.glb", {
   eager: true,
   query: "?url",
   import: "default"
