@@ -103,6 +103,23 @@ const EquipmentPreview = () => {
       });
   }, [id]);
 
+  // --- 4.5. Track Equipment View ---
+  useEffect(() => {
+    const userStr = localStorage.getItem("user");
+    const user = userStr && userStr !== "undefined" ? JSON.parse(userStr) : null;
+    const userId = user?.user_id || user?.id;
+    
+    if (!userId) return; // don't track for guests
+
+    const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
+    
+    fetch(`${baseUrl}/equipment/${id}/view`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user_id: userId })
+    }).catch(err => console.error("Error tracking view:", err));
+  }, [id]);
+
   useEffect(() => {
     const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
 
