@@ -57,8 +57,6 @@ const Login = () => {
           password: formData.password
         }
       );
-
-      
       // ✅ success handling
       if (res.data.success) {
         const user = res.data.user;
