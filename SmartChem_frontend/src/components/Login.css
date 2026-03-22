@@ -322,3 +322,25 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* FORGOT PASSWORD LINK - SMALL */
+.forgot-password-wrapper {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.forgot-password-wrapper a {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.forgot-password-wrapper a:hover {
+  color: #059669;
+  opacity: 1;
+  text-decoration: underline;
+}
+

@@ -102,9 +102,9 @@ const quizScores = [
 const QuizProgressChart = () => {
 
   const labels = Array.from(
-    { length: TOTAL_PRACTICALS }, 
+    { length: TOTAL_PRACTICALS },
     (_, i) => i + 1
-);
+  );
 
   const data = {
     labels: labels,
@@ -126,12 +126,12 @@ const QuizProgressChart = () => {
     responsive: true,
     maintainAspectRatio: false,
     layout: {
-        padding: {
-            left: 10,
-            right: 30,
-            top: 20,
-            bottom: 20,
-        },
+      padding: {
+        left: 10,
+        right: 30,
+        top: 20,
+        bottom: 20,
+      },
     },
 
     scales: {
@@ -161,9 +161,9 @@ const QuizProgressChart = () => {
         },
       },
     },
-    
+
     plugins: {
-      legend: { display: false,},
+      legend: { display: false, },
     },
   };
 
@@ -173,10 +173,10 @@ const QuizProgressChart = () => {
         Quiz Performance Progress
       </h2>
 
-        <div className="chart-wrapper">
-            <Line data={data} options={options} />
-        </div>
-     
+      <div className="chart-wrapper">
+        <Line data={data} options={options} />
+      </div>
+
     </div>
   );
 };
@@ -191,8 +191,8 @@ const Report = () => {
 
   return (
     <div className="report-page">
-        {/* Top Section */}
-        <FeedbackCard />
+      {/* Top Section */}
+      <FeedbackCard />
 
       {/* Bottom Row (SIDE-BY-SIDE WRAPPER) */}
       <div className="report-flex">
@@ -208,9 +208,8 @@ const Report = () => {
               return (
                 <div
                   key={id}
-                  className={`practical-bar ${
-                    isCompleted ? "completed" : "not-completed"
-                  }`}
+                  className={`practical-bar ${isCompleted ? "completed" : "not-completed"
+                    }`}
                 >
                   Practical {id}
                 </div>
@@ -223,9 +222,9 @@ const Report = () => {
         <EquipmentProgress />
       </div>
 
-        {/* Line Chart Below */}
-        <QuizProgressChart />
-        <Footer />
+      {/* Line Chart Below */}
+      <QuizProgressChart />
+      <Footer />
     </div>
   );
 };

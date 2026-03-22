@@ -6,7 +6,7 @@ import './Sidebar.css';
 const Sidebar = () => {
   const location = useLocation();
   const sidebarRef = useRef(null);
-  
+
   // Mouse position for Spotlight effect
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -16,7 +16,6 @@ const Sidebar = () => {
     { name: 'Equipments', path: '/equipments', icon: '⚖️' },
     { name: 'Safety Methods', path: '/safetymethods', icon: '🛡️' },
     { name: 'Report', path: '/report', icon: '📊' },
-    { name: 'Settings', path: '/settings', icon: '⚙️', badge: 2 },
   ];
 
   // Handle Mouse Move for Spotlight
@@ -44,13 +43,13 @@ const Sidebar = () => {
   };
 
   return (
-    <div 
-      className="sidebar" 
+    <div
+      className="sidebar"
       ref={sidebarRef}
       onMouseMove={handleMouseMove}
       style={{ '--x': mousePos.x + 'px', '--y': mousePos.y + 'px' }}
     >
-      
+
       {/* MAIN HEADER */}
       <Link to="/" className="sidebar-header-link">
         <div className="sidebar-header">
@@ -59,7 +58,7 @@ const Sidebar = () => {
           </div>
         </div>
       </Link>
-        
+
 
       {/* NAVIGATION */}
       <nav className="sidebar-nav">
@@ -73,7 +72,7 @@ const Sidebar = () => {
               >
                 {/* Interactive Spotlight Gradient */}
                 <span className="spotlight"></span>
-                
+
                 <span className="nav-icon">{item.icon}</span>
                 <span className="nav-text">{item.name}</span>
                 {item.badge && <span className="nav-badge">{item.badge}</span>}

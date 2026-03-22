@@ -196,6 +196,11 @@ const Login = () => {
             localStorage.setItem('user', JSON.stringify(u));
             navigate("/dashboard");}} />
 
+          <div className="forgot-password-wrapper">
+             <Link to="/forgot-password" title="Reset your password">Forgot Password?</Link>
+          </div>
+
+
           
           <div className="login-footer">
             <p>New to SmartChem? <Link to="/signup">Create an Account</Link></p>
