@@ -42,6 +42,21 @@ const PracticalWorkplace = () => {
     }
   }, [practicalId]);
 
+  // Track Practical Completion (Simulation start)
+  useEffect(() => {
+    if (!practicalId) return;
+
+    const userStr = localStorage.getItem("user");
+    const user = userStr && userStr !== "undefined" ? JSON.parse(userStr) : null;
+    const userId = user?.user_id || user?.id;
+    
+    if (!userId) return;
+    const baseURL = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
+
+    axios.post(`${baseURL}/practicals/${practicalId}/complete`, { user_id: userId })
+      .catch(err => console.error("Error tracking practical complete:", err));
+  }, [practicalId]);
+
   return (
     <div className="workplace-page">
       <WorkplaceHeader practicalName={practical?.p_name || "Practical"} />
