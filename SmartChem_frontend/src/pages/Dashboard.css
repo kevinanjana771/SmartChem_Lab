@@ -282,10 +282,12 @@
 .dashboard-wrapper .footer {
   margin-top: 0;
   width: 100%;
+  max-width: 1400px; /* ALIGNED WITH DASHBOARD BOXES */
   margin-left: auto;
   margin-right: auto;
   border-radius: 20px;
   overflow: hidden;
+  margin-bottom: 2rem; /* EQUAL VERTICAL SPACING */
 }
 
 .dashboard-wrapper .footer-content,
@@ -294,6 +296,7 @@
   padding-left: 2rem;
   padding-right: 2rem;
 }
+
 
 /*SCROLL REVEAL ANIMATION */
 .reveal {
