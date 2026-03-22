@@ -241,7 +241,10 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: conic-gradient(var(--color) var(--percentage) * 1%, #e5e7eb 0);
+   background: conic-gradient(
+    var(--color) calc(var(--percentage) * 1%), /* colored part */
+    #e5e7eb 0 /* remaining gray part */
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -253,18 +256,18 @@
 .progress-ring::before {
   content: '';
   position: absolute;
-  width: 68px;
-  height: 68px;
-  background: rgba(255,255,255,0.7); /* Glassy center */
+  width: 60px;   /* smaller = thinner ring */
+  height: 60px;
+  background: white; /* or transparent if needed */
   border-radius: 50%;
 }
 
 .progress-value {
   position: relative;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #374151;
+  z-index: 2;
+  font-weight: bold;
 }
+
 
 .progress-info h5 {
   font-size: 0.95rem;
