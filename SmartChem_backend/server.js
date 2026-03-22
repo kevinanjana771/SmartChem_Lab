@@ -7,7 +7,7 @@ import errorMiddleware from "./middleware/errorMiddleware.js";
 import authRoutes from "./routes/authRoutes.js";
 import practicalRoutes from "./routes/practicalRoutes.js";
 import quizRoutes from "./routes/quizRoutes.js";
-
+import reportRoutes from "./routes/reportRoutes.js";
 
 
 // Load environment variables
@@ -46,6 +46,7 @@ app.get("/", (req, res) => {
 app.use("/api/equipment", equipmentRoutes);
 app.use("/api/practicals", practicalRoutes);
 app.use("/api/quizzes", quizRoutes);
+app.use("/api/reports", reportRoutes);
 
 // Auth Routes
 app.use("/api/auth", authRoutes);
