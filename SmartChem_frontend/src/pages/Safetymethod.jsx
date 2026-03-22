@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import './Safetymethods.css';
 import Footer from '../components/Footer';
@@ -439,33 +440,84 @@ const Safetymethods = () => {
                       <p>If a real-world or virtual accident occurs, follow these protocols.</p>
                   </div>
 
-                  <div className="emergency-actions">
+                  <motion.div 
+                    className="emergency-actions"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    variants={{
+                      hidden: { opacity: 0 },
+                      visible: {
+                        opacity: 1,
+                        transition: { staggerChildren: 0.2 }
+                      }
+                    }}
+                  >
 
-                      <div className="action-card">
-                          <i className="fa-solid fa-eye-dropper"></i>
+                      <motion.div 
+                        className="action-card"
+                        variants={{
+                          hidden: { opacity: 0, y: 30 },
+                          visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+                        }}
+                        whileHover={{ 
+                          y: -12, 
+                          transition: { type: "spring", stiffness: 300 } 
+                        }}
+                      >
+                          <motion.i 
+                            className="fa-solid fa-eye-dropper"
+                            whileHover={{ rotate: [0, -15, 15, -15, 0], scale: 1.1 }}
+                          ></motion.i>
                           <h4>Eye Contamination</h4>
                           <p style={{ fontSize: '1.0rem', color: '#881337' }}>
                               Rinse in eyewash station for 15 minutes.
                           </p>
-                      </div>
+                      </motion.div>
 
-                      <div className="action-card">
-                          <i className="fa-solid fa-fire-extinguisher"></i>
+                      <motion.div 
+                        className="action-card"
+                        variants={{
+                          hidden: { opacity: 0, y: 30 },
+                          visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+                        }}
+                        whileHover={{ 
+                          y: -12, 
+                          transition: { type: "spring", stiffness: 300 } 
+                        }}
+                      >
+                          <motion.i 
+                            className="fa-solid fa-fire-extinguisher"
+                            whileHover={{ scale: 1.2, rotate: 5 }}
+                          ></motion.i>
                           <h4>Fire Outbreak</h4>
                           <p style={{ fontSize: '1.0rem', color: '#881337' }}>
                               Evacuate immediately. Pull alarm.
                           </p>
-                      </div>
+                      </motion.div>
 
-                      <div className="action-card">
-                          <i className="fa-solid fa-house-medical"></i>
+                      <motion.div 
+                        className="action-card"
+                        variants={{
+                          hidden: { opacity: 0, y: 30 },
+                          visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+                        }}
+                        whileHover={{ 
+                          y: -12, 
+                          transition: { type: "spring", stiffness: 300 } 
+                        }}
+                      >
+                          <motion.i 
+                            className="fa-solid fa-house-medical"
+                            whileHover={{ scale: 1.1, y: -5 }}
+                          ></motion.i>
                           <h4>Spill Response</h4>
                           <p style={{ fontSize: '1.0rem', color: '#881337' }}>
                               Alert supervisor. Do not touch spill.
                           </p>
-                      </div>
+                      </motion.div>
 
-                  </div>
+                  </motion.div>
                 </div>
             </section> 
           </div>

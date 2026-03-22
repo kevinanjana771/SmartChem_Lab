@@ -596,31 +596,41 @@
 .safety-methods .emergency-actions {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 40px; /* Increased gap for better spacing */
     margin-top: 40px;
     flex-wrap: wrap;
 }
 
 .safety-methods .action-card {
     background: #ffffff;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    width: 240px;
-    border: 1px solid #fecdd3;
+    padding: 35px 30px; /* Balanced padding */
+    border-radius: 24px; /* More modern rounded corners */
+    box-shadow: 0 10px 15px -3px rgba(190, 18, 60, 0.05), 0 4px 6px -2px rgba(190, 18, 60, 0.05);
+    width: 280px; /* Slightly wider */
+    border: 1px solid #ffe4e6;
     text-align: center;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.safety-methods .action-card:hover {
+    border-color: #fb7185;
+    box-shadow: 0 20px 25px -5px rgba(190, 18, 60, 0.1), 0 10px 10px -5px rgba(190, 18, 60, 0.04);
 }
 
 .safety-methods .action-card i {
-    font-size: 3.0rem;
+    font-size: 3.5rem; /* Larger icons */
     color: #e11d48;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: color 0.3s ease;
 }
 
 .safety-methods .action-card h4 {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     color: #881337;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    font-weight: 700;
 }
 
 .safety-methods .safety-footer-shell .footer {
