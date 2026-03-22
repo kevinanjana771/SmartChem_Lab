@@ -280,7 +280,7 @@
 .hazard-section {
     background: #047857;
     color: #ffffff;
-    padding: 100px 0;
+    padding: 60px 0;
     position: relative;
     border-radius: 15px;
     overflow: hidden;
@@ -294,7 +294,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%;
-    height: 140%;
+    height: 100%;
     background: radial-gradient(circle, rgb(16, 185, 129) 0%, rgba(4, 120, 87, 0) 70%);
     z-index: 0;
     pointer-events: none;
