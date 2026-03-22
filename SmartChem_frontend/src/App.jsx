@@ -3,6 +3,8 @@ import { AnimatePresence } from "framer-motion";
 import LandingPage from './pages/LandingPage';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import ForgotPassword from './components/ForgotPassword';
+
 import MainLayout from './components/MainLayout';
 import Dashboard from './pages/Dashboard';
 import Practicals from './pages/Practicals';
@@ -25,6 +27,8 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+
 
           {/* App Routes  */}
           <Route element={<MainLayout />}>
