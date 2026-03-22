@@ -51,13 +51,12 @@ const Login = () => {
     try {
       // ✅ send login request to backend
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/auth/login`,
+        `${import.meta.env.VITE_API_URL}/auth/login`,
         {
           email: formData.email,
           password: formData.password
         }
       );
-
       // ✅ success handling
       if (res.data.success) {
         const user = res.data.user;
