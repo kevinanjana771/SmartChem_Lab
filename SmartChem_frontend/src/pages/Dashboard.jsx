@@ -50,19 +50,19 @@ const progressData = [
     label: "Equipments",
     value: "22/50",
     percentage: 44,
-    color: "#3b82f6",
+    color: "#10b981",
   },
   {
     label: "Safety",
     value: "10/40",
     percentage: 25,
-    color: "#f59e0b",
+    color: "#10b981",
   },
   {
     label: "Quizzes",
     value: "80%",
     percentage: 80,
-    color: "#ef4444",
+    color: "#10b981",
   },
 ];
 
