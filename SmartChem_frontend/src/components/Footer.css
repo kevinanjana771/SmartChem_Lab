@@ -2,9 +2,10 @@
 .footer {
   background: #111827;
   color: white;
-  padding: 2rem 2rem 2rem;
-  margin-bottom: 0;
-  border-radius: 20px;
+  padding: 4rem 2rem;
+  margin: 0;
+  border-radius: 0;
+  width: 100%;
 }
 
 .footer-content {

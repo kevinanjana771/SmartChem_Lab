@@ -32,10 +32,10 @@
 .safety-methods .safety-footer-shell {
     width: 100%;
     max-width: none;
-    margin: 0 0 40px;
+    margin: 0;
     overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .safety-methods .btn {
