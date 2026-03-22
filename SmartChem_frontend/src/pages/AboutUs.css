@@ -1,11 +1,86 @@
 /* ABOUT PAGE SPECIFIC STYLES */
 
-/* Page-level background for About Us (overrides global white for this page) */
+/* Page-level background (KEPT ORIGINAL) */
 .app {
-  background: linear-gradient(180deg, #eef2ff 0%, #e6fff2 100%);
+  background: radial-gradient(circle at 30% 30%, rgba(192, 242, 211, 0.7), rgba(255, 255, 255, 0.95));
   min-height: 100vh;
 }
 
+/* --- ENHANCED ANIMATION CLASSES --- */
+.scroll-section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease-out;
+}
+
+.scroll-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 2. Problem Card - Slide from Left */
+.ps-card.problem.scroll-section {
+  opacity: 0;
+  transform: translateX(-60px) translateY(30px); /* Slide left + slight down */
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.ps-card.problem.scroll-section.is-visible {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+/* 3. Solution Card - Slide from Right */
+.ps-card.solution.scroll-section {
+  opacity: 0;
+  transform: translateX(60px) translateY(30px); /* Slide right + slight down */
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.ps-card.solution.scroll-section.is-visible {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+/* 4. Staggered Content Animation inside Cards */
+.ps-header {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+  transition-delay: 0.3s; 
+}
+
+.ps-body {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+  transition-delay: 0.5s;
+}
+
+/* Active state for internal content */
+.scroll-section.is-visible .ps-header,
+.scroll-section.is-visible .ps-body {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Team and Features Stagger Animation */
+.animate-children > * {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Stagger delays */
+.animate-children.is-visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+.animate-children.is-visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+.animate-children.is-visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+.animate-children.is-visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+.animate-children.is-visible > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
+.animate-children.is-visible > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 0.6s; }
+
+
+/* --- LAYOUT STYLES (ORIGINAL COLORS PRESERVED) --- */
 
 /* Header Section */
 .about-header {
@@ -25,7 +100,8 @@
   font-size: 1.25rem;
   color: #10b981;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.0rem;
+  margin-top: 2.0rem;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -36,31 +112,32 @@
   font-size: 1.125rem;
   color: #4b5563;
   line-height: 1.8;
+  text-align: justify;
 }
 
 /* Problem & Solution Section */
 .problem-solution-section {
-  padding: 60px 2rem;
+  padding: 10px 2rem;
   background: transparent;
 }
 
 .ps-container {
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
 }
 
 .ps-card {
-  padding: 3rem;
+  padding: 2.5rem;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
+  transition: box-shadow 0.3s ease;
 }
 
 .ps-card:hover {
-  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
 
 .problem {
@@ -73,17 +150,33 @@
   border-left: 5px solid #10b981;
 }
 
+/* Flex container for Icon + Title on one line */
+.ps-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
 .ps-icon {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  background: rgba(134, 145, 147, 0.8);
+  padding: 0.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(132, 139, 144, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ps-title {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
   color: #111;
 }
+
+.problem .ps-title { color: #dc2626; }
+.solution .ps-title { color: #10b981; }
 
 .ps-text {
   font-size: 1.05rem;
@@ -125,7 +218,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s;
+  transition: transform 0.3s ease;
 }
 
 .feature-card:hover {
@@ -136,7 +229,6 @@
 .feature-card.highlight {
   background: #10b981;
   color: white;
-  grid-column: span 1; /* Adjust if you want it wider */
 }
 
 .feature-card.highlight .feature-text {
@@ -161,8 +253,7 @@
   color: #374151;
 }
 
-/* TEAM SECTION - 3 Column Layout */
-
+/* TEAM SECTION */
 .team-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr); 
@@ -177,7 +268,7 @@
   background: rgba(255, 255, 255, 0.95);
   border-radius: 16px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  overflow: hidden; /* Ensures image stays inside border radius */
+  overflow: hidden;
   transition: transform 0.3s ease;
 }
 
@@ -187,14 +278,19 @@
 
 .team-image-container {
   width: 100%;
-  height: 300px; /* Fixed height ensures all cards are same size */
+  height: 300px;
   overflow: hidden;
 }
 
 .team-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Prevents image stretching */
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.team-card:hover .team-image {
+  transform: scale(1.05);
 }
 
 .team-info {
@@ -221,27 +317,26 @@
   font-size: 0.9rem;
 }
 
-/* RESPONSIVE - Stack cards on smaller screens */
+/* RESPONSIVE */
 @media (max-width: 900px) {
   .team-grid {
-    /* Switch to 2 columns on tablets */
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
   .team-grid {
-    /* Switch to 1 column on mobile */
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .ps-container {
     grid-template-columns: 1fr;
   }
   
+  .ps-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
   .page-title {
     font-size: 2rem;
   }
