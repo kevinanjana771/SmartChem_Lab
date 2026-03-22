@@ -24,3 +24,20 @@
 .back-btn:hover {
   background: #059669;
 }
+
+.quiz-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-left: auto;
+}
+
+.quiz-btn:hover {
+  background: #059669;
+}
+
