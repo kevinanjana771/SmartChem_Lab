@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./Report.css";
 import Footer from '../components/Footer';
@@ -44,13 +44,8 @@ const FeedbackCard = () => {
 
 /* ================= Equipment Progress ================= */
 
-const TOTAL_EQUIPMENT = 68;
-const VIEWED_EQUIPMENT = 25;
-
-const EquipmentProgress = () => {
-  const percentage = Math.round(
-    (VIEWED_EQUIPMENT / TOTAL_EQUIPMENT) * 100
-  );
+const EquipmentProgress = ({ total, viewed }) => {
+  const percentage = total > 0 ? Math.round((viewed / total) * 100) : 0;
 
   return (
     <div className="equipment-card">
@@ -72,50 +67,47 @@ const EquipmentProgress = () => {
       </div>
 
       <div className="equipment-footer">
-        {VIEWED_EQUIPMENT} / {TOTAL_EQUIPMENT}  Viewed Equipment
+        {viewed} / {total}  Viewed Equipment
       </div>
     </div>
   );
 };
 
-/* ================= Completed Practicals ================= */
-
-const TOTAL_PRACTICALS = 45;
-
-const completedPracticals = [
-  1, 2, 3, 5, 6, 10, 11, 15,
-  18, 20, 21, 25, 30, 31, 32, 40
-];
-
-// Example quiz scores (each between 0 and 10, multiples of 2)
-const quizScores = [
-  10, 8, 6, 4, 10, 8, 2, 6, 10, 8,
-  6, 4, 10, 10, 8, 6, 2, 4, 8, 10,
-  6, 8, 10, 4, 2, 6, 8, 10, 10, 8,
-  6, 4, 10, 8, 6, 10, 2, 4, 8, 10,
-  6, 8, 10, 4, 2
-];
-
 /*==================Quiz Progress=====================*/
 
-
-const QuizProgressChart = () => {
-
+const QuizProgressChart = ({ quizScoresData, totalPracticals }) => {
+  
+  // We need to map `quizScoresData` mapping `p_id` to its score.
+  // `quizScoresData` looks like: [{ p_id: 1, score: 8, total_questions: 10, chart_score: 8 }]
   const labels = Array.from(
-    { length: TOTAL_PRACTICALS },
+    { length: totalPracticals },
     (_, i) => i + 1
   );
+
+  // Initialize all scores to 0
+  const scoreData = new Array(totalPracticals).fill(0);
+  
+  quizScoresData.forEach(item => {
+    // p_id is 1-indexed. Array is 0-indexed.
+    const practicalIndex = parseInt(item.p_id, 10) - 1;
+    if (practicalIndex >= 0 && practicalIndex < totalPracticals) {
+        // use chart_score or fallback to score
+        const scoreValue = parseFloat(item.chart_score !== undefined ? item.chart_score : item.score);
+        scoreData[practicalIndex] = scoreValue;
+    }
+  });
 
   const data = {
     labels: labels,
     datasets: [
       {
         label: "Quiz Score",
-        data: quizScores,
+        data: scoreData,
         borderColor: "#3b82f6",
         backgroundColor: "rgba(59, 130, 246, 0.1)",
         tension: 0.1,
         fill: true,
+        spanGaps: true, // will connect lines across missed practicals
         pointRadius: 4,
         pointBackgroundColor: "#3b82f6",
       },
@@ -148,10 +140,9 @@ const QuizProgressChart = () => {
         },
       },
 
-
       y: {
         min: 0,
-        max: 12,
+        max: 12, // Ensure the chart scale spans 12
         ticks: {
           stepSize: 2,
         },
@@ -184,33 +175,77 @@ const QuizProgressChart = () => {
 /* ================= Main Report ================= */
 
 const Report = () => {
-  const practicals = Array.from(
-    { length: TOTAL_PRACTICALS },
-    (_, i) => i + 1
-  );
+  const TOTAL_PRACTICALS_DEFAULT = 45;
+
+  const [reportData, setReportData] = useState({
+    equipment: { total: 68, viewed: 0 },
+    completedPracticals: [],
+    quizScores: [],
+    totalPracticals: TOTAL_PRACTICALS_DEFAULT
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchReport = async () => {
+      try {
+        const userStr = localStorage.getItem("user");
+        const user = userStr && userStr !== "undefined" ? JSON.parse(userStr) : null;
+        const userId = user?.user_id || user?.id;
+        
+        if (!userId) {
+            setLoading(false);
+            return; // Stay empty if the user is not logged in
+        }
+
+        const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
+        const response = await fetch(`${baseUrl}/reports/user/${userId}`);
+        if (!response.ok) throw new Error("Failed to fetch report data");
+        const data = await response.json();
+        setReportData(prev => ({
+          ...prev,
+          totalPracticals: data.totalPracticals || prev.totalPracticals,
+          equipment: data.equipment || prev.equipment,
+          completedPracticals: (data.completedPracticals || []).map(id => Number(id)),
+          quizScores: data.quizScores || []
+        }));
+      } catch (error) {
+        console.error("Report fetch error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchReport();
+  }, []);
+
+  const practicals = Array.from({ length: reportData.totalPracticals }, (_, i) => i + 1);
+
+  if (loading) {
+    return (
+      <div className="report-page" style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", color: "white" }}>
+        <h2>Loading Report...</h2>
+      </div>
+    );
+  }
 
   return (
     <div className="report-page">
-      {/* Top Section */}
       <FeedbackCard />
 
-      {/* Bottom Row (SIDE-BY-SIDE WRAPPER) */}
-      <div className="report-flex">
+      {/* Not logged-in banner */}
+      {!localStorage.getItem("user") && (
+        <div style={{ textAlign: "center", padding: "20px", color: "#94a3b8", fontSize: "14px" }}>
+          ⚠️ Log in to see your personal progress data.
+        </div>
+      )}
 
-        {/* LEFT CARD */}
+      <div className="report-flex">
         <div className="progress-container-card">
           <h2 className="progress-title">Completed Practicals</h2>
-
           <div className="bars-wrapper">
             {practicals.map((id) => {
-              const isCompleted = completedPracticals.includes(id);
-
+              const isCompleted = reportData.completedPracticals.includes(id);
               return (
-                <div
-                  key={id}
-                  className={`practical-bar ${isCompleted ? "completed" : "not-completed"
-                    }`}
-                >
+                <div key={id} className={`practical-bar ${isCompleted ? "completed" : "not-completed"}`}>
                   Practical {id}
                 </div>
               );
@@ -218,14 +253,13 @@ const Report = () => {
           </div>
         </div>
 
-        {/* RIGHT CARD */}
-        <EquipmentProgress />
+        <EquipmentProgress total={reportData.equipment.total} viewed={reportData.equipment.viewed} />
       </div>
 
-      {/* Line Chart Below */}
-      <QuizProgressChart />
+      <QuizProgressChart quizScoresData={reportData.quizScores} totalPracticals={reportData.totalPracticals} />
       <Footer />
     </div>
   );
 };
+
 export default Report;
