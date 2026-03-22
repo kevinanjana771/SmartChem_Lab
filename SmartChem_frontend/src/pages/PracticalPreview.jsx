@@ -94,6 +94,38 @@ const PracticalPreview = () => {
     );
   }
 
+  //image handling
+  const STORAGE_URL = "https://kwbuvntvutrihygxaxqo.supabase.co/storage/v1/object/public/practical_image";
+
+  let imageSrc = "https://via.placeholder.com/800x400?text=No+Image";
+
+  if (practical?.p_image) {
+    let fileName = practical.p_image;
+
+    // Handle JSON string like '["p1.png"]'
+    if (typeof fileName === "string" && fileName.startsWith("[")) {
+      try {
+        const parsed = JSON.parse(fileName);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          fileName = parsed[0];
+        }
+      } catch (e) {}
+    } 
+    else if (Array.isArray(fileName)) {
+      fileName = fileName[0];
+    }
+
+    if (typeof fileName === "string") {
+      if (fileName.startsWith("http")) {
+        imageSrc = fileName;
+      } else {
+        fileName = fileName.replace(/^"|"$/g, "");
+        imageSrc = `${STORAGE_URL}/${fileName}`;
+      }
+    }
+  }
+
+
   return (
     <motion.div
       className="practical-preview"
@@ -140,7 +172,7 @@ const PracticalPreview = () => {
             {/* Image from 'practical' table */}
             <div className="preview-image-section">
               <img
-                src={practical.p_image || "https://via.placeholder.com/800x4k00/f3f4f6/FFFFFF?text=Lab+Setup"}
+                src={imageSrc}
                 alt="Experiment Setup"
                 className="lab-main-img"
               />
