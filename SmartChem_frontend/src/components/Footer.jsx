@@ -1,8 +1,28 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Footer.css';
 import logo from '../images/landing/sdgp-logo.png';
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleLinkClick = (e, path) => {
+    e.preventDefault();
+    if (path.startsWith('#')) {
+      // If we're on the landing page, just scroll. Otherwise, go to landing with hash.
+      if (window.location.pathname === '/') {
+        const element = document.querySelector(path);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        navigate('/' + path);
+      }
+    } else {
+      navigate(path);
+    }
+  };
+
   return (
     <footer className="footer">
         <div className="footer-content">
@@ -19,18 +39,18 @@ const Footer = () => {
             <div className="footer-column">
                 <h4>Quick Links</h4>
                 <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="/" onClick={(e) => handleLinkClick(e, '/')}>Home</a></li>
+                <li><a href="/about" onClick={(e) => handleLinkClick(e, '/about')}>About Us</a></li>
+                <li><a href="#contact" onClick={(e) => handleLinkClick(e, '#contact')}>Contact</a></li>
                 </ul>
             </div>
 
             <div className="footer-column">
                 <h4>Resources</h4>
                 <ul>
-                <li><a href="#practicals">Practicals</a></li>
-                <li><a href="#safety">Safety Guide</a></li>
-                <li><a href="#equipment">Equipment</a></li>
+                <li><a href="/practicals" onClick={(e) => handleLinkClick(e, '/practicals')}>Practicals</a></li>
+                <li><a href="/safetymethods" onClick={(e) => handleLinkClick(e, '/safetymethods')}>Safety Guide</a></li>
+                <li><a href="/equipments" onClick={(e) => handleLinkClick(e, '/equipments')}>Equipment</a></li>
                 </ul>
             </div>
 
