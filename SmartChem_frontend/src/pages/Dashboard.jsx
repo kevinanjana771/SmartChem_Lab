@@ -5,11 +5,12 @@ import { motion } from "framer-motion";
 import "./Dashboard.css";
 import Footer from "../components/Footer";
 
-import practicalImg1 from "../images/practical/p1.png";
-import practicalImg2 from "../images/practical/p2.png";
-import practicalImg3 from "../images/practical/p3.png";
-import practicalImg4 from "../images/practical/p4.png";
-import practicalImg5 from "../images/practical/p5.png";
+const STORAGE_URL = "https://kwbuvntvutrihygxaxqo.supabase.co/storage/v1/object/public/practical_image";
+const practicalImg1 = `${STORAGE_URL}/p1.png`;
+const practicalImg2 = `${STORAGE_URL}/p2.png`;
+const practicalImg3 = `${STORAGE_URL}/p3.png`;
+const practicalImg4 = `${STORAGE_URL}/p4.png`;
+
 // Placeholder images
 const lessons = [
   {
