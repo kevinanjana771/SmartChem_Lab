@@ -102,37 +102,13 @@
   margin-bottom: 1.5rem;
 }
 
-.practical-preview .tabs {
-  display: flex;
-  gap: 1rem;
-  border-bottom: 2px solid #e5e7eb;
-}
-
-.practical-preview .tab {
-  padding: 0.75rem 1.5rem;
-  background: transparent;
-  border: none;
-  font-size: 1rem;
-  color: #6b7280;
-  font-weight: 500;
-  cursor: pointer;
-  position: relative;
-}
-
-.practical-preview .tab.active {
-  color: #10b981;
-  font-weight: 700;
-}
-
-.practical-preview .tab.active::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
+.practical-preview .tabs-separator {
   width: 100%;
   height: 2px;
-  background: #10b981;
+  background-color: #e5e7eb;
+  margin-top: 1rem;
 }
+
 
 .practical-preview .preview-content {
   display: grid;
