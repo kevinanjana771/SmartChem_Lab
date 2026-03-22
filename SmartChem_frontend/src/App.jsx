@@ -1,5 +1,6 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from "framer-motion";
+import { useEffect } from 'react';
 import LandingPage from './pages/LandingPage';
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -17,9 +18,19 @@ import Safetymethods from './pages/Safetymethod';
 import PracticalWorkplace from "./pages/PracticalWorkplace";
 import Report from './pages/Report';
 
+// Automatically scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
+
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AnimatePresence mode="wait">
         <Routes>
           {/* Public Routes  */}

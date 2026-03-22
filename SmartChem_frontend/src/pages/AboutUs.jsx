@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../images/landing/sdgp-logo.png';
-import './AboutUs.css'; 
+import './AboutUs.css';
 
 import landingKevin from "../images/landing/kevin.jpeg";
 import landingAkinda from "../images/landing/akinda.jpg";
@@ -23,8 +23,8 @@ const useScrollAnimation = () => {
         }
       },
       {
-        threshold: 0.1, 
-        rootMargin: '0px 0px -50px 0px' 
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
       }
     );
 
@@ -79,62 +79,70 @@ export default function AboutUs() {
         </div>
       </nav>
 
-      {/* BACKGROUND HEADER */}
-      <section ref={headerRef} className="about-header scroll-section">
-        <div className="about-header-content">
-          <h1 className="page-title">About SmartChem Lab</h1>
-          <p className="page-subtitle">
-            Background of Our Application
-          </p>
-          <p className="page-description">
-            SmartChem Lab is a modern digital platform developed to bridge the gap between theoretical 
-            understanding and practical application for Advanced Level Chemistry students in Sri Lanka. 
-            By integrating advanced web technologies with interactive learning tools, the platform offers a safe, 
-            immersive, and accessible virtual laboratory experience. Students can explore laboratory equipment in 
-            detail, simulate experiments, and reinforce their knowledge through guided practice all without the 
-            limitations of a traditional physical lab. SmartChem Lab aims to enhance conceptual clarity, promote 
-            self-directed learning, and support academic excellence in chemistry education.
-          </p>
+      {/* 1. BACKGROUND SECTION - Zig Layout */}
+      <section ref={headerRef} className="about-section scroll-section">
+        <div className="section-content split">
+          <div className="section-text">
+            <h1 className="main-gradient-title">Our Scientific <span className="highlight-green">Journey</span></h1>
+            <h3 className="sub-heading">Background of SmartChem</h3>
+            <div className="premium-glass-card">
+              <p>
+                SmartChem Lab bridges the gap between theoretical understanding and practical 
+                application for <strong>Advanced Level Chemistry students</strong>. Our digital platform offers 
+                a safe, immersive experience that transcends the limitations of a physical laboratory.
+              </p>
+              <p>
+                We aim to enhance conceptual clarity and promote self-directed learning, 
+                supporting academic excellence in chemistry education.
+              </p>
+            </div>
+          </div>
+          <div className="section-visual">
+             <div className="floating-orb chemistry">🧪</div>
+             <div className="orbital-ring"></div>
+          </div>
         </div>
       </section>
 
-      {/* PROBLEM & SOLUTION SECTION */}
-      <section className="problem-solution-section">
-        <div className="ps-container">
-          
-          {/* PROBLEM CARD - Slides from Left */}
-          <div ref={problemRef} className="ps-card problem scroll-section">
-            <div className="ps-header">
-              <span className="ps-icon">⚠️</span>
-              <h2 className="ps-title">Challenges in Traditional Chemistry Learning</h2>
-            </div>
-            <div className="ps-body">
-              <p className="ps-text">
-                Traditional chemistry education often faces limitations such as restricted laboratory 
-                access, safety concerns, and insufficient practical exposure. These challenges hinder 
-                students from fully understanding experimental procedures and developing confidence in 
-                laboratory environments, ultimately affecting their academic performance and interest in 
-                the subject.
+      {/* 2. CHALLENGE SECTION - Zag Layout */}
+      <section ref={problemRef} className="about-section scroll-section alt-bg">
+        <div className="section-content split reverse">
+          <div className="section-text">
+            <h2 className="main-gradient-title red">The Challenge</h2>
+            <h3 className="sub-heading">Traditional Learning Gaps</h3>
+            <div className="premium-glass-card error-accent">
+              <p>
+                Traditional chemistry education often faces <strong>restricted laboratory access, 
+                safety concerns, and insufficient practical exposure.</strong> These hurdles hinder 
+                students from building confidence in laboratory environments.
               </p>
             </div>
           </div>
-          
-          {/* SOLUTION CARD - Slides from Right */}
-          <div ref={solutionRef} className="ps-card solution scroll-section">
-            <div className="ps-header">
-              <span className="ps-icon">💡</span>
-              <h2 className="ps-title">Our Innovative Solution</h2>
-            </div>
-            <div className="ps-body">
-              <p className="ps-text">
-                SmartChem Lab addresses these challenges by offering a comprehensive digital solution that 
-                integrates virtual simulations, interactive learning modules, and guided experiment walkthroughs. 
-                The platform empowers students to explore, practice, and revise laboratory concepts at their own 
-                pace, enhancing both understanding and retention.
+          <div className="section-visual">
+             <div className="floating-orb alert">⚠️</div>
+             <div className="orbital-ring red-ring"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. SOLUTION SECTION - Zig Layout */}
+      <section ref={solutionRef} className="about-section scroll-section">
+        <div className="section-content split">
+          <div className="section-text">
+            <h2 className="main-gradient-title green">The Solution</h2>
+            <h3 className="sub-heading">Virtual Mastery</h3>
+            <div className="premium-glass-card success-accent">
+              <p>
+                SmartChem Lab addresses these challenges by offering <strong>high-fidelity virtual 
+                simulations</strong> and interactive learning modules. The platform empowers 
+                students to explore, practice, and revise laboratory concepts at their own pace.
               </p>
             </div>
           </div>
-          
+          <div className="section-visual">
+             <div className="floating-orb solution">💡</div>
+             <div className="orbital-ring green-ring"></div>
+          </div>
         </div>
       </section>
 
