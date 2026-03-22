@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 import './PracticalPreview.css';
 import Footer from '../components/Footer';
 
-import practicalImg6 from "../images/practical/p6.png";
-
 const PracticalPreview = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -15,6 +13,7 @@ const PracticalPreview = () => {
 
   // State for Steps (from 'practical_steps' table)
   const [steps, setSteps] = useState([]);
+  const [practicalList, setPracticalList] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -23,15 +22,16 @@ const PracticalPreview = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
+        const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
 
         // 1. Fetch Main Practical Details from 'practical' table
-        const practicalRes = await fetch(`http://localhost:5001/api/practicals/${id}`);
+        const practicalRes = await fetch(`${baseUrl}/practicals/${id}`);
         if (!practicalRes.ok) throw new Error('Failed to fetch practical data');
         const practicalData = await practicalRes.json();
         setPractical(practicalData);
 
         // 2. Fetch Steps from 'practical_steps' table
-        const stepsRes = await fetch(`http://localhost:5001/api/practicals/${id}/steps`);
+        const stepsRes = await fetch(`${baseUrl}/practicals/${id}/steps`);
         if (!stepsRes.ok) throw new Error('Failed to fetch steps');
         const stepsData = await stepsRes.json();
         setSteps(stepsData);
@@ -45,6 +45,35 @@ const PracticalPreview = () => {
 
     fetchData();
   }, [id]);
+
+  useEffect(() => {
+    const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
+
+    fetch(`${baseUrl}/practicals`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch practical list');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setPracticalList(Array.isArray(data) ? data : []);
+      })
+      .catch((err) => {
+        console.error("Error fetching practical list:", err);
+        setPracticalList([]);
+      });
+  }, []);
+
+  const currentPracticalIndex = practicalList.findIndex(
+    (item) => String(item.p_id) === String(id)
+  );
+  const previousPractical = currentPracticalIndex > 0
+    ? practicalList[currentPracticalIndex - 1]
+    : null;
+  const nextPractical = currentPracticalIndex >= 0 && currentPracticalIndex < practicalList.length - 1
+    ? practicalList[currentPracticalIndex + 1]
+    : null;
 
   // Render Loading State
   if (loading) {
@@ -73,9 +102,30 @@ const PracticalPreview = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
     >
-      <button className="practical-back-btn" onClick={() => navigate('/practicals')}>
-        ← Back to Practicals
-      </button>
+      <div className="practical-preview-topbar">
+        <button className="practical-back-btn" onClick={() => navigate('/practicals')}>
+          ← Back to Practicals
+        </button>
+
+        <div className="practical-sequence-nav">
+          <button
+            type="button"
+            className="practical-sequence-btn"
+            onClick={() => previousPractical && navigate(`/practicals/${previousPractical.p_id}`)}
+            disabled={!previousPractical}
+          >
+            ← Previous
+          </button>
+          <button
+            type="button"
+            className="practical-sequence-btn"
+            onClick={() => nextPractical && navigate(`/practicals/${nextPractical.p_id}`)}
+            disabled={!nextPractical}
+          >
+            Next →
+          </button>
+        </div>
+      </div>
 
       <div className="preview-shell">
         <div className="preview-layout">
