@@ -233,6 +233,7 @@
   cursor: pointer;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
   transition: transform 0.2s ease, background 0.2s ease;
+  outline: none;
 }
 
 .viewer-zoom-icon {
@@ -247,9 +248,35 @@
   transform: translateY(-3px);
 }
 
+.viewer-reset-btn {
+  background: rgba(16, 185, 129, 0.92);
+  color: #ffffff;
+}
+
+.viewer-reset-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+  transform: translateX(-2px) translateY(-3px);
+}
+
 .viewer-zoom-btn:hover {
   transform: translateY(-1px);
   background: #ffffff;
+}
+
+.viewer-zoom-btn.viewer-reset-btn:hover {
+  background: #059669;
+  color: #ffffff;
+}
+
+.viewer-zoom-btn:focus,
+.viewer-zoom-btn:focus-visible,
+.viewer-zoom-btn:active {
+  outline: none;
+}
+
+.viewer-zoom-btn:focus-visible {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22), 0 0 0 3px rgba(255, 255, 255, 0.45);
 }
 
 .viewer-empty {

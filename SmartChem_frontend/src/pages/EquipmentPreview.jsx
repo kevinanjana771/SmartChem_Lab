@@ -6,6 +6,11 @@ import { Center, Environment, OrbitControls, useGLTF, Html } from "@react-three/
 import './EquipmentPreview.css';
 import Footer from '../components/Footer.jsx';
 
+const DEFAULT_VIEWER_CAMERA_POSITION = [0, 1.5, 4];
+const DEFAULT_VIEWER_CAMERA_TARGET = [0, 0, 0];
+const MIN_VIEWER_DISTANCE = 2.5;
+const MAX_VIEWER_DISTANCE = 10;
+
 // --- 1. Configuration for Local Model Loading ---
 const MODEL_FILES = import.meta.glob("/public/models/*.glb", {
   eager: true,
@@ -51,8 +56,9 @@ const ViewerScene = ({ url, scale, controlsRef }) => {
       <OrbitControls
         ref={controlsRef}
         enableDamping
-        minDistance={2.5}
-        maxDistance={10}
+        target={DEFAULT_VIEWER_CAMERA_TARGET}
+        minDistance={MIN_VIEWER_DISTANCE}
+        maxDistance={MAX_VIEWER_DISTANCE}
       />
     </>
   );
@@ -71,6 +77,7 @@ const EquipmentPreview = () => {
   // State for Modal
   const [showViewer, setShowViewer] = useState(false);
   const viewerControlsRef = useRef(null);
+  const resetAnimationRef = useRef(null);
 
   // --- 4. Data Fetching (Database) ---
   useEffect(() => {
@@ -118,10 +125,66 @@ const EquipmentPreview = () => {
     const zoomFactor = direction === 'in' ? 0.8 : 1.2;
     const offset = controls.object.position.clone().sub(controls.target);
     const nextOffset = offset.multiplyScalar(zoomFactor);
+    const nextDistance = nextOffset.length();
+
+    if (nextDistance < MIN_VIEWER_DISTANCE) {
+      nextOffset.setLength(MIN_VIEWER_DISTANCE);
+    } else if (nextDistance > MAX_VIEWER_DISTANCE) {
+      nextOffset.setLength(MAX_VIEWER_DISTANCE);
+    }
 
     controls.object.position.copy(controls.target.clone().add(nextOffset));
     controls.update();
   };
+
+  const resetViewer = () => {
+    const controls = viewerControlsRef.current;
+
+    if (!controls) return;
+
+    if (resetAnimationRef.current) {
+      cancelAnimationFrame(resetAnimationRef.current);
+    }
+
+    const startPosition = controls.object.position.clone();
+    const startTarget = controls.target.clone();
+    const duration = 450;
+    const startTime = performance.now();
+
+    const animateReset = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      controls.object.position.set(
+        startPosition.x + (DEFAULT_VIEWER_CAMERA_POSITION[0] - startPosition.x) * easedProgress,
+        startPosition.y + (DEFAULT_VIEWER_CAMERA_POSITION[1] - startPosition.y) * easedProgress,
+        startPosition.z + (DEFAULT_VIEWER_CAMERA_POSITION[2] - startPosition.z) * easedProgress
+      );
+      controls.target.set(
+        startTarget.x + (DEFAULT_VIEWER_CAMERA_TARGET[0] - startTarget.x) * easedProgress,
+        startTarget.y + (DEFAULT_VIEWER_CAMERA_TARGET[1] - startTarget.y) * easedProgress,
+        startTarget.z + (DEFAULT_VIEWER_CAMERA_TARGET[2] - startTarget.z) * easedProgress
+      );
+      controls.update();
+
+      if (progress < 1) {
+        resetAnimationRef.current = requestAnimationFrame(animateReset);
+      } else {
+        resetAnimationRef.current = null;
+      }
+    };
+
+    resetAnimationRef.current = requestAnimationFrame(animateReset);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (resetAnimationRef.current) {
+        cancelAnimationFrame(resetAnimationRef.current);
+      }
+    };
+  }, []);
 
   // --- 6. Render States ---
   if (loading) return <div className="loading-container"><p>Loading equipment details...</p></div>;
@@ -198,6 +261,15 @@ const EquipmentPreview = () => {
               <div className="viewer-zoom-controls">
                 <button
                   type="button"
+                  className="viewer-zoom-btn viewer-reset-btn"
+                  onClick={resetViewer}
+                  aria-label="Reset view"
+                  title="Reset view"
+                >
+                  <span className="viewer-zoom-icon viewer-reset-icon">⟲</span>
+                </button>
+                <button
+                  type="button"
                   className="viewer-zoom-btn"
                   onClick={() => adjustViewerZoom('in')}
                 >
@@ -211,7 +283,7 @@ const EquipmentPreview = () => {
                   <span className="viewer-zoom-icon viewer-zoom-icon-minus">-</span>
                 </button>
               </div>
-              <Canvas camera={{ position: [0, 1.5, 4], fov: 50 }}>
+              <Canvas camera={{ position: DEFAULT_VIEWER_CAMERA_POSITION, fov: 50 }}>
                 <ViewerScene
                   url={modelUrl}
                   scale={modelScale}
