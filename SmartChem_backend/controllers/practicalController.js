@@ -90,3 +90,23 @@ export const getPracticalChemicals = async (req, res, next) => {
         next(error);
     }
 };
+
+// Track practical completion
+export const trackPracticalCompletion = async (req, res, next) => {
+    const { id } = req.params;
+    const { user_id } = req.body;
+
+    if (!user_id) {
+        return res.status(400).json({ error: "Missing user_id" });
+    }
+
+    try {
+        await pool.query(
+            "INSERT INTO user_completed_practicals (user_id, p_id) VALUES ($1, $2) ON CONFLICT (user_id, p_id) DO UPDATE SET completed_at = CURRENT_TIMESTAMP",
+            [user_id, id]
+        );
+        res.json({ message: "Practical completion tracked" });
+    } catch (error) {
+        next(error);
+    }
+};
