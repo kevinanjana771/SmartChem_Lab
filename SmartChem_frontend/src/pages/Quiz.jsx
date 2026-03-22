@@ -75,14 +75,42 @@ const Quiz = () => {
             setCurrentIndex(currentIndex - 1);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         let newScore = 0;
+
         questions.forEach(q => {
-            // The logic relies on the option ID being "correct"
             if (answers[q.id] === "correct") newScore++;
         });
+
         setScore(newScore);
         setSubmitted(true);
+
+        // ✅ SAVE TO DATABASE
+        try {
+            const userStr = localStorage.getItem("user");
+            const user = userStr && userStr !== "undefined" ? JSON.parse(userStr) : null;
+            const userId = user?.user_id || user?.id;
+
+            if (!userId) {
+                console.warn("Quiz submit: no user logged in. Score not saved.");
+                return;
+            }
+
+            const response = await fetch("http://localhost:5001/api/quizzes/submit", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    user_id: userId,
+                    p_id: id,
+                    score: newScore,
+                    total_questions: questions.length
+                }),
+            });
+            const resData = await response.json();
+            console.log("Quiz save response:", resData);
+        } catch (error) {
+            console.error("Error saving quiz:", error);
+        }
     };
 
     const currentQuestion = questions[currentIndex];
