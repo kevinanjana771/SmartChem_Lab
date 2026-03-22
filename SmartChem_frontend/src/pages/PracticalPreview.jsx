@@ -185,8 +185,8 @@ const PracticalPreview = () => {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </motion.div>
   );
 };

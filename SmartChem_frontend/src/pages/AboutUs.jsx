@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../images/landing/sdgp-logo.png';
 import './AboutUs.css'; 
-
 
 import landingKevin from "../images/landing/kevin.jpeg";
 import landingAkinda from "../images/landing/akinda.jpg";
@@ -12,9 +11,47 @@ import landingNihara from "../images/landing/nihara.jpeg";
 import landingThaaru from "../images/landing/thaaru.jpeg";
 import Footer from '../components/Footer';
 
+// Custom Hook for Scroll Animation
+const useScrollAnimation = () => {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      },
+      {
+        threshold: 0.1, 
+        rootMargin: '0px 0px -50px 0px' 
+      }
+    );
+
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
+
+  return ref;
+};
 
 export default function AboutUs() {
   const navigate = useNavigate();
+
+  // Initialize refs
+  const headerRef = useScrollAnimation();
+  const problemRef = useScrollAnimation();
+  const solutionRef = useScrollAnimation();
+  const featuresRef = useScrollAnimation();
+  const teamRef = useScrollAnimation();
 
   const teamMembers = [
     { name: 'Kevin Anjana', role: 'Team Leader', image: landingKevin, bio: 'Undergraduate Software Engineer' },
@@ -43,17 +80,20 @@ export default function AboutUs() {
       </nav>
 
       {/* BACKGROUND HEADER */}
-      <section className="about-header">
+      <section ref={headerRef} className="about-header scroll-section">
         <div className="about-header-content">
           <h1 className="page-title">About SmartChem Lab</h1>
           <p className="page-subtitle">
             Background of Our Application
           </p>
           <p className="page-description">
-            SmartChem Lab was designed to bridge the gap between theoretical knowledge and practical application 
-            for Advanced Level Chemistry students in Sri Lanka. By leveraging modern web technologies, we provide a 
-            safe, interactive, and comprehensive environment where students can explore lab equipment, 
-            practice experiments, and test their knowledge without the constraints of a physical laboratory.
+            SmartChem Lab is a modern digital platform developed to bridge the gap between theoretical 
+            understanding and practical application for Advanced Level Chemistry students in Sri Lanka. 
+            By integrating advanced web technologies with interactive learning tools, the platform offers a safe, 
+            immersive, and accessible virtual laboratory experience. Students can explore laboratory equipment in 
+            detail, simulate experiments, and reinforce their knowledge through guided practice all without the 
+            limitations of a traditional physical lab. SmartChem Lab aims to enhance conceptual clarity, promote 
+            self-directed learning, and support academic excellence in chemistry education.
           </p>
         </div>
       </section>
@@ -61,33 +101,45 @@ export default function AboutUs() {
       {/* PROBLEM & SOLUTION SECTION */}
       <section className="problem-solution-section">
         <div className="ps-container">
-          <div className="ps-card problem">
-            <div className="ps-icon">⚠️</div>
-            <h2 className="ps-title">1.3 Problem Statement</h2>
-            <p className="ps-text">
-              Sri Lankan A/L Chemistry students lack an accessible, interactive, and syllabus-aligned digital platform 
-              that allows them to safely and effectively practice and understand chemistry experiments.
-            </p>
+          
+          {/* PROBLEM CARD - Slides from Left */}
+          <div ref={problemRef} className="ps-card problem scroll-section">
+            <div className="ps-header">
+              <span className="ps-icon">⚠️</span>
+              <h2 className="ps-title">Challenges in Traditional Chemistry Learning</h2>
+            </div>
+            <div className="ps-body">
+              <p className="ps-text">
+                Traditional chemistry education often faces limitations such as restricted laboratory 
+                access, safety concerns, and insufficient practical exposure. These challenges hinder 
+                students from fully understanding experimental procedures and developing confidence in 
+                laboratory environments, ultimately affecting their academic performance and interest in 
+                the subject.
+              </p>
+            </div>
           </div>
           
-          <div className="ps-card solution">
-            <div className="ps-icon">💡</div>
-            <h2 className="ps-title">1.4 Proposed Solution</h2>
-            <p className="ps-text">
-              SmartChem Lab is the suggested solution, an application that is either mobile-based or web-based, which is 
-              intended to support the learning of chemistry through virtual simulation, interactive theory modules, 
-              guided experiment walkthroughs, and personalized feedback.
-            </p>
-            <p className="ps-note">
-              The intention is not to entirely substitute the labs with virtual ones, but to supplement and make easier 
-              the students’ understanding before and after the actual practice sessions.
-            </p>
+          {/* SOLUTION CARD - Slides from Right */}
+          <div ref={solutionRef} className="ps-card solution scroll-section">
+            <div className="ps-header">
+              <span className="ps-icon">💡</span>
+              <h2 className="ps-title">Our Innovative Solution</h2>
+            </div>
+            <div className="ps-body">
+              <p className="ps-text">
+                SmartChem Lab addresses these challenges by offering a comprehensive digital solution that 
+                integrates virtual simulations, interactive learning modules, and guided experiment walkthroughs. 
+                The platform empowers students to explore, practice, and revise laboratory concepts at their own 
+                pace, enhancing both understanding and retention.
+              </p>
+            </div>
           </div>
+          
         </div>
       </section>
 
       {/* KEY FEATURES SECTION */}
-      <section className="features-section">
+      <section ref={featuresRef} className="features-section scroll-section animate-children">
         <h2 className="section-title dark">Platform Highlights</h2>
         <div className="features-grid">
           <div className="feature-card">
@@ -114,7 +166,7 @@ export default function AboutUs() {
       </section>
 
       {/* TEAM SECTION */}
-      <section className="about">
+      <section ref={teamRef} className="about scroll-section animate-children">
         <h2 className="section-title dark">Meet Our Team</h2>
         <p className="section-subtitle dark">
           Our dedicated team of experts brings together chemistry education, technology innovation, and student success.
@@ -123,11 +175,11 @@ export default function AboutUs() {
         <div className="team-grid">
           {teamMembers.map((member, index) => (
             <div key={index} className="team-card">
-                  <div className="team-image-container">
-                    {member.image && (
-                      <img src={member.image} alt={member.name} className="team-image" />
-                    )}
-                  </div>
+              <div className="team-image-container">
+                {member.image && (
+                  <img src={member.image} alt={member.name} className="team-image" />
+                )}
+              </div>
               <div className="team-info">
                 <h3 className="team-name">{member.name}</h3>
                 <p className="team-role">{member.role}</p>
