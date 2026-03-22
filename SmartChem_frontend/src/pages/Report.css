@@ -80,6 +80,7 @@
     opacity: 0;
     transform: translateY(-15px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -204,7 +205,9 @@
   font-size: 1.9rem;
   font-weight: 800;
   color: hsl(179, 94%, 46%);
-}  /*#10b981*/
+}
+
+/*#10b981*/
 
 /* Label */
 .label {
@@ -222,9 +225,12 @@
 
 /* ===== Layout for Bottom Two Cards ===== */
 .report-flex {
-  display: flex;              /* makes items horizontal */
-  gap: 2rem;                  /* space between them */
-  align-items: flex-start;    /* align to top */
+  display: flex;
+  /* makes items horizontal */
+  gap: 2rem;
+  /* space between them */
+  align-items: flex-start;
+  /* align to top */
   justify-content: space-between;
   margin-top: 2rem;
 }

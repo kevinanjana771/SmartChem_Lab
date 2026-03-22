@@ -12,43 +12,43 @@ const Equipments = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
- useEffect(() => {
-  // Replace with your actual Project ID and Bucket Name
-  const STORAGE_URL = "https://kwbuvntvutrihygxaxqo.supabase.co/storage/v1/object/public/equipments_image";
+  useEffect(() => {
+    // Replace with your actual Project ID and Bucket Name
+    const STORAGE_URL = "https://kwbuvntvutrihygxaxqo.supabase.co/storage/v1/object/public/equipments_image";
 
-  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
-  
-  fetch(`${baseUrl}/equipment`)
-    .then((res) => {
-      if (!res.ok) throw new Error("Failed to fetch equipment");
-      return res.json();
-    })
-    .then((data) => {
-      const formattedData = data.map(item => {
-        // Since 'img' is a JSON array in Supabase (e.g., ["drill.png"])
-        // we check if it's an array and pick the first item [0]
-        const fileName = Array.isArray(item.img) && item.img.length > 0 
-          ? item.img[0] 
-          : item.img; // Fallback if it's somehow just a string
+    const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
 
-        return {
-          id: item.e_id,
-          name: item.e_name,
-          // Build the full public URL
-          image: fileName 
-            ? `${STORAGE_URL}/${fileName}` 
-            : "https://via.placeholder.com/150?text=No+Image"
-        };
+    fetch(`${baseUrl}/equipment`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch equipment");
+        return res.json();
+      })
+      .then((data) => {
+        const formattedData = data.map(item => {
+          // Since 'img' is a JSON array in Supabase (e.g., ["drill.png"])
+          // we check if it's an array and pick the first item [0]
+          const fileName = Array.isArray(item.img) && item.img.length > 0
+            ? item.img[0]
+            : item.img; // Fallback if it's somehow just a string
+
+          return {
+            id: item.e_id,
+            name: item.e_name,
+            // Build the full public URL
+            image: fileName
+              ? `${STORAGE_URL}/${fileName}`
+              : "https://via.placeholder.com/150?text=No+Image"
+          };
+        });
+        setEquipmentList(formattedData);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError("Could not load equipment list.");
+        setLoading(false);
       });
-      setEquipmentList(formattedData);
-      setLoading(false);
-    })
-    .catch((err) => {
-      console.error(err);
-      setError("Could not load equipment list.");
-      setLoading(false);
-    });
-}, []);
+  }, []);
 
   const filteredEquipments = equipmentList.filter((eq) =>
     eq.name.toLowerCase().includes(searchTerm.toLowerCase())
