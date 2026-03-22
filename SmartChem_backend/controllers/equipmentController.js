@@ -67,3 +67,23 @@ export const updateEquipmentScale = async (req, res, next) => {
         next(error);
     }
 };
+
+// Track equipment view
+export const trackEquipmentView = async (req, res, next) => {
+    const { id } = req.params;
+    const { user_id } = req.body;
+
+    if (!user_id) {
+        return res.status(400).json({ error: "Missing user_id" });
+    }
+
+    try {
+        await pool.query(
+            "INSERT INTO user_equipment_views (user_id, e_id) VALUES ($1, $2) ON CONFLICT (user_id, e_id) DO UPDATE SET viewed_at = CURRENT_TIMESTAMP",
+            [user_id, id]
+        );
+        res.json({ message: "Equipment view tracked" });
+    } catch (error) {
+        next(error);
+    }
+};
