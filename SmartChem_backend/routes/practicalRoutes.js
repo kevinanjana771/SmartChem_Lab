@@ -1,40 +1,18 @@
 import express from "express";
-import {
-  getAllPracticals,
-  getPracticalById,
-  getPracticalSteps,
-  getPracticalEquipments, 
-  getPracticalChemicals
-
-} from "../controllers/practicalController.js";
+import { getEquipmentById, getAllEquipment, updateEquipmentScale, trackEquipmentView } from "../controllers/equipmentController.js";
 
 const router = express.Router();
 
+// Route to get all equipment
+router.get("/", getAllEquipment);
 
-//GET ALL PRACTICALS
-//GET /api/practicals
+// Route to get a specific equipment by ID
+router.get("/:id", getEquipmentById);
 
-router.get("/", getAllPracticals);
+// Route to update equipment scale
+router.patch("/:id/scale", updateEquipmentScale);
 
-
-//GET SINGLE PRACTICAL
-//GET /api/practicals/:id
-
-router.get("/:id", getPracticalById);
-
-
-//GET STEPS FOR PRACTICAL
-//GET /api/practicals/:id/steps
-
-router.get("/:id/steps", getPracticalSteps);
-
-
-//GET EUIPMENTS FOR PRACTICAL (RESTORED)
-//GET /api/practicals/:id/equipments
-
-router.get("/:id/equipments", getPracticalEquipments);
-
-router.get("/:id/chemicals", getPracticalChemicals);
-
+// Route to track equipment view
+router.post("/:id/view", trackEquipmentView);
 
 export default router;
