@@ -69,23 +69,42 @@ const ForgotPassword = () => {
     setLoading(false);
   };
 
-  // Generate Bubbles (Same as Login)
-  const bubbles = Array.from({ length: 20 }).map((_, i) => (
-    <div 
-      key={i} 
-      className="bubble" 
-      style={{
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
-        width: `${Math.random() * 30 + 5}px`,
-        height: `${Math.random() * 30 + 5}px`,
-        animationDuration: `${Math.random() * 4 + 3}s`,
-        animationDelay: `${Math.random() * 2}s`,
-        opacity: Math.random() * 0.5 + 0.1,
-        transform: `translate(${mousePosition.x * -30}px, ${mousePosition.y * -30}px)`
-      }}
-    />
-  ));
+  // Generate Molecules (New Premium Animation)
+  const molecules = Array.from({ length: 15 }).map((_, i) => {
+    const size = Math.random() * 40 + 20;
+    const duration = Math.random() * 10 + 10;
+    const delay = Math.random() * -20;
+    
+    return (
+      <motion.div 
+        key={i} 
+        className="molecule-node" 
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          width: `${size}px`,
+          height: `${size}px`,
+          opacity: Math.random() * 0.3 + 0.1,
+          background: `radial-gradient(circle at 30% 30%, rgba(16, 185, 129, 0.4), rgba(6, 78, 59, 0.1))`
+        }}
+        animate={{
+          x: [0, (Math.random() - 0.5) * 200, 0],
+          y: [0, (Math.random() - 0.5) * 200, 0],
+          rotate: [0, 360],
+          scale: [1, 1.2, 1]
+        }}
+        transition={{
+          duration: duration,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: delay
+        }}
+      >
+        <div className="molecule-core" />
+        <div className="molecule-orbit" />
+      </motion.div>
+    );
+  });
 
   return (
     <motion.div className="login-page-wrapper"
@@ -102,12 +121,13 @@ const ForgotPassword = () => {
           onMouseMove={handleMouseMove}
         >
           <div className="gradient-bg"></div>
-          <div className="particles">{bubbles}</div>
+          <div className="particles">{molecules}</div>
 
           <div 
             className="center-icon"
             style={{ transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)` }}
           >
+            <div className="flask-scanner" />
             <svg viewBox="0 0 24 24" fill="none" className="flask-icon">
               <path d="M10 2v7.31" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M14 2v7.31" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
