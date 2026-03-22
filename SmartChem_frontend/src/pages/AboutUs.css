@@ -98,22 +98,40 @@
 
 .page-subtitle {
   font-size: 1.25rem;
-  color: #10b981;
-  font-weight: 600;
-  margin-bottom: 2.0rem;
-  margin-top: 2.0rem;
+  color: #059669; /* Slightly darker green for contrast */
+  font-weight: 700;
+  margin-bottom: 1rem;
+  margin-top: 2.5rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  display: inline-block;
+  border-bottom: 3px solid #10b981;
+  padding-bottom: 0.5rem;
 }
 
+
 .page-description {
-  max-width: 800px;
-  margin: 0 auto;
-  font-size: 1.125rem;
-  color: #4b5563;
-  line-height: 1.8;
-  text-align: justify;
+  max-width: 900px;
+  margin: 2.5rem auto 0;
+  font-size: 1.15rem;
+  color: #374151;
+  line-height: 1.9;
+  text-align: center;
+  
+  /* Premium Glass Styling */
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 24px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+  
+  /* Animation subtle entrance */
+  position: relative;
+  z-index: 2;
 }
+
 
 /* Problem & Solution Section */
 .problem-solution-section {
