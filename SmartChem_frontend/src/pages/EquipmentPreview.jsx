@@ -73,6 +73,7 @@ const EquipmentPreview = () => {
   const [equipment, setEquipment] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [equipmentList, setEquipmentList] = useState([]);
 
   // State for Modal
   const [showViewer, setShowViewer] = useState(false);
@@ -102,6 +103,25 @@ const EquipmentPreview = () => {
       });
   }, [id]);
 
+  useEffect(() => {
+    const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
+
+    fetch(`${baseUrl}/equipment`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch equipment list');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setEquipmentList(Array.isArray(data) ? data : []);
+      })
+      .catch((err) => {
+        console.error("Error fetching equipment list:", err);
+        setEquipmentList([]);
+      });
+  }, []);
+
   // --- 5. Helper to Resolve Model URL ---
   const modelFilename = equipment?.model_filename;
 
@@ -113,6 +133,15 @@ const EquipmentPreview = () => {
   const modelUrl = modelKey ? MODEL_FILES[modelKey] : null;
   const parsedModelScale = Number(equipment?.model_scale);
   const modelScale = Number.isFinite(parsedModelScale) ? parsedModelScale : 19;
+  const currentEquipmentIndex = equipmentList.findIndex(
+    (item) => String(item.e_id) === String(id)
+  );
+  const previousEquipment = currentEquipmentIndex > 0
+    ? equipmentList[currentEquipmentIndex - 1]
+    : null;
+  const nextEquipment = currentEquipmentIndex >= 0 && currentEquipmentIndex < equipmentList.length - 1
+    ? equipmentList[currentEquipmentIndex + 1]
+    : null;
   const previewImageUrl = equipment?.image
     ? `${STORAGE_URL}/${equipment.image}`
     : `https://via.placeholder.com/400x400/3b82f6/ffffff?text=${encodeURIComponent(equipment?.e_name || "Equipment")}`;
@@ -199,7 +228,28 @@ const EquipmentPreview = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <button className="back-btn" onClick={() => navigate(-1)}>← Back to Equipments</button>
+      <div className="preview-topbar">
+        <button className="back-btn" onClick={() => navigate(-1)}>← Back to Equipments</button>
+
+        <div className="equip-sequence-nav">
+          <button
+            type="button"
+            className="equip-sequence-btn"
+            onClick={() => previousEquipment && navigate(`/equipments/${previousEquipment.e_id}`)}
+            disabled={!previousEquipment}
+          >
+            ← Previous
+          </button>
+          <button
+            type="button"
+            className="equip-sequence-btn"
+            onClick={() => nextEquipment && navigate(`/equipments/${nextEquipment.e_id}`)}
+            disabled={!nextEquipment}
+          >
+            Next →
+          </button>
+        </div>
+      </div>
 
       <div className="preview-shell">
         <div className="preview-layout">
