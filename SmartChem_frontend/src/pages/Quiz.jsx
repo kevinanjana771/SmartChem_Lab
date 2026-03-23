@@ -8,6 +8,7 @@ import bannerImg from '../images/Quiz/QuizF.jpg';
 const Quiz = () => {
     const navigate = useNavigate();
     const { id } = useParams(); // Get the p_id from the URL 
+    const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
 
     const [started, setStarted] = useState(false);
 
@@ -29,7 +30,7 @@ const Quiz = () => {
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
-                const response = await fetch(`http://localhost:5001/api/quizzes/${id}`);
+                const response = await fetch(`${baseUrl}/quizzes/${id}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch questions');
                 }
@@ -43,7 +44,7 @@ const Quiz = () => {
         };
 
         fetchQuestions();
-    }, [id]);
+    }, [baseUrl, id]);
 
     // Timer Logic
     useEffect(() => {
@@ -96,7 +97,7 @@ const Quiz = () => {
                 return;
             }
 
-            const response = await fetch("http://localhost:5001/api/quizzes/submit", {
+            const response = await fetch(`${baseUrl}/quizzes/submit`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

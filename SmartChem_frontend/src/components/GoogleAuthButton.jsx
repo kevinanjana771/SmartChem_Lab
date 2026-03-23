@@ -12,7 +12,8 @@ const GoogleAuthButton = ({ setUser }) => {
       const token = response.credential;
       console.log("📌 Token:", token);
 
-      const res = await axios.post("http://localhost:5001/api/auth/google", {
+      const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
+      const res = await axios.post(`${baseUrl}/auth/google`, {
         token,
       });
 
