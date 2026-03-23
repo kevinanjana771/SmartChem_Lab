@@ -19,32 +19,57 @@
    2. Dark Overlay (::before) to make text readable
 */
 .sidebar {
-  background: conic-gradient(
-    from 180deg at 50% 50%,
-    #022c22, /* Dark Emerald */
-    #10b981, /* Main Green */
-    #0e7490, /* Teal */
-    #1e3a8a, /* Dark Blue */
-    #022c22  /* Back to Emerald */
-  );
-  /* Slight rotation to make the bend visible */
-  background-size: 200% 200%;
-  animation: bgRotate 20s linear infinite;
+  background: linear-gradient(180deg, #031712 0%, #0b2c25 35%, #0f172a 100%);
 }
-
-@keyframes bgRotate {
-  from { background-position: 0% 50%; }
-  to { background-position: 100% 50%; }
-}
-
 
 .sidebar::before {
   content: '';
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.6); 
-  z-index: 0; 
+  z-index: 1; 
   backdrop-filter: blur(5px);
+}
+
+.sidebar::after {
+  content: '';
+  position: absolute;
+  inset: -35%;
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    rgba(2, 44, 34, 0.95),
+    rgba(16, 185, 129, 0.92),
+    rgba(14, 116, 144, 0.88),
+    rgba(30, 58, 138, 0.84),
+    rgba(2, 44, 34, 0.95)
+  );
+  filter: blur(18px);
+  opacity: 0.72;
+  transform: translate3d(0, 0, 0) scale(1.18);
+  transform-origin: center;
+  animation:
+    sidebarGradientSpin 16s linear infinite,
+    sidebarGradientPulse 8s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes sidebarGradientSpin {
+  0% {
+    transform: rotate(0deg) scale(1.18);
+  }
+  100% {
+    transform: rotate(360deg) scale(1.18);
+  }
+}
+
+@keyframes sidebarGradientPulse {
+  0%, 100% {
+    opacity: 0.62;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
 /*HEADER & LOGO*/
