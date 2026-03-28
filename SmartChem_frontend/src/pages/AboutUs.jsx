@@ -107,6 +107,10 @@ export default function AboutUs() {
       {/* 2. CHALLENGE SECTION - Zag Layout */}
       <section ref={problemRef} className="about-section scroll-section alt-bg">
         <div className="section-content split reverse">
+          <div className="section-visual">
+             <div className="floating-orb alert">⚠️</div>
+             <div className="orbital-ring red-ring"></div>
+          </div>
           <div className="section-text">
             <h2 className="main-gradient-title red">The Challenge</h2>
             <h3 className="sub-heading">Traditional Learning Gaps</h3>
@@ -117,10 +121,6 @@ export default function AboutUs() {
                 students from building confidence in laboratory environments.
               </p>
             </div>
-          </div>
-          <div className="section-visual">
-             <div className="floating-orb alert">⚠️</div>
-             <div className="orbital-ring red-ring"></div>
           </div>
         </div>
       </section>
