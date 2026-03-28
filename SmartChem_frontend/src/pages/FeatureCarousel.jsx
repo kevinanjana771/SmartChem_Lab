@@ -12,13 +12,13 @@ import {
     Rotate3d,
     HelpCircle,
 } from "lucide-react"; // Using Lucide for consistency
-import Practical from "../images/Feature/practicale sutie.png";
+import Practical from "../images/Feature/practicale-sutie.png";
 import safety from "../images/Feature/Lab-safety.png";
 import GC from "../images/Feature/global-community.jpg";
-import SQ from "../images/Feature/quiz.jpg";    
+import SQ from "../images/Feature/quiz.png";    
 import view from "../images/Feature/3D-view.png";
-import tracking from "../images/Feature/tracking.jpg";
-import theory from "../images/Feature/theory.jpg";
+import tracking from "../images/Feature/tracking.png";
+import theory from "../images/Feature/theory.png";
 // Chemistry Themed Features
 const FEATURES = [
     {
