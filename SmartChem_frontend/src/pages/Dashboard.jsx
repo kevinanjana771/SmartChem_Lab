@@ -15,26 +15,26 @@ const practicalImg4 = `${STORAGE_URL}/p4.png`;
 const lessons = [
   {
     id: 1,
-    title: "Introduction to Chemistry",
-    lesson: "LESSON 2.4",
+    title: "Properties of Cathode Rays",
+    lesson: "LESSON 1.1",
     image: practicalImg1,
   },
   {
     id: 2,
-    title: "Salt Crystal Formation Cryptic",
-    lesson: "LESSON 2.5",
+    title: "Molecular and Ionic Shapes Using Models",
+    lesson: "LESSON 2.1",
     image: practicalImg2,
   },
   {
     id: 3,
-    title: "Ester Preparation Experiment",
-    lesson: "LESSON 2.6",
+    title: "Safe Handling of Glassware and Four-Beam Balance",
+    lesson: "LESSON 3.1",
     image: practicalImg3,
   },
   {
     id: 4,
-    title: "Ester Preparation Experiment",
-    lesson: "LESSON 2.7",
+    title: "Preparation of Standard Solutions",
+    lesson: "LESSON 3.2",
     image: practicalImg4,
   },
 ];
