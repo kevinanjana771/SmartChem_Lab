@@ -1,9 +1,17 @@
-/* ABOUT PAGE SPECIFIC STYLES */
+.app {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
 .about-us-page {
-  background: radial-gradient(circle at 30% 30%, rgba(192, 242, 211, 0.7), rgba(255, 255, 255, 0.95));
   min-height: 100vh;
   padding-top: 20px;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 /* --- ANIMATION CLASSES --- */
 
@@ -12,6 +20,7 @@
   opacity: 0;
   transform: translateY(50px);
   transition: all 1s ease-out;
+  backdrop-filter: blur(2px);
 }
 
 .scroll-section.is-visible {
@@ -51,6 +60,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(2px);
 }
 
 .section-content.split {
@@ -320,6 +330,7 @@
   margin: 0 auto;
   padding: 0 1rem;
   margin-top: 2rem;
+  margin-bottom: 2rem;
   width: 100%;
 }
 

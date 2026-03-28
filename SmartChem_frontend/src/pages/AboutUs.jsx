@@ -10,6 +10,7 @@ import landingSamudi from "../images/landing/samudi.jpeg";
 import landingNihara from "../images/landing/nihara.jpeg";
 import landingThaaru from "../images/landing/thaaru.jpeg";
 import Footer from '../components/Footer';
+import BackgroundCanvas from '../components/BackgroundCanvas';
 
 // Custom Hook for Scroll Animation
 const useScrollAnimation = () => {
@@ -64,6 +65,7 @@ export default function AboutUs() {
 
   return (
     <div className="app">
+      <BackgroundCanvas />
       {/* NAVBAR */}
       <nav className="navbar">
         <div className="nav-container">
