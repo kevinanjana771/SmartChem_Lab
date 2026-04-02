@@ -10,7 +10,7 @@ export const getUserReport = async (req, res, next) => {
         const totalEquipment = parseInt(totalEquipResult.rows[0].count, 10);
 
         const viewedEquipResult = await pool.query(
-            "SELECT COUNT(DISTINCT e_id) FROM user_equipment_views WHERE user_id = $1", 
+            "SELECT COUNT(DISTINCT e_id) FROM user_equipment_views WHERE user_id = $1",
             [userId]
         );
         const viewedEquipment = parseInt(viewedEquipResult.rows[0].count, 10);
@@ -28,7 +28,7 @@ export const getUserReport = async (req, res, next) => {
             "SELECT p_id, score, total_questions FROM user_quiz_results WHERE user_id = $1 ORDER BY p_id ASC",
             [userId]
         );
-        
+
         // Prepare arrays for the chart: it expects scores mapped closely to practicals
         // Let's create an array of scores. We can map `p_id` to its score.
         // Frontend expects just an array of `quizScores`. We will return a structured list.
@@ -54,6 +54,22 @@ export const getUserReport = async (req, res, next) => {
 
     } catch (error) {
         console.error("Error fetching user report:", error);
+        next(error);
+    }
+};
+
+// DELETE /api/reports/reset/:userId
+export const resetUserProgress = async (req, res, next) => {
+    const { userId } = req.params;
+
+    try {
+        await pool.query("DELETE FROM user_equipment_views WHERE user_id = $1", [userId]);
+        await pool.query("DELETE FROM user_completed_practicals WHERE user_id = $1", [userId]);
+        await pool.query("DELETE FROM user_quiz_results WHERE user_id = $1", [userId]);
+
+        res.json({ message: "User progress reset successfully" });
+    } catch (error) {
+        console.error("Error resetting user progress:", error);
         next(error);
     }
 };
