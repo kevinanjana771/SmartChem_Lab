@@ -1,5 +1,5 @@
 import express from "express";
-import { getQuestionsByPracticalId, saveQuizResult} from "../controllers/quizController.js";
+import { getQuestionsByPracticalId, saveQuizResult } from "../controllers/quizController.js";
 
 const router = express.Router();
 
