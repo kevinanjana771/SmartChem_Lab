@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./Report.css";
 import Footer from '../components/Footer';
+import ReportImg from '../images/report/report.png';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,17 +26,35 @@ ChartJS.register(
 /* ================= Feedback Card ================= */
 
 const FeedbackCard = () => {
+  const navigate = useNavigate();
+  const isLoggedIn = !!localStorage.getItem("user");
+
   return (
     <div className="feedback-container">
       <div className="feedback-content">
-        <h2 className="feedback-heading">🌟 Chemistry Insight Report</h2>
-        <p className="feedback-message">
-          Amazing progress! You’ve completed several practicals and are building
-          strong laboratory skills. Keep reviewing Safety Methods and aim to
-          improve your quiz scores to unlock your next achievement badge.
-        </p>
-        <div className="feedback-highlight">
-          🚀 You are on the right path to becoming a Junior Chemist!
+        <div className="feedback-text-section">
+          <h2 className="feedback-heading"> Laboratory Performance Report</h2>
+          <p className="feedback-message">
+            Your engagement across practical completion,
+            equipment exploration, and quiz performance shows
+            steady learning progress. Continue building on this 
+            foundation to strengthen your chemistry knowledge and laboratory skills.
+          </p>
+          {isLoggedIn ? (
+            <div className="feedback-highlight">
+               You are on the right path to becoming a Junior Chemist!
+            </div>
+          ) : (
+            <button
+              className="feedback-highlight"
+              onClick={() => navigate('/login')}
+            >
+              Log in to view your progress
+            </button>
+          )}
+        </div>
+        <div className="feedback-image-section">
+          <img src={ReportImg} alt="Chemistry Tracking" className="feedback-image" />
         </div>
       </div>
     </div>
@@ -76,7 +95,7 @@ const EquipmentProgress = ({ total, viewed }) => {
 /*==================Quiz Progress=====================*/
 
 const QuizProgressChart = ({ quizScoresData, totalPracticals }) => {
-  
+
   // We need to map `quizScoresData` mapping `p_id` to its score.
   // `quizScoresData` looks like: [{ p_id: 1, score: 8, total_questions: 10, chart_score: 8 }]
   const labels = Array.from(
@@ -86,14 +105,14 @@ const QuizProgressChart = ({ quizScoresData, totalPracticals }) => {
 
   // Initialize all scores to 0
   const scoreData = new Array(totalPracticals).fill(0);
-  
+
   quizScoresData.forEach(item => {
     // p_id is 1-indexed. Array is 0-indexed.
     const practicalIndex = parseInt(item.p_id, 10) - 1;
     if (practicalIndex >= 0 && practicalIndex < totalPracticals) {
-        // use chart_score or fallback to score
-        const scoreValue = parseFloat(item.chart_score !== undefined ? item.chart_score : item.score);
-        scoreData[practicalIndex] = scoreValue;
+      // use chart_score or fallback to score
+      const scoreValue = parseFloat(item.chart_score !== undefined ? item.chart_score : item.score);
+      scoreData[practicalIndex] = scoreValue;
     }
   });
 
@@ -191,10 +210,10 @@ const Report = () => {
         const userStr = localStorage.getItem("user");
         const user = userStr && userStr !== "undefined" ? JSON.parse(userStr) : null;
         const userId = user?.user_id || user?.id;
-        
+
         if (!userId) {
-            setLoading(false);
-            return; // Stay empty if the user is not logged in
+          setLoading(false);
+          return; // Stay empty if the user is not logged in
         }
 
         const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
@@ -231,12 +250,7 @@ const Report = () => {
     <div className="report-page">
       <FeedbackCard />
 
-      {/* Not logged-in banner */}
-      {!localStorage.getItem("user") && (
-        <div style={{ textAlign: "center", padding: "20px", color: "#94a3b8", fontSize: "14px" }}>
-          ⚠️ Log in to see your personal progress data.
-        </div>
-      )}
+
 
       <div className="report-flex">
         <div className="progress-container-card">
