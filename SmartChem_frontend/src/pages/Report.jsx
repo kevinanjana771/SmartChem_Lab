@@ -11,6 +11,7 @@ import {
   LineElement,
   Tooltip,
   Legend,
+  Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
@@ -20,7 +21,8 @@ ChartJS.register(
   PointElement,
   LineElement,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 );
 
 /* ================= Feedback Card ================= */
@@ -37,12 +39,12 @@ const FeedbackCard = () => {
           <p className="feedback-message">
             Your engagement across practical completion,
             equipment exploration, and quiz performance shows
-            steady learning progress. Continue building on this 
-            foundation to strengthen your chemistry knowledge and laboratory skills.
+            steady learning progress.
           </p>
+
           {isLoggedIn ? (
             <div className="feedback-highlight">
-               You are on the right path to becoming a Junior Chemist!
+              You are on the right path to becoming a Junior Chemist!
             </div>
           ) : (
             <button
@@ -53,6 +55,7 @@ const FeedbackCard = () => {
             </button>
           )}
         </div>
+
         <div className="feedback-image-section">
           <img src={ReportImg} alt="Chemistry Tracking" className="feedback-image" />
         </div>
@@ -73,10 +76,7 @@ const EquipmentProgress = ({ total, viewed }) => {
       <div
         className="circle"
         style={{
-          background: `conic-gradient(
-            #10b981 ${percentage}%,
-            #e5e7eb ${percentage}% 100%
-          )`,
+          background: `conic-gradient(#10b981 ${percentage}%, #e5e7eb ${percentage}% 100%)`,
         }}
       >
         <div className="circle-inner">
@@ -86,51 +86,39 @@ const EquipmentProgress = ({ total, viewed }) => {
       </div>
 
       <div className="equipment-footer">
-        {viewed} / {total}  Viewed Equipment
+        {viewed} / {total} Viewed Equipment
       </div>
     </div>
   );
 };
 
-/*==================Quiz Progress=====================*/
+/* ================= Quiz Progress ================= */
 
 const QuizProgressChart = ({ quizScoresData, totalPracticals }) => {
 
-  // We need to map `quizScoresData` mapping `p_id` to its score.
-  // `quizScoresData` looks like: [{ p_id: 1, score: 8, total_questions: 10, chart_score: 8 }]
-  const labels = Array.from(
-    { length: totalPracticals },
-    (_, i) => i + 1
-  );
-
-  // Initialize all scores to 0
+  const labels = Array.from({ length: totalPracticals }, (_, i) => i + 1);
   const scoreData = new Array(totalPracticals).fill(0);
 
   quizScoresData.forEach(item => {
-    // p_id is 1-indexed. Array is 0-indexed.
-    const practicalIndex = parseInt(item.p_id, 10) - 1;
-    if (practicalIndex >= 0 && practicalIndex < totalPracticals) {
-      // use chart_score or fallback to score
-      const scoreValue = parseFloat(item.chart_score !== undefined ? item.chart_score : item.score);
-      scoreData[practicalIndex] = scoreValue;
+    const index = parseInt(item.p_id, 10) - 1;
+    if (index >= 0 && index < totalPracticals) {
+      scoreData[index] = parseFloat(item.chart_score ?? item.score);
     }
   });
 
   const data = {
-    labels: labels,
-    datasets: [
-      {
-        label: "Quiz Score",
-        data: scoreData,
-        borderColor: "#3b82f6",
-        backgroundColor: "rgba(59, 130, 246, 0.1)",
-        tension: 0.1,
-        fill: true,
-        spanGaps: true, // will connect lines across missed practicals
-        pointRadius: 4,
-        pointBackgroundColor: "#3b82f6",
-      },
-    ],
+    labels,
+    datasets: [{
+      label: "Quiz Score",
+      data: scoreData,
+      borderColor: "#3b82f6",
+      backgroundColor: "rgba(59, 130, 246, 0.1)",
+      tension: 0.1,
+      fill: true,
+      spanGaps: true, // will connect lines across missed practicals
+      pointRadius: 4,
+      pointBackgroundColor: "#3b82f6",
+    }],
   };
 
   const options = {
@@ -179,14 +167,10 @@ const QuizProgressChart = ({ quizScoresData, totalPracticals }) => {
 
   return (
     <div className="quiz-chart-card">
-      <h2 className="quiz-title">
-        Quiz Performance Progress
-      </h2>
-
+      <h2 className="quiz-title">Quiz Performance Progress</h2>
       <div className="chart-wrapper">
         <Line data={data} options={options} />
       </div>
-
     </div>
   );
 };
@@ -202,75 +186,145 @@ const Report = () => {
     quizScores: [],
     totalPracticals: TOTAL_PRACTICALS_DEFAULT
   });
+
   const [loading, setLoading] = useState(true);
+  const [showConfirm, setShowConfirm] = useState(false); //controls the popup(modal) is visible
+  const [resetLoading, setResetLoading] = useState(false);//shows "Resetting..." while API is running
+
+  /* ===== Fetch Report ===== */
+  const fetchReport = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user?.user_id || user?.id;
+
+      if (!userId) return setLoading(false);
+
+      const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
+      const res = await fetch(`${baseUrl}/reports/user/${userId}`);
+      const data = await res.json();
+
+      setReportData(prev => ({
+        ...prev,
+        totalPracticals: data.totalPracticals || prev.totalPracticals,
+        equipment: data.equipment || prev.equipment,
+        completedPracticals: (data.completedPracticals || []).map(Number),
+        quizScores: data.quizScores || []
+      }));
+
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchReport = async () => {
-      try {
-        const userStr = localStorage.getItem("user");
-        const user = userStr && userStr !== "undefined" ? JSON.parse(userStr) : null;
-        const userId = user?.user_id || user?.id;
-
-        if (!userId) {
-          setLoading(false);
-          return; // Stay empty if the user is not logged in
-        }
-
-        const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
-        const response = await fetch(`${baseUrl}/reports/user/${userId}`);
-        if (!response.ok) throw new Error("Failed to fetch report data");
-        const data = await response.json();
-        setReportData(prev => ({
-          ...prev,
-          totalPracticals: data.totalPracticals || prev.totalPracticals,
-          equipment: data.equipment || prev.equipment,
-          completedPracticals: (data.completedPracticals || []).map(id => Number(id)),
-          quizScores: data.quizScores || []
-        }));
-      } catch (error) {
-        console.error("Report fetch error:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchReport();
   }, []);
 
-  const practicals = Array.from({ length: reportData.totalPracticals }, (_, i) => i + 1);
+  /* ===== RESET FUNCTION ===== */
+  const handleResetProgress = async () => {
+    try {
+      setResetLoading(true);
 
-  if (loading) {
-    return (
-      <div className="report-page" style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", color: "white" }}>
-        <h2>Loading Report...</h2>
-      </div>
-    );
-  }
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user?.user_id || user?.id;
+
+      const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
+
+      await fetch(`${baseUrl}/reports/reset/${userId}`, {
+        method: "DELETE"
+      });
+
+      await fetchReport(); // refresh without reload
+
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setResetLoading(false);
+      setShowConfirm(false);
+    }
+  };
+
+  const practicals = Array.from(
+    { length: reportData.totalPracticals },
+    (_, i) => i + 1
+  );
+
+  if (loading) return <h2>Loading...</h2>;
 
   return (
     <div className="report-page">
+
       <FeedbackCard />
-
-
 
       <div className="report-flex">
         <div className="progress-container-card">
           <h2 className="progress-title">Completed Practicals</h2>
+
           <div className="bars-wrapper">
-            {practicals.map((id) => {
-              const isCompleted = reportData.completedPracticals.includes(id);
-              return (
-                <div key={id} className={`practical-bar ${isCompleted ? "completed" : "not-completed"}`}>
-                  Practical {id}
-                </div>
-              );
-            })}
+            {practicals.map(id => (
+              <div
+                key={id}
+                className={`practical-bar ${reportData.completedPracticals.includes(id)
+                  ? "completed"
+                  : "not-completed"
+                  }`}
+              >
+                Practical {id}
+              </div>
+            ))}
           </div>
         </div>
 
-        <EquipmentProgress total={reportData.equipment.total} viewed={reportData.equipment.viewed} />
+        <EquipmentProgress
+          total={reportData.equipment.total}
+          viewed={reportData.equipment.viewed}
+        />
       </div>
 
-      <QuizProgressChart quizScoresData={reportData.quizScores} totalPracticals={reportData.totalPracticals} />
+      <QuizProgressChart
+        quizScoresData={reportData.quizScores}
+        totalPracticals={reportData.totalPracticals}
+      />
+
+      {/* ===== RESET BUTTON ===== */}
+      <div className="reset-section">
+        <button
+          className="reset-btn"
+          onClick={() => setShowConfirm(true)}
+        >
+          Reset Progress Results
+        </button>
+      </div>
+
+      {/* ===== MODAL ===== */}
+      {showConfirm && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Reset Progress Results</h3>
+            <p>This will clear all your progress. Are you sure?</p>
+
+            <div className="modal-actions">
+              <button
+                className="confirm-btn"
+                onClick={handleResetProgress}
+                disabled={resetLoading}
+              >
+                {resetLoading ? "Resetting..." : "Yes"}
+              </button>
+
+              <button
+                className="cancel-btn"
+                onClick={() => setShowConfirm(false)}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Footer />
     </div>
   );
